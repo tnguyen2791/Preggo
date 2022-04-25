@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'constants.dart';
-import 'reusableCard.dart';
+import '../components/reusableCard.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:preggo/components/listTile.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({Key? key}) : super(key: key);
@@ -29,8 +29,8 @@ class Homepage extends StatelessWidget {
       ),
       drawer: Drawer(
         child: ListView(
-          children: const [
-            DrawerHeader(
+          children: [
+            const DrawerHeader(
               child: Center(
                 child: Text(
                   'Menu to App!',
@@ -41,48 +41,13 @@ class Homepage extends StatelessWidget {
                 ),
               ),
             ),
-            ListTile(
-              title: Text(
-                'Home',
-                style: kMenuTextStyle,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                'Weigh-In',
-                style: kMenuTextStyle,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                'Food Diary',
-                style: kMenuTextStyle,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                'Water Intake',
-                style: kMenuTextStyle,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                'Blood Sugar Log',
-                style: kMenuTextStyle,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                'Export Information',
-                style: kMenuTextStyle,
-              ),
-            ),
-            ListTile(
-              title: Text(
-                'Resources',
-                style: kMenuTextStyle,
-              ),
-            ),
+            MenuListTile(menuTitle: 'Home'),
+            MenuListTile(menuTitle: 'Weigh-In'),
+            MenuListTile(menuTitle: 'Food Diary'),
+            MenuListTile(menuTitle: 'Water Intake'),
+            MenuListTile(menuTitle: 'Blood Sugar Log'),
+            MenuListTile(menuTitle: 'Export Information'),
+            MenuListTile(menuTitle: 'Resources'),
           ],
         ),
       ),
