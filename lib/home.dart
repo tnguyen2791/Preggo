@@ -93,7 +93,7 @@ class Homepage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(formattedDate, style: kTitleTextStyle),
-                Text('28 Weeks pregnant!', style: kTitleTextStyle),
+                Text('28 Weeks pregnant!!', style: kTitleTextStyle),
                 Text('Things To Do Today', style: kTitleTextStyle),
               ],
             ),
