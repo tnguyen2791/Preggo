@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'constants.dart';
-import 'reusablecard.dart';
+import 'reusableCard.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Homepage extends StatelessWidget {
@@ -92,9 +93,11 @@ class Homepage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(formattedDate, style: kTitleTextStyle),
-                Text('28 Weeks pregnant!!', style: kTitleTextStyle),
-                Text('Things To Do Today', style: kTitleTextStyle),
+                Text(formattedDate, style: GoogleFonts.acme(fontSize: 40)),
+                Text('28 Weeks pregnant!!',
+                    style: GoogleFonts.acme(fontSize: 40)),
+                Text('Things To Do Today',
+                    style: GoogleFonts.acme(fontSize: 40)),
               ],
             ),
           ),
@@ -111,10 +114,7 @@ class Homepage extends StatelessWidget {
                       onPress: () {
                         print('Hello');
                       },
-                      cardDescription: const Text(
-                        'Weigh in!',
-                        style: kMenuTextStyle,
-                      ),
+                      cardDescription: 'Weigh-in!',
                       cardIcon: const Icon(
                         FontAwesomeIcons.weightScale,
                         size: 40.0,
@@ -125,10 +125,7 @@ class Homepage extends StatelessWidget {
                       onPress: () {
                         print('Hello');
                       },
-                      cardDescription: const Text(
-                        'Are you hydrated?',
-                        style: kMenuTextStyle,
-                      ),
+                      cardDescription: 'Are you hydrated?',
                       cardIcon: const Icon(
                         FontAwesomeIcons.droplet,
                         size: 40.0,
@@ -139,10 +136,7 @@ class Homepage extends StatelessWidget {
                       onPress: () {
                         print('Hello');
                       },
-                      cardDescription: const Text(
-                        'Exercise Regimen',
-                        style: kMenuTextStyle,
-                      ),
+                      cardDescription: 'Exercise Regimen',
                       cardIcon: const Icon(
                         FontAwesomeIcons.dumbbell,
                         size: 40.0,
@@ -153,10 +147,7 @@ class Homepage extends StatelessWidget {
                       onPress: () {
                         print('Hello');
                       },
-                      cardDescription: const Text(
-                        'Diet',
-                        style: kMenuTextStyle,
-                      ),
+                      cardDescription: 'Diet',
                       cardIcon: const Icon(
                         FontAwesomeIcons.carrot,
                         size: 40.0,
@@ -167,10 +158,7 @@ class Homepage extends StatelessWidget {
                       onPress: () {
                         print('Hello');
                       },
-                      cardDescription: const Text(
-                        'Resources',
-                        style: kMenuTextStyle,
-                      ),
+                      cardDescription: 'Resources',
                       cardIcon: const Icon(
                         FontAwesomeIcons.boxArchive,
                         size: 40.0,

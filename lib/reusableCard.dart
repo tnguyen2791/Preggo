@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ReusableCard extends StatelessWidget {
   final Color colour;
   final Function onPress;
-  final Text cardDescription;
+  final String cardDescription;
   final Icon cardIcon;
 
   ReusableCard({
@@ -30,14 +30,17 @@ class ReusableCard extends StatelessWidget {
               ),
               Expanded(
                 flex: 2,
-                child: cardDescription,
+                child: Text(
+                  cardDescription,
+                  style: GoogleFonts.acme(fontSize: 25.0),
+                ),
               ),
             ],
           ),
-          margin: EdgeInsets.all(5.0),
+          margin: const EdgeInsets.all(5.0),
           decoration: BoxDecoration(
             color: colour,
-            borderRadius: BorderRadius.all(
+            borderRadius: const BorderRadius.all(
               Radius.circular(25.0),
             ),
           ),
