@@ -15,9 +15,13 @@ class _WaterDropletState extends State<WaterDroplet> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Icon(
-        FontAwesomeIcons.droplet,
-        color: beenPressed ? Colors.blue : Colors.white,
+      child: Container(
+        margin: EdgeInsets.all(3.0),
+        child: Icon(
+          FontAwesomeIcons.droplet,
+          color: beenPressed ? Colors.blue : Colors.white,
+          size: 80.0,
+        ),
       ),
       onTap: () {
         setState(() {

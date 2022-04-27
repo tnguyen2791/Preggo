@@ -16,49 +16,48 @@ class weighin extends StatelessWidget {
               'Water Tracker',
               style: kGoogleTitle,
             ),
+            margin: EdgeInsets.all(15.0),
           ),
           Container(
             child: Text(
               'You should be drinking at least 64 ounces of water every day! That is eight 8-oz glasses of water per day.',
               style: kGoogleDescription,
             ),
+            margin: EdgeInsets.all(20.0),
           ),
-          WaterContainer(),
+          SizedBox(
+            height: 15.0,
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    WaterDroplet(),
+                    WaterDroplet(),
+                    WaterDroplet(),
+                    WaterDroplet(),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    WaterDroplet(),
+                    WaterDroplet(),
+                    WaterDroplet(),
+                    WaterDroplet(),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ],
       ),
-    );
-  }
-}
-
-class WaterContainer extends StatefulWidget {
-  const WaterContainer({Key? key}) : super(key: key);
-
-  @override
-  State<WaterContainer> createState() => _WaterContainerState();
-}
-
-class _WaterContainerState extends State<WaterContainer> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: const [
-            WaterDroplet(),
-            WaterDroplet(),
-            WaterDroplet(),
-            WaterDroplet(),
-          ],
-        ),
-        Row(
-          children: const [
-            WaterDroplet(),
-            WaterDroplet(),
-            WaterDroplet(),
-            WaterDroplet(),
-          ],
-        ),
-      ],
     );
   }
 }
