@@ -1,4 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const kMenuTextStyle = TextStyle(fontSize: 20);
+final kGoogleTitle = GoogleFonts.acme(
+  fontSize: 40.0,
+);
+
+final kGoogleDescription = GoogleFonts.acme(
+  fontSize: 15.0,
+);

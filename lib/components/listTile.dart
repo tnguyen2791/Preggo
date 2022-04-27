@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:preggo/screens/water_log.dart';
 
 //To supply the menu with proper tiles
 
@@ -17,6 +18,14 @@ class MenuTile extends StatelessWidget {
           fontSize: 30.0,
         ),
       ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const weighin(),
+          ),
+        );
+      },
     );
   }
 }
