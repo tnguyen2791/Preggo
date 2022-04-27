@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MenuListTile extends StatelessWidget {
+//To supply the menu with proper tiles
+
+class MenuTile extends StatelessWidget {
   final String menuTitle;
 
-  MenuListTile({required this.menuTitle});
+  MenuTile({required this.menuTitle});
 
   @override
   Widget build(BuildContext context) {

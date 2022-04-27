@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/reusableCard.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:preggo/components/listTile.dart';
+import 'package:preggo/components/base.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({Key? key}) : super(key: key);
@@ -13,45 +13,8 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pregnancy Weight App'),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.baby_changing_station,
-            ),
-            onPressed: () {
-              print('hello');
-            },
-          )
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            const DrawerHeader(
-              child: Center(
-                child: Text(
-                  'Menu to App!',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ),
-            ),
-            MenuListTile(menuTitle: 'Home'),
-            MenuListTile(menuTitle: 'Weigh-In'),
-            MenuListTile(menuTitle: 'Food Diary'),
-            MenuListTile(menuTitle: 'Water Intake'),
-            MenuListTile(menuTitle: 'Blood Sugar Log'),
-            MenuListTile(menuTitle: 'Export Information'),
-            MenuListTile(menuTitle: 'Resources'),
-          ],
-        ),
-      ),
-      body: Column(
+    return BaseScaffold(
+      scaffoldBody: Column(
         children: [
           Expanded(
             flex: 1,
