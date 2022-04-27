@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/home.dart';
+import 'screens/water_log.dart';
 
 void main() => runApp(PreggoApp());
 
@@ -8,7 +9,12 @@ class PreggoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: Homepage(),
+      title: 'Pregnancy Weights',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Homepage(),
+        '/WaterLog': (context) => const WaterLog(),
+      },
     );
   }
 }

@@ -3,15 +3,15 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ReusableCard extends StatelessWidget {
   final Color colour;
-  final Function onPress;
   final String cardDescription;
   final Icon cardIcon;
+  final String navigationRoute;
 
   ReusableCard({
     required this.colour,
-    required this.onPress,
     required this.cardDescription,
     required this.cardIcon,
+    required this.navigationRoute,
   });
 
   @override
@@ -19,7 +19,7 @@ class ReusableCard extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         onTap: () {
-          print('tap detected');
+          Navigator.pushNamed(context, navigationRoute);
         },
         child: Container(
           child: Row(

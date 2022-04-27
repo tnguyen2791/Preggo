@@ -39,9 +39,7 @@ class Homepage extends StatelessWidget {
                   children: [
                     ReusableCard(
                       colour: Colors.grey,
-                      onPress: () {
-                        print('Hello');
-                      },
+                      navigationRoute: '/',
                       cardDescription: 'Weigh-in!',
                       cardIcon: const Icon(
                         FontAwesomeIcons.weightScale,
@@ -50,9 +48,7 @@ class Homepage extends StatelessWidget {
                     ), //Weighing in
                     ReusableCard(
                       colour: Colors.grey,
-                      onPress: () {
-                        print('Hello');
-                      },
+                      navigationRoute: '/',
                       cardDescription: 'Are you hydrated?',
                       cardIcon: const Icon(
                         FontAwesomeIcons.droplet,
@@ -61,9 +57,7 @@ class Homepage extends StatelessWidget {
                     ), //Hydration
                     ReusableCard(
                       colour: Colors.grey,
-                      onPress: () {
-                        print('Hello');
-                      },
+                      navigationRoute: '/',
                       cardDescription: 'Exercise Regimen',
                       cardIcon: const Icon(
                         FontAwesomeIcons.dumbbell,
@@ -72,9 +66,7 @@ class Homepage extends StatelessWidget {
                     ), //Exercise Regimen
                     ReusableCard(
                       colour: Colors.grey,
-                      onPress: () {
-                        print('Hello');
-                      },
+                      navigationRoute: '/',
                       cardDescription: 'Diet',
                       cardIcon: const Icon(
                         FontAwesomeIcons.carrot,
@@ -83,9 +75,7 @@ class Homepage extends StatelessWidget {
                     ), //Diet
                     ReusableCard(
                       colour: Colors.grey,
-                      onPress: () {
-                        print('Hello');
-                      },
+                      navigationRoute: '/',
                       cardDescription: 'Resources',
                       cardIcon: const Icon(
                         FontAwesomeIcons.boxArchive,

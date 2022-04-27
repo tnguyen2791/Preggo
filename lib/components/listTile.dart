@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:preggo/screens/water_log.dart';
 
 //To supply the menu with proper tiles
 
 class MenuTile extends StatelessWidget {
   final String menuTitle;
+  final String navigationRoute;
 
-  MenuTile({required this.menuTitle});
+  MenuTile({required this.menuTitle, required this.navigationRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +19,7 @@ class MenuTile extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const weighin(),
-          ),
-        );
+        Navigator.pushNamed(context, navigationRoute);
       },
     );
   }

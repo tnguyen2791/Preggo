@@ -3,8 +3,8 @@ import 'package:preggo/components/base.dart';
 import 'package:preggo/components/water_droplet.dart';
 import 'package:preggo/constants.dart';
 
-class weighin extends StatelessWidget {
-  const weighin({Key? key}) : super(key: key);
+class WaterLog extends StatelessWidget {
+  const WaterLog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

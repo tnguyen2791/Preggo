@@ -18,13 +18,34 @@ class MenuBase extends StatelessWidget {
               ),
             ),
           ),
-          MenuTile(menuTitle: 'Home'),
-          MenuTile(menuTitle: 'Weigh-In'),
-          MenuTile(menuTitle: 'Food Diary'),
-          MenuTile(menuTitle: 'Water Intake'),
-          MenuTile(menuTitle: 'Blood Sugar Log'),
-          MenuTile(menuTitle: 'Export Information'),
-          MenuTile(menuTitle: 'Resources'),
+          MenuTile(
+            menuTitle: 'Home',
+            navigationRoute: '/',
+          ),
+          MenuTile(
+            menuTitle: 'Weigh-In',
+            navigationRoute: '/',
+          ),
+          MenuTile(
+            menuTitle: 'Food Diary',
+            navigationRoute: '/',
+          ),
+          MenuTile(
+            menuTitle: 'Water Intake',
+            navigationRoute: '/WaterLog',
+          ),
+          MenuTile(
+            menuTitle: 'Blood Sugar Log',
+            navigationRoute: '/',
+          ),
+          MenuTile(
+            menuTitle: 'Export Information',
+            navigationRoute: '/',
+          ),
+          MenuTile(
+            menuTitle: 'Resources',
+            navigationRoute: '/',
+          ),
         ],
       ),
     );
