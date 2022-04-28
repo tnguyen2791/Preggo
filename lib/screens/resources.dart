@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:preggo/components/screenBase.dart';
 import 'package:preggo/constants.dart';
 
-class GrowthChart extends StatelessWidget {
+class Resources extends StatelessWidget {
+  const Resources({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ScreenBaseScaffold(
@@ -10,7 +12,7 @@ class GrowthChart extends StatelessWidget {
         children: [
           Container(
             child: Text(
-              'Growth Chart',
+              'Resource',
               style: kGoogleTitle,
             ),
           ),

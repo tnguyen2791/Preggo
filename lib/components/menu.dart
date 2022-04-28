@@ -19,20 +19,20 @@ class MenuBase extends StatelessWidget {
             ),
           ),
           MenuTile(
-            menuTitle: 'Home',
-            navigationRoute: '/',
-          ),
-          MenuTile(
             menuTitle: 'Weigh-In',
-            navigationRoute: '/',
+            navigationRoute: '/GrowthChart',
           ),
           MenuTile(
             menuTitle: 'Food Diary',
-            navigationRoute: '/',
+            navigationRoute: '/Diet',
           ),
           MenuTile(
             menuTitle: 'Water Intake',
             navigationRoute: '/WaterLog',
+          ),
+          MenuTile(
+            menuTitle: 'Exercise',
+            navigationRoute: '/ExerciseRegimen',
           ),
           MenuTile(
             menuTitle: 'Blood Sugar Log',
@@ -44,7 +44,7 @@ class MenuBase extends StatelessWidget {
           ),
           MenuTile(
             menuTitle: 'Resources',
-            navigationRoute: '/',
+            navigationRoute: '/Resources',
           ),
         ],
       ),

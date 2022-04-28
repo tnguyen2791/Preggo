@@ -48,7 +48,7 @@ class Homepage extends StatelessWidget {
                     ), //Weighing in
                     ReusableCard(
                       colour: Colors.grey,
-                      navigationRoute: '/',
+                      navigationRoute: '/WaterLog',
                       cardDescription: 'Are you hydrated?',
                       cardIcon: const Icon(
                         FontAwesomeIcons.droplet,
@@ -57,7 +57,7 @@ class Homepage extends StatelessWidget {
                     ), //Hydration
                     ReusableCard(
                       colour: Colors.grey,
-                      navigationRoute: '/',
+                      navigationRoute: '/ExerciseRegimen',
                       cardDescription: 'Exercise Regimen',
                       cardIcon: const Icon(
                         FontAwesomeIcons.dumbbell,
@@ -66,7 +66,7 @@ class Homepage extends StatelessWidget {
                     ), //Exercise Regimen
                     ReusableCard(
                       colour: Colors.grey,
-                      navigationRoute: '/',
+                      navigationRoute: '/Diet',
                       cardDescription: 'Diet',
                       cardIcon: const Icon(
                         FontAwesomeIcons.carrot,
@@ -75,7 +75,7 @@ class Homepage extends StatelessWidget {
                     ), //Diet
                     ReusableCard(
                       colour: Colors.grey,
-                      navigationRoute: '/',
+                      navigationRoute: '/Resources',
                       cardDescription: 'Resources',
                       cardIcon: const Icon(
                         FontAwesomeIcons.boxArchive,
