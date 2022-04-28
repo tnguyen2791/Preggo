@@ -9,6 +9,8 @@ import 'screens/water_log.dart';
 
 void main() => runApp(PreggoApp());
 
+//TODO Consider putting in a SafeArea widget https://api.flutter.dev/flutter/widgets/SafeArea-class.html
+
 class PreggoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

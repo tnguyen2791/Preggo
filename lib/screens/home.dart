@@ -11,6 +11,9 @@ class Homepage extends StatelessWidget {
   String formattedDate =
       '${DateTime.now().month}/${DateTime.now().day}/${DateTime.now().year}';
 
+  //Todo: Implementation of the ICON into the android and iOS folders.
+  //TODO: Creation of the launcher icon https://pub.dev/packages/flutter_launcher_icons
+
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(

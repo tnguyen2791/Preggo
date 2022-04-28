@@ -32,6 +32,7 @@ class WaterLog extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                //TODO: Change the water droplets into a gridview. https://api.flutter.dev/flutter/widgets/GridView-class.html
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [

@@ -5,6 +5,8 @@ import 'package:preggo/constants.dart';
 class Resources extends StatelessWidget {
   const Resources({Key? key}) : super(key: key);
 
+  //TODO: You can use the URL Launcher to create links
+
   @override
   Widget build(BuildContext context) {
     return ScreenBaseScaffold(
