@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:preggo/components/base.dart';
+import 'package:preggo/components/screenBase.dart';
 import 'package:preggo/components/water_droplet.dart';
 import 'package:preggo/constants.dart';
 
@@ -8,7 +8,7 @@ class WaterLog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseScaffold(
+    return ScreenBaseScaffold(
       scaffoldBody: Column(
         children: [
           Container(

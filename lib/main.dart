@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:preggo/screens/growth_chart.dart';
 import 'screens/home.dart';
 import 'screens/water_log.dart';
 
@@ -14,6 +15,7 @@ class PreggoApp extends StatelessWidget {
       routes: {
         '/': (context) => Homepage(),
         '/WaterLog': (context) => const WaterLog(),
+        '/GrowthChart': (context) => GrowthChart(),
       },
     );
   }

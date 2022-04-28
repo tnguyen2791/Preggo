@@ -39,7 +39,7 @@ class Homepage extends StatelessWidget {
                   children: [
                     ReusableCard(
                       colour: Colors.grey,
-                      navigationRoute: '/',
+                      navigationRoute: '/GrowthChart',
                       cardDescription: 'Weigh-in!',
                       cardIcon: const Icon(
                         FontAwesomeIcons.weightScale,
