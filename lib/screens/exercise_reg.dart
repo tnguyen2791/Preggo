@@ -6,6 +6,7 @@ class ExerciseRegimen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenBaseScaffold(
+      titleText: "Exercise",
       scaffoldBody: Column(
         children: [
           Container(

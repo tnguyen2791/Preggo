@@ -10,6 +10,7 @@ class GrowthChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenBaseScaffold(
+      titleText: "Growth Chart",
       scaffoldBody: Column(
         children: [
           Container(

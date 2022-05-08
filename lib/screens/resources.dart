@@ -10,6 +10,7 @@ class Resources extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenBaseScaffold(
+      titleText: "Resources",
       scaffoldBody: Column(
         children: [
           Container(

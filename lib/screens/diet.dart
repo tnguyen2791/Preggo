@@ -6,6 +6,7 @@ class Diet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenBaseScaffold(
+      titleText: "Diet",
       scaffoldBody: Column(
         children: [
           Container(

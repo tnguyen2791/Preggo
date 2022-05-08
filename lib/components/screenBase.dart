@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class ScreenBaseScaffold extends StatelessWidget {
   final Widget scaffoldBody;
+  String titleText;
 
-  ScreenBaseScaffold({required this.scaffoldBody});
+  ScreenBaseScaffold({required this.scaffoldBody, required this.titleText});
 
   //TODO: Can use the circle avatar for the home screen and icon. https://api.flutter.dev/flutter/material/CircleAvatar-class.html
   //TODO: Create a splash screen https://pub.dev/packages/flutter_native_splash
@@ -13,7 +14,7 @@ class ScreenBaseScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dat App Tho'),
+        title: Text(titleText),
         actions: [
           IconButton(
             icon: const Icon(
