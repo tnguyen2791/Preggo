@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:preggo/constants.dart';
 import '../components/reusableCard.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:preggo/components/base.dart';
@@ -24,11 +24,9 @@ class Homepage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(formattedDate, style: GoogleFonts.acme(fontSize: 40)),
-                Text('28 Weeks pregnant!!',
-                    style: GoogleFonts.acme(fontSize: 40)),
-                Text('Things To Do Today',
-                    style: GoogleFonts.acme(fontSize: 40)),
+                Text(formattedDate, style: kGoogleTitle),
+                Text('28 Weeks pregnant!!', style: kGoogleTitle),
+                Text('Things To Do Today', style: kGoogleTitle),
               ],
             ),
           ),
@@ -41,49 +39,29 @@ class Homepage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ReusableCard(
-                      colour: Colors.grey,
                       navigationRoute: '/GrowthChart',
                       cardDescription: 'Weigh-in!',
-                      cardIcon: const Icon(
-                        FontAwesomeIcons.weightScale,
-                        size: 40.0,
-                      ),
+                      cardIcon: FontAwesomeIcons.weightScale,
                     ), //Weighing in
                     ReusableCard(
-                      colour: Colors.grey,
                       navigationRoute: '/WaterLog',
                       cardDescription: 'Are you hydrated?',
-                      cardIcon: const Icon(
-                        FontAwesomeIcons.droplet,
-                        size: 40.0,
-                      ),
+                      cardIcon: FontAwesomeIcons.droplet,
                     ), //Hydration
                     ReusableCard(
-                      colour: Colors.grey,
                       navigationRoute: '/ExerciseRegimen',
                       cardDescription: 'Exercise Regimen',
-                      cardIcon: const Icon(
-                        FontAwesomeIcons.dumbbell,
-                        size: 40.0,
-                      ),
+                      cardIcon: FontAwesomeIcons.dumbbell,
                     ), //Exercise Regimen
                     ReusableCard(
-                      colour: Colors.grey,
                       navigationRoute: '/Diet',
                       cardDescription: 'Diet',
-                      cardIcon: const Icon(
-                        FontAwesomeIcons.carrot,
-                        size: 40.0,
-                      ),
+                      cardIcon: FontAwesomeIcons.carrot,
                     ), //Diet
                     ReusableCard(
-                      colour: Colors.grey,
                       navigationRoute: '/Resources',
                       cardDescription: 'Resources',
-                      cardIcon: const Icon(
-                        FontAwesomeIcons.boxArchive,
-                        size: 40.0,
-                      ),
+                      cardIcon: FontAwesomeIcons.boxArchive,
                     ), //Resources
                   ],
                 ),

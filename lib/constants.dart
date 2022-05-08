@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final kGoogleTitle = GoogleFonts.acme(
-  fontSize: 45.0,
+TextStyle kGoogleTitle = GoogleFonts.acme(
+  fontSize: 40.0,
+  color: Colors.white,
 );
 
-final kGoogleDescription = GoogleFonts.acme(
+TextStyle kGoogleDescription = GoogleFonts.acme(
   fontSize: 25.0,
+  color: Colors.white,
 );

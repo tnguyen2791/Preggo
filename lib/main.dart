@@ -15,7 +15,10 @@ class PreggoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(),
+      theme: ThemeData(
+        primarySwatch: Colors.pink,
+        scaffoldBackgroundColor: const Color(0xFF7209B7),
+      ),
       title: 'Pregnancy Weights',
       initialRoute: '/',
       routes: {
