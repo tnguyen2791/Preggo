@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:preggo/components/listTile.dart';
+import 'package:preggo/screens/diet.dart';
+import 'package:preggo/screens/exercise_reg.dart';
+import 'package:preggo/screens/growth_chart.dart';
+import 'package:preggo/screens/home.dart';
+import 'package:preggo/screens/resources.dart';
+import 'package:preggo/screens/settings.dart';
+import 'package:preggo/screens/water_log.dart';
 
 class MenuBase extends StatelessWidget {
   @override
@@ -20,31 +27,35 @@ class MenuBase extends StatelessWidget {
           ),
           MenuTile(
             menuTitle: 'Weigh-In',
-            navigationRoute: '/GrowthChart',
+            navigationRoute: GrowthChart.id,
           ),
           MenuTile(
             menuTitle: 'Food Diary',
-            navigationRoute: '/Diet',
+            navigationRoute: Diet.id,
           ),
           MenuTile(
             menuTitle: 'Water Intake',
-            navigationRoute: '/WaterLog',
+            navigationRoute: WaterLog.id,
           ),
           MenuTile(
             menuTitle: 'Exercise',
-            navigationRoute: '/ExerciseRegimen',
+            navigationRoute: ExerciseRegimen.id,
           ),
           MenuTile(
             menuTitle: 'Blood Sugar Log',
-            navigationRoute: '/',
+            navigationRoute: Homepage.id,
           ),
           MenuTile(
             menuTitle: 'Export Information',
-            navigationRoute: '/',
+            navigationRoute: Homepage.id,
           ),
           MenuTile(
             menuTitle: 'Resources',
-            navigationRoute: '/Resources',
+            navigationRoute: Resources.id,
+          ),
+          MenuTile(
+            menuTitle: 'Settings',
+            navigationRoute: Settings.id,
           ),
         ],
       ),

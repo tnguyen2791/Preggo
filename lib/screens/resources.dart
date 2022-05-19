@@ -3,6 +3,8 @@ import 'package:preggo/components/screenBase.dart';
 import 'package:preggo/constants.dart';
 
 class Resources extends StatelessWidget {
+  static const String id = 'resources_screen';
+
   const Resources({Key? key}) : super(key: key);
 
   //TODO: You can use the URL Launcher to create links

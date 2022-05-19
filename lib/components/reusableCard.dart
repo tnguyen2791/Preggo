@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ReusableCard extends StatelessWidget {
@@ -7,9 +8,9 @@ class ReusableCard extends StatelessWidget {
   final String navigationRoute;
 
   ReusableCard({
-    required this.cardDescription,
-    required this.cardIcon,
-    required this.navigationRoute,
+    this.cardDescription = 'No Description',
+    this.cardIcon = FontAwesomeIcons.faceSadCry,
+    this.navigationRoute = '/',
   });
 
   @override

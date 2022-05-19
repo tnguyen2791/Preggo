@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:preggo/components/screenBase.dart';
-import 'package:preggo/components/water_droplet.dart';
+import 'package:preggo/components/water_droplets.dart';
 import 'package:preggo/constants.dart';
 
 class WaterLog extends StatelessWidget {
-  const WaterLog({Key? key}) : super(key: key);
+  WaterLog({Key? key}) : super(key: key);
 
+  static const String id = 'water_screen';
+ 
   @override
   Widget build(BuildContext context) {
     return ScreenBaseScaffold(
@@ -28,23 +30,11 @@ class WaterLog extends StatelessWidget {
           ),
           const SizedBox(
             height: 30.0,
-          ),
-          GridView.count(
-            crossAxisCount: 4,
-            shrinkWrap: true,
-            children: const [
-              WaterDroplet(),
-              WaterDroplet(),
-              WaterDroplet(),
-              WaterDroplet(),
-              WaterDroplet(),
-              WaterDroplet(),
-              WaterDroplet(),
-              WaterDroplet(),
-            ],
-          )
+          ), WaterCounter(),
         ],
       ),
     );
   }
 }
+
+

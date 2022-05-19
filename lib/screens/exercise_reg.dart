@@ -3,6 +3,8 @@ import 'package:preggo/components/screenBase.dart';
 import 'package:preggo/constants.dart';
 
 class ExerciseRegimen extends StatelessWidget {
+static const String id = 'exercise_screen';
+
   @override
   Widget build(BuildContext context) {
     return ScreenBaseScaffold(

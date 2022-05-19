@@ -3,6 +3,8 @@ import 'package:preggo/components/screenBase.dart';
 import 'package:preggo/constants.dart';
 
 class Diet extends StatelessWidget {
+  static const String id = 'diet_screen';
+
   @override
   Widget build(BuildContext context) {
     return ScreenBaseScaffold(

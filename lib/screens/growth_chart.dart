@@ -7,6 +7,8 @@ class GrowthChart extends StatelessWidget {
   //TODO: Learn how to create data containers for this
   //TODO: A stacked chart is what you're looking for.
 
+  static const String id = 'growth_screen';
+
   @override
   Widget build(BuildContext context) {
     return ScreenBaseScaffold(
