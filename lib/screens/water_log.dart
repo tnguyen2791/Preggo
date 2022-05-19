@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:preggo/components/screenBase.dart';
-import 'package:preggo/components/water_droplet.dart';
+import 'package:preggo/components/water_droplets.dart';
 import 'package:preggo/constants.dart';
 
 class WaterLog extends StatelessWidget {
@@ -29,20 +29,7 @@ class WaterLog extends StatelessWidget {
           const SizedBox(
             height: 30.0,
           ),
-          GridView.count(
-            crossAxisCount: 4,
-            shrinkWrap: true,
-            children: const [
-              WaterDroplet(),
-              WaterDroplet(),
-              WaterDroplet(),
-              WaterDroplet(),
-              WaterDroplet(),
-              WaterDroplet(),
-              WaterDroplet(),
-              WaterDroplet(),
-            ],
-          )
+          WaterCounter(),
         ],
       ),
     );
