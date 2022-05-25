@@ -15,13 +15,9 @@ class _WaterTotalState extends State<WaterTotal> {
 
   @override
   Widget build(BuildContext context) {
-    return Text('${WaterLog.fluidsDrank} oz today',
+    return Text(' oz today',
         style: kGoogleDescription.copyWith(fontSize: 80.0));
   }
 
-void updateWater (){
-  setState(() {
-  });
-}
 
 }

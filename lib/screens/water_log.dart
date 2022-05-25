@@ -30,7 +30,12 @@ class WaterLog extends StatelessWidget {
           ),
           const SizedBox(
             height: 30.0,
+<<<<<<< HEAD
           ), WaterCounter(),
+=======
+          ),
+          WaterCounter(),
+>>>>>>> settingsproduction
         ],
       ),
     );

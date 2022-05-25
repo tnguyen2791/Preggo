@@ -10,7 +10,7 @@ class BaseScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dat App Tho'),
+        title: const Text("Childing"),
         actions: [
           IconButton(
             icon: const Icon(
