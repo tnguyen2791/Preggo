@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:introduction_screen/introduction_screen.dart';
 import 'package:preggo/screens/diet.dart';
 import 'package:preggo/screens/exercise_reg.dart';
 import 'package:preggo/screens/growth_chart.dart';
+import 'package:preggo/screens/introduction.dart';
 import 'package:preggo/screens/resources.dart';
 import 'package:preggo/screens/settings.dart';
 import 'package:preggo/screens/weigh_in.dart';
@@ -21,9 +23,10 @@ class PreggoApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFF7209B7),
       ),
       title: 'Pregnancy Weights',
-      initialRoute: Homepage.id,
+      initialRoute: OnBoardingPage.id,
       routes: {
         Homepage.id: (context) => Homepage(),
+        OnBoardingPage.id: (context) => OnBoardingPage(),
         WaterLog.id: (context) => WaterLog(),
         GrowthChart.id: (context) => GrowthChart(),
         WeighIn.id: (context) => WeighIn(),
