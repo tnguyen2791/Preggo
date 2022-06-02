@@ -31,6 +31,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   bool hxsecret = false;
   bool hxconcern = false;
   bool _notapplicable = false;
+  bool _agreeDisclaimer = false;
 
   Future<void> _loadDisclaimer() async {
     final _loadedDisclaimer =
@@ -70,7 +71,23 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       pages: [
         PageViewModel(
           title: "Disclaimer",
-          bodyWidget: Text(_disclaimer ?? "Nothing"),
+          bodyWidget: Column(children: [
+            Text(_disclaimer ?? "Nothing"),
+            const Divider(
+              thickness: 5,
+              height: 50.0,
+            ),
+            Center(
+              child: CheckboxListTile(
+                  title: const Text('I agree with the  disclaimer.'),
+                  value: _agreeDisclaimer,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      _agreeDisclaimer = value!;
+                    });
+                  }),
+            ),
+          ]),
         ),
         PageViewModel(
           title: "Medical History",
@@ -138,9 +155,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           bodyWidget: Column(
             children: [
               (hxconcern || hxcontrol || hxeating || hxsecret || hxsick)
-                  ? Text(
+                  ? const Text(
                       'You answered yes to either the question asking about a history of disordered eating or to the four screening questions for disordered eating. We strongly suggest bringing this up with your physician so that he or she can more fully care for you through your pregnancy and beyond. Since recording and viewing your weight may be triggering, this tool has the following options:')
-                  : Text('Select an option for weighing-in!'),
+                  : const Text('Select an option for weighing-in!'),
               Text(
                   'Partner weighing: you weigh yourself weekly, but a partner logs your weigh in the app without you seeing the number. The number will only be visible when you export your data to your physician.'),
               TextButton(onPressed: null, child: Text('Partner Weigh-in')),
