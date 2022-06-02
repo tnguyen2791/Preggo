@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:preggo/screens/diet.dart';
+import 'package:preggo/screens/eatingdisorderinfo.dart';
 import 'package:preggo/screens/exercise_reg.dart';
 import 'package:preggo/screens/growth_chart.dart';
 import 'package:preggo/screens/introduction.dart';
@@ -33,7 +34,8 @@ class PreggoApp extends StatelessWidget {
         Resources.id: (context) => Resources(),
         ExerciseRegimen.id: (context) => ExerciseRegimen(),
         Diet.id: (context) => Diet(),
-        Settings.id: (context) => Settings()
+        Settings.id: (context) => Settings(),
+        WeighInOptions.id: (context) => WeighInOptions(),
       },
     );
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:preggo/screens/eatingdisorderinfo.dart';
 import 'package:preggo/screens/home.dart';
 
 class OnBoardingPage extends StatefulWidget {
@@ -30,7 +31,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   bool hxcontrol = false;
   bool hxsecret = false;
   bool hxconcern = false;
-  bool _notapplicable = false;
   bool _agreeDisclaimer = false;
 
   Future<void> _loadDisclaimer() async {
@@ -87,6 +87,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     });
                   }),
             ),
+            !_agreeDisclaimer
+                ? Text("Please check the disclaimer above!")
+                : Text("Swipe left to the next screen!"),
           ]),
         ),
         PageViewModel(
@@ -148,35 +151,26 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 });
               },
             ),
+            Divider(),
+            TextButton(
+              style: TextButton.styleFrom(
+                  primary: Colors.purple, backgroundColor: Colors.pink[100]),
+              onPressed: (_agreeDisclaimer)
+                  ? (() {
+                      (hxconcern || hxcontrol || hxeating || hxsecret)
+                          ? Navigator.pushReplacementNamed(
+                              context, WeighInOptions.id)
+                          : Navigator.pushReplacementNamed(
+                              context, Homepage.id);
+                    })
+                  : null,
+              child: const Text('Done!'),
+            ),
+            !_agreeDisclaimer
+                ? const Text("Please accept the disclaimer!")
+                : const Text('Welcome aboard!'),
           ]),
         ),
-        PageViewModel(
-          title: "Select Weigh-in Options",
-          bodyWidget: Column(
-            children: [
-              (hxconcern || hxcontrol || hxeating || hxsecret || hxsick)
-                  ? const Text(
-                      'You answered yes to either the question asking about a history of disordered eating or to the four screening questions for disordered eating. We strongly suggest bringing this up with your physician so that he or she can more fully care for you through your pregnancy and beyond. Since recording and viewing your weight may be triggering, this tool has the following options:')
-                  : const Text('Select an option for weighing-in!'),
-              Text(
-                  'Partner weighing: you weigh yourself weekly, but a partner logs your weigh in the app without you seeing the number. The number will only be visible when you export your data to your physician.'),
-              TextButton(onPressed: null, child: Text('Partner Weigh-in')),
-              Text(
-                  "No-weigh option: you don't weigh yourself at all. You can still use all the other functions of the app, but skip the weekly weigh ins."),
-              TextButton(onPressed: null, child: Text('No Weigh-in')),
-              Text(
-                  'Standard weigh-in: you weigh yourself weekly and log it using the default setting.'),
-              TextButton(onPressed: null, child: Text('Regular Weigh-in')),
-              Text(
-                  'You can change your preference in the settings at any time.'),
-              TextButton(
-                  onPressed: (() {
-                    Navigator.pushNamed(context, Homepage.id);
-                  }),
-                  child: Text('Done!'))
-            ],
-          ),
-        )
       ],
 
       onDone: () => _onIntroEnd(context),
@@ -184,10 +178,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       showSkipButton: false,
       skipOrBackFlex: 0,
       nextFlex: 0,
-      showBackButton: true,
-      back: const Text('Back'),
-      showNextButton: true,
-      next: const Text('Next'),
+      showBackButton: false,
+      showNextButton: false,
       //rtl: true, // Display as right-to-left
       isTopSafeArea: true,
       skip: const Text('Skip', style: TextStyle(fontWeight: FontWeight.w600)),
