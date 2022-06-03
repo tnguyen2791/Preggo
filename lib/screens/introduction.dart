@@ -6,6 +6,7 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:preggo/screens/eatingdisorderinfo.dart';
 import 'package:preggo/screens/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardingPage extends StatefulWidget {
   static String id = 'intro_screen';
@@ -24,6 +25,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   }
 
   final introKey = GlobalKey<IntroductionScreenState>();
+
+  addBoolToSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('agreeDisclaimer', _agreeDisclaimer);
+  }
+
   String? _disclaimer;
 
   bool hxeating = false;
@@ -84,6 +91,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   onChanged: (bool? value) {
                     setState(() {
                       _agreeDisclaimer = value!;
+                      addBoolToSF();
                     });
                   }),
             ),
