@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:preggo/screens/home.dart';
 
 class ScreenBaseScaffold extends StatelessWidget {
   final Widget scaffoldBody;
@@ -14,6 +15,12 @@ class ScreenBaseScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(
+          onPressed: () {
+            Navigator.pop(
+                context, MaterialPageRoute(builder: (context) => Homepage()));
+          },
+        ),
         title: Text(titleText),
         actions: [
           IconButton(

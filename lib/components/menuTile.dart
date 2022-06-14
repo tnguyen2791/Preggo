@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:preggo/screens/home.dart';
 
 //To supply the menu with proper tiles
 
@@ -19,6 +20,7 @@ class MenuTile extends StatelessWidget {
         ),
       ),
       onTap: () {
+        Navigator.pop(context);
         Navigator.pushNamed(context, navigationRoute);
       },
     );

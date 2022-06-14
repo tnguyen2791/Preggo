@@ -14,16 +14,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(PreggoApp());
 
-//TODO Consider putting in a SafeArea widget https://api.flutter.dev/flutter/widgets/SafeArea-class.html
-
 class PreggoApp extends StatelessWidget {
   Future<bool?> _getBoolFromSharedPref() async {
     final prefs = await SharedPreferences.getInstance();
     final disclaimerCheck = prefs.getBool('agreeDisclaimer');
     if (disclaimerCheck == null) {
       return false;
+    } else {
+      return disclaimerCheck;
     }
-    return disclaimerCheck;
   }
 
   @override
@@ -34,8 +33,8 @@ class PreggoApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFF7209B7),
       ),
       title: 'Pregnancy Weights',
-      initialRoute:
-          (_getBoolFromSharedPref() == false) ? OnBoardingPage.id : Homepage.id,
+      initialRoute: OnBoardingPage.id,
+      //(_getBoolFromSharedPref() == false) ? OnBoardingPage.id : Homepage.id,
       routes: {
         Homepage.id: (context) => Homepage(),
         OnBoardingPage.id: (context) => OnBoardingPage(),

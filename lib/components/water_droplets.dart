@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:preggo/screens/water_log.dart';
 import 'package:preggo/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 ValueNotifier<int> fluidsDrank = ValueNotifier(0);
 
 class WaterCounter extends StatefulWidget {
-  const WaterCounter({Key? key}) : super(key: key);
+  WaterCounter({Key? key}) : super(key: key);
 
   @override
   State<WaterCounter> createState() => _WaterCounterState();
@@ -22,21 +22,15 @@ class _WaterCounterState extends State<WaterCounter> {
         children: [
           WaterDroplet(),
           WaterDroplet(),
-          WaterDroplet(),
-          WaterDroplet(),
-          WaterDroplet(),
-          WaterDroplet(),
-          WaterDroplet(),
-          WaterDroplet(),
-        ], 
-      ),WaterTotal(),
+          //redraw the above
+        ],
+      ),
+      WaterTotal(),
     ]);
   }
 }
 
 class WaterDroplet extends StatefulWidget {
-  const WaterDroplet({Key? key}) : super(key: key);
-
   @override
   State<WaterDroplet> createState() => _WaterDropletState();
 }
@@ -49,7 +43,6 @@ class _WaterDropletState extends State<WaterDroplet> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        margin: const EdgeInsets.all(3.0),
         child: Icon(
           FontAwesomeIcons.droplet,
           color: beenPressed ? Colors.blue : Colors.white,
@@ -73,21 +66,75 @@ class WaterTotal extends StatefulWidget {
 }
 
 class _WaterTotalState extends State<WaterTotal> {
+  final _prefs = SharedPreferences.getInstance();
+  late Future<int> _waterTotal;
+
+  Future<void> _addeightoz() async {
+    final SharedPreferences prefs = await _prefs;
+    final int waterTotal = (prefs.getInt('watertotal') ?? 0) + 1;
+
+    setState(() {
+      _waterTotal = prefs.setInt('watertotal', waterTotal).then((bool success) {
+        return waterTotal;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _waterTotal = _prefs.then((SharedPreferences prefs) {
+      return prefs.getInt('watertotal') ?? 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<int>(
-        builder: (BuildContext context, int value, Widget? child) {
-      // This builder will only get called when the _counter
-      // is updated.
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Text('$value oz\ntoday!', style: kGoogleDescription.copyWith(fontSize: 80.0),),
-        ],
-      );
-    }, valueListenable: fluidsDrank,);
+    return FutureBuilder<int>(
+      future: _waterTotal,
+      builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return const CircularProgressIndicator();
+          default:
+            if (snapshot.hasError) {
+              return Text(
+                'Error: ${snapshot.error}',
+                style: kGoogleDescription,
+              );
+            } else {
+              return Text(
+                'You drank ${snapshot.data} oz of water',
+                style: kGoogleDescription,
+              );
+            }
+        }
+      },
+    );
   }
 }
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return ValueListenableBuilder<int>(
+//       builder: (BuildContext context, int value, Widget? child) {
+//         // This builder will only get called when the _counter
+//         // is updated.
+//         return Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//           children: <Widget>[
+//             Text(
+//               '$_waterTotal oz\ntoday!',
+//               style: kGoogleDescription,
+//             ),
+//           ],
+//         );
+//       },
+//       valueListenable: fluidsDrank,
+//     );
+//   }
+// }
 
 /*
 

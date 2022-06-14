@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:preggo/components/listTile.dart';
+import 'package:preggo/components/menuTile.dart';
 import 'package:preggo/screens/diet.dart';
 import 'package:preggo/screens/exercise_reg.dart';
 import 'package:preggo/screens/growth_chart.dart';
@@ -57,6 +57,19 @@ class MenuBase extends StatelessWidget {
             menuTitle: 'Settings',
             navigationRoute: Settings.id,
           ),
+          ListTile(
+            title: Text(
+              'TestSettings',
+              style: GoogleFonts.acme(
+                fontSize: 30.0,
+              ),
+            ),
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => Settings()))
+                  .then((value) => null);
+            },
+          )
         ],
       ),
     );

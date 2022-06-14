@@ -18,39 +18,44 @@ class OnBoardingPage extends StatefulWidget {
 }
 
 class _OnBoardingPageState extends State<OnBoardingPage> {
+  String? _disclaimer;
+
   @override
   void initState() {
     _loadDisclaimer();
     super.initState();
   }
 
+/* The section to load the disclaimer */
+
+  Future<void> _loadDisclaimer() async {
+    final loadedDisclaimer =
+        await rootBundle.loadString('assets/texts/disclaimer.txt');
+    setState(() {
+      _disclaimer = loadedDisclaimer;
+    });
+  }
+
   final introKey = GlobalKey<IntroductionScreenState>();
+
+/* Area dedicated to the introduction page */
+
+  void _onIntroEnd(context) {
+    Navigator.pushNamed(context, Homepage.id);
+  }
 
   addBoolToSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('agreeDisclaimer', _agreeDisclaimer);
   }
 
-  String? _disclaimer;
+  bool _agreeDisclaimer = false;
 
   bool hxeating = false;
   bool hxsick = false;
   bool hxcontrol = false;
   bool hxsecret = false;
   bool hxconcern = false;
-  bool _agreeDisclaimer = false;
-
-  Future<void> _loadDisclaimer() async {
-    final _loadedDisclaimer =
-        await rootBundle.loadString('assets/texts/disclaimer.txt');
-    setState(() {
-      _disclaimer = _loadedDisclaimer;
-    });
-  }
-
-  void _onIntroEnd(context) {
-    Navigator.pushNamed(context, Homepage.id);
-  }
 
   void toggleSwitch(bool value) {
     if (hxeating == false) {
