@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:preggo/components/menuTile.dart';
-import 'package:preggo/screens/diet.dart';
-import 'package:preggo/screens/exercise_reg.dart';
-import 'package:preggo/screens/growth_chart.dart';
-import 'package:preggo/screens/home.dart';
-import 'package:preggo/screens/resources.dart';
-import 'package:preggo/screens/settings.dart';
-import 'package:preggo/screens/water_log.dart';
+import 'package:preggo/presentation/screens/all_screens.dart';
 
 class MenuBase extends StatelessWidget {
   @override

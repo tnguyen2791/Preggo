@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:preggo/screens/home.dart';
+import 'package:preggo/presentation/screens/home.dart';
 
 class WeighInOptions extends StatelessWidget {
   const WeighInOptions({Key? key}) : super(key: key);

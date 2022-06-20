@@ -1,16 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:introduction_screen/introduction_screen.dart';
-import 'package:preggo/screens/diet.dart';
-import 'package:preggo/screens/eatingdisorderinfo.dart';
-import 'package:preggo/screens/exercise_reg.dart';
-import 'package:preggo/screens/growth_chart.dart';
-import 'package:preggo/screens/introduction.dart';
-import 'package:preggo/screens/resources.dart';
-import 'package:preggo/screens/settings.dart';
-import 'package:preggo/screens/weigh_in.dart';
-import 'screens/home.dart';
-import 'screens/water_log.dart';
+import 'package:preggo/presentation/router/app_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'presentation/screens/introduction.dart';
 
 void main() => runApp(PreggoApp());
 
@@ -27,6 +18,8 @@ class PreggoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppRouter _appRouter = AppRouter();
+
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.pink,
@@ -35,18 +28,7 @@ class PreggoApp extends StatelessWidget {
       title: 'Pregnancy Weights',
       initialRoute: OnBoardingPage.id,
       //(_getBoolFromSharedPref() == false) ? OnBoardingPage.id : Homepage.id,
-      routes: {
-        Homepage.id: (context) => Homepage(),
-        OnBoardingPage.id: (context) => OnBoardingPage(),
-        WaterLog.id: (context) => WaterLog(),
-        GrowthChart.id: (context) => GrowthChart(),
-        WeighIn.id: (context) => WeighIn(),
-        Resources.id: (context) => Resources(),
-        ExerciseRegimen.id: (context) => ExerciseRegimen(),
-        Diet.id: (context) => Diet(),
-        Settings.id: (context) => Settings(),
-        WeighInOptions.id: (context) => WeighInOptions(),
-      },
+      onGenerateRoute: _appRouter.onGenerateRoute,
     );
   }
 }

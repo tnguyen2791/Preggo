@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:preggo/screens/home.dart';
+import 'package:preggo/presentation/screens/home.dart';
 
 class ScreenBaseScaffold extends StatelessWidget {
   final Widget scaffoldBody;

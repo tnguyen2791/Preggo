@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:preggo/screens/diet.dart';
-import 'package:preggo/screens/exercise_reg.dart';
-import 'package:preggo/screens/growth_chart.dart';
-import 'package:preggo/screens/resources.dart';
-import 'package:preggo/screens/water_log.dart';
-import '../components/reusableCard.dart';
+import 'all_screens.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:preggo/components/base.dart';
-import 'package:preggo/tools/sharedPreferences.dart';
 import 'package:preggo/components/userDashBoard.dart';
-
+import 'package:preggo/components/reusableCard.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({Key? key}) : super(key: key);

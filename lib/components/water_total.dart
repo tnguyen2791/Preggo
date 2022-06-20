@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:preggo/screens/water_log.dart';
 import 'package:preggo/constants.dart';
 
 class WaterTotal extends StatefulWidget {

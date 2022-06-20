@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:preggo/screens/eatingdisorderinfo.dart';
-import 'package:preggo/screens/home.dart';
+import 'package:preggo/presentation/screens/eatingdisorderinfo.dart';
+import 'package:preggo/presentation/screens/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardingPage extends StatefulWidget {
