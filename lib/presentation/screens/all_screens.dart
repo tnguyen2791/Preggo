@@ -7,4 +7,4 @@ export 'introduction.dart';
 export 'resources.dart';
 export 'settings.dart';
 export 'water_log.dart';
-export 'weigh_in.dart';
+export '../../weight/weigh_in.dart';

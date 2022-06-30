@@ -20,7 +20,7 @@ class WeighInOptions extends StatelessWidget {
           TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.white),
               onPressed: (() =>
-                  Navigator.pushReplacementNamed(context, Homepage.id)),
+                  Navigator.pushReplacementNamed(context, HomeScreen.id)),
               child: Text("Done!"))
         ],
       ),

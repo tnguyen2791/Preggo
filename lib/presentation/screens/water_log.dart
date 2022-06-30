@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:preggo/components/screenBase.dart';
-import 'package:preggo/components/water_droplets.dart';
+import 'package:preggo/shared/shared.dart';
 import 'package:preggo/constants.dart';
 
 class WaterLog extends StatelessWidget {

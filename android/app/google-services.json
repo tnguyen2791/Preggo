@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "101204525967",
+    "project_id": "childing-9ddea",
+    "storage_bucket": "childing-9ddea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101204525967:android:8f85b9b75b5dd955dd81fa",
+        "android_client_info": {
+          "package_name": "com.example.preggo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "101204525967-t81r0vpgab1n3mjmii2hi0p9o45udk9s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA7xrA2uRX2QXG5SIu9kNK5Jmwc9pXOlI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "101204525967-t81r0vpgab1n3mjmii2hi0p9o45udk9s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "101204525967-i5n18rpt58uujabmnos7enk7mb753qgk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.preggo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

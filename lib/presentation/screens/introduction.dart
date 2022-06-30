@@ -41,7 +41,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 /* Area dedicated to the introduction page */
 
   void _onIntroEnd(context) {
-    Navigator.pushNamed(context, Homepage.id);
+    Navigator.pushNamed(context, HomeScreen.id);
   }
 
   addBoolToSF() async {
@@ -174,7 +174,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                           ? Navigator.pushReplacementNamed(
                               context, WeighInOptions.id)
                           : Navigator.pushReplacementNamed(
-                              context, Homepage.id);
+                              context, HomeScreen.id);
                     })
                   : null,
               child: const Text('Done!'),

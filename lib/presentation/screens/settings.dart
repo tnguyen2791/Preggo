@@ -1,11 +1,10 @@
 import 'dart:io';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:preggo/components/base.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:preggo/components/screenBase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:preggo/tools/sharedPreferences.dart';
+import 'package:preggo/shared/shared.dart';
 
 class Settings extends StatelessWidget {
   static const String id = 'settings screen';

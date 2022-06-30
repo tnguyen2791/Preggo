@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:preggo/components/menuTile.dart';
+import 'package:preggo/shared/menuTile.dart';
 import 'package:preggo/presentation/screens/all_screens.dart';
 
 class MenuBase extends StatelessWidget {
@@ -37,11 +37,11 @@ class MenuBase extends StatelessWidget {
           ),
           MenuTile(
             menuTitle: 'Blood Sugar Log',
-            navigationRoute: Homepage.id,
+            navigationRoute: HomeScreen.id,
           ),
           MenuTile(
             menuTitle: 'Export Information',
-            navigationRoute: Homepage.id,
+            navigationRoute: HomeScreen.id,
           ),
           MenuTile(
             menuTitle: 'Resources',

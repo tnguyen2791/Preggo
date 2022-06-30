@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:preggo/presentation/router/app_router.dart';
+import 'package:preggo/login/login.dart';
+import 'package:preggo/routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'presentation/screens/introduction.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() => runApp(PreggoApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(PreggoApp());
+}
 
 class PreggoApp extends StatelessWidget {
   Future<bool?> _getBoolFromSharedPref() async {
@@ -18,17 +25,14 @@ class PreggoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AppRouter _appRouter = AppRouter();
-
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.pink,
         scaffoldBackgroundColor: const Color(0xFF7209B7),
       ),
       title: 'Pregnancy Weights',
-      initialRoute: OnBoardingPage.id,
-      //(_getBoolFromSharedPref() == false) ? OnBoardingPage.id : Homepage.id,
-      onGenerateRoute: _appRouter.onGenerateRoute,
+      initialRoute: LoginScreen.id,
+      routes: appRoutes,
     );
   }
 }
