@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:preggo/presentation/screens/home.dart';
+import 'package:flutter/services.dart';
+import 'package:preggo/services/auth.dart';
 
 class ScreenBaseScaffold extends StatelessWidget {
   final Widget scaffoldBody;
@@ -28,7 +30,7 @@ class ScreenBaseScaffold extends StatelessWidget {
               Icons.baby_changing_station,
             ),
             onPressed: () {
-              print('Hello');
+              AuthService().signOut();
             },
           )
         ],

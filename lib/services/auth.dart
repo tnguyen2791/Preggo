@@ -22,6 +22,21 @@ class AuthService {
     }
   }
 
+  Future<void> anonLogin() async {
+    try {
+      await FirebaseAuth.instance.signInAnonymously();
+      /* This has user credentials as the future type signature*/
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case "operation-not-allowed":
+          print("Anonymous auth hasn't been enabled for this project.");
+          break;
+        default:
+          print("Unknown error.");
+      }
+    }
+  }
+
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }

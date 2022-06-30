@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:preggo/login/login.dart';
 import 'package:preggo/services/auth.dart';
@@ -15,18 +16,31 @@ class HomeScreen extends StatelessWidget {
     return StreamBuilder(
       stream: AuthService().userStream,
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        } else if (snapshot.hasError) {
-          return const Center(
-            child: Text('There was an error'),
-          );
-        } else if (snapshot.hasData) {
-          return const UserHomeScreen();
+        if (snapshot.connectionState == ConnectionState.active) {
+          var user = snapshot.data;
+          if (user == null) {
+            return LoginScreen();
+          }
+          return UserHomeScreen();
         } else {
-          return const LoginScreen();
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
         }
-      },
+      }
+
+      // if (snapshot.connectionState == ConnectionState.waiting) {
+      //   return const CircularProgressIndicator();
+      // } else if (snapshot.hasError) {
+      //   return const Center(
+      //     child: Text('There was an error'),
+      //   );
+      // } else if (snapshot.hasData) {
+      //   return UserHomeScreen();
+      // } else {
+      //   return LoginScreen();
+      // }
+      ,
     );
   }
 }

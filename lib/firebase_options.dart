@@ -25,7 +25,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -67,17 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '101204525967',
     projectId: 'childing-9ddea',
     storageBucket: 'childing-9ddea.appspot.com',
+    androidClientId: '101204525967-hqmhvjuol29fo60p3oh3bibu45eevlc2.apps.googleusercontent.com',
     iosClientId: '101204525967-i5n18rpt58uujabmnos7enk7mb753qgk.apps.googleusercontent.com',
     iosBundleId: 'com.example.preggo',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyApfAZfMR_ObHUIPJYcDmbnn0trhwHVcas',
-    appId: '1:101204525967:ios:c7e0786ec3e4a92edd81fa',
-    messagingSenderId: '101204525967',
-    projectId: 'childing-9ddea',
-    storageBucket: 'childing-9ddea.appspot.com',
-    iosClientId: '101204525967-3jtv4dptphhoo802trvlarrbv7n7t27e.apps.googleusercontent.com',
-    iosBundleId: 'com.tnguyen2791.childing',
   );
 }

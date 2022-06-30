@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:preggo/login/login.dart';
+import 'package:preggo/presentation/screens/home.dart';
 import 'package:preggo/routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'presentation/screens/introduction.dart';
@@ -31,7 +32,7 @@ class PreggoApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFF7209B7),
       ),
       title: 'Pregnancy Weights',
-      initialRoute: LoginScreen.id,
+      initialRoute: HomeScreen.id,
       routes: appRoutes,
     );
   }
