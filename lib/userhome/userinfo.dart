@@ -18,7 +18,7 @@ class _UserInfoState extends State<UserInfo> {
 
     if (user != null) {
       String date = user.first.date;
-      String duedate = user.first.duedate;
+      int duedate = user.first.epochduedate;
       String weight = user.first.weight;
 
       return Column(
@@ -28,7 +28,7 @@ class _UserInfoState extends State<UserInfo> {
             style: kGoogleTitle,
           ),
           Text(
-            duedate,
+            duedate.toString(),
             style: kGoogleTitle,
           ),
           Text(

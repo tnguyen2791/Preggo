@@ -7,28 +7,26 @@ class Diet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenBaseScaffold(
-      titleText: "Diet",
-      scaffoldBody: Column(
-        children: [
-          Container(
-            child: Text(
-              'Diet',
-              style: kGoogleTitle,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              child: Text(
+                'Diet',
+                style: kGoogleTitle,
+              ),
             ),
-          ),
-          Container(
-            child: Text(
-              'Description',
-              style: kGoogleDescription,
+            Container(
+              child: Text(
+                'Description',
+                style: kGoogleDescription,
+              ),
             ),
-          ),
-          Expanded(
-            child: Container(
-              color: Colors.red,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

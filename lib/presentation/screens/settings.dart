@@ -1,9 +1,11 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:preggo/models/user.dart';
+import 'package:preggo/services/database.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:preggo/tools/sharedPreferences.dart';
-import 'package:preggo/shared/shared.dart';
+import 'package:provider/provider.dart';
 
 class Settings extends StatelessWidget {
   static const String id = 'settings screen';
@@ -11,8 +13,13 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenBaseScaffold(
-        scaffoldBody: SettingsOptions(), titleText: "Settings");
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Settings'),
+        centerTitle: true,
+      ),
+      body: const SettingsOptions(),
+    );
   }
 }
 
@@ -24,8 +31,6 @@ class SettingsOptions extends StatefulWidget {
 }
 
 class _SettingsOptionsState extends State<SettingsOptions> {
-  final Future<SharedPreferences> _pref = SharedPreferences.getInstance();
-  late Future<bool> _userAgreement;
   bool? settingUserAgreement;
 
   bool theme2 = false;
@@ -35,19 +40,6 @@ class _SettingsOptionsState extends State<SettingsOptions> {
   double? preconweight;
   bool settingsChanges = false;
 
-  void refreshData() async {
-    final pref = await SharedPreferences.getInstance();
-    setState(() {
-      _dueDate = pref.getString("dueDate") ?? 'Enter due date!';
-      preconweight = pref.getDouble('preconweight') ?? 0.0;
-    });
-  }
-
-  @override
-  void initState() {
-    refreshData();
-    super.initState();
-  }
   //Above is, start the session with the instantiated variable and then pull
   //if we are able to from the SharedPrefs
 
@@ -107,90 +99,66 @@ class _SettingsOptionsState extends State<SettingsOptions> {
   }
 
   Future<void> enterDueDate(BuildContext context) async {
+    final user = Provider.of<UserModeling>(context, listen: false);
+
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
-      lastDate: DateTime(2025),
-      cancelText: "are you sure?",
+      lastDate: DateTime(2050),
+      cancelText: "Cancel",
     ).then((date) async {
       if (date == null) {
         return;
       } else {
-        final prefs = await SharedPreferences.getInstance();
-        String? aString = '';
-
-        String dueDateYear = date.year.toString();
-        String dueDateMonth = date.month.toString();
-        String dueDateDay = date.day.toString();
-
-        await prefs.setString(
-            'dueDate', '$dueDateDay-$dueDateMonth-$dueDateYear');
-        aString = prefs.getString('dueDate');
-        print(aString);
-        setState(() {
-          _dueDate = "$dueDateDay $dueDateMonth $dueDateYear";
-        });
+        int adate = date.millisecondsSinceEpoch;
+        print(adate);
+        print(DateTime.fromMillisecondsSinceEpoch(adate));
+        DatabaseService(uid: user.uid).updateDueDate(adate);
       }
-      ;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return SettingsList(
-      sections: [
-        SettingsSection(
-          title: Text('Childing Application App'),
-          tiles: [
-            SettingsTile.navigation(
-              leading: Icon(Icons.language),
-              title: Text('Language'),
-              value: Text('English'),
-            ),
-            SettingsTile.switchTile(
-              onToggle: (value) {
-                setState(() {
-                  this.toggle1 = value;
-                });
-              },
-              initialValue: toggle1,
-              leading: Icon(Icons.format_paint),
-              title: Text('Toggle 1'),
-            ),
-            SettingsTile.switchTile(
-              onToggle: (value) {
-                setState(() {
-                  theme2 = value;
-                });
-                print(value);
-              },
-              initialValue: theme2,
-              leading: Icon(Icons.format_paint),
-              title: Text('Theme 2'),
-            ),
-            SettingsTile(
-              title: Text('Due Date'),
-              leading: Icon(FontAwesomeIcons.baby),
-              trailing: Text(_dueDate ?? 'none'),
-              onPressed: enterDueDate,
-            ),
-            SettingsTile(
-              title: Text('Pre-Pregnancy Weight'),
-              trailing: Text(preconweight.toString()),
-              onPressed: _weightInput,
-            ),
-            SettingsTile.switchTile(
-              initialValue: false,
-              onToggle: (value) {
-                print:
-                Text('switched');
-              },
-              title: Text('Text'),
-            ),
-          ],
-        ),
-      ],
+    final user = Provider.of<UserModeling>(context);
+
+    return StreamBuilder<UserData>(
+      stream: DatabaseService(uid: user.uid).userData,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          UserData userData = snapshot.data!;
+          return SettingsList(
+            sections: [
+              SettingsSection(
+                title: Text('Profile Settings'),
+                tiles: [
+                  SettingsTile(
+                    title: Text('Due Date'),
+                    leading: Icon(FontAwesomeIcons.baby),
+                    trailing: Text(userData.duedate.toString()),
+                    onPressed: enterDueDate,
+                  ),
+                  SettingsTile(
+                    title: Text('Pre-pregnancy Weight'),
+                    leading: Icon(FontAwesomeIcons.weightScale),
+                    trailing: Text(preconweight.toString()),
+                    onPressed: _weightInput,
+                  ),
+                  SettingsTile(
+                    title: Text('Provider E-mail'),
+                    leading: Icon(FontAwesomeIcons.userDoctor),
+                    trailing: Text(preconweight.toString()),
+                    onPressed: _weightInput,
+                  ),
+                ],
+              ),
+            ],
+          );
+        } else {
+          return Container(child: Text('something has gone wrong'));
+        }
+      },
     );
   }
 }

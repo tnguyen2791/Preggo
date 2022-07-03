@@ -3,6 +3,7 @@ import 'package:preggo/models/pregnancy.dart';
 import 'package:preggo/models/user.dart';
 import 'package:preggo/presentation/screens/all_screens.dart';
 import 'package:preggo/services/database.dart';
+import 'package:preggo/services/auth.dart';
 import 'package:preggo/shared/shared.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -18,8 +19,29 @@ class UserHomeScreen extends StatelessWidget {
     return StreamProvider<List<PregnancyInfo>?>.value(
       value: DatabaseService(uid: user.uid).userProfile,
       initialData: null,
-      child: BaseScaffold(
-        scaffoldBody: Column(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Homescreen'),
+          actions: [
+            IconButton(
+              icon: const Icon(
+                Icons.settings,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, Settings.id);
+              },
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.logout,
+              ),
+              onPressed: () {
+                AuthService().signOut();
+              },
+            ),
+          ],
+        ),
+        body: Column(
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

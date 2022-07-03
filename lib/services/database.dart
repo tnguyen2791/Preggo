@@ -6,11 +6,11 @@ class DatabaseService {
   final String uid;
 
   DatabaseService({required this.uid});
-  DatabaseService.withoutUID() : uid = '';
 
   //collection reference
   final CollectionReference childingCollection =
       FirebaseFirestore.instance.collection('childing');
+
   //will create it automatically
 
   Future updateUserData(String duedate, String weight, String date) async {
@@ -23,12 +23,18 @@ class DatabaseService {
     //At the same time, the dummy data will be recorded
   }
 
-//Getting a brew list from the snapshot
+  Future updateDueDate(int dueDate) async {
+    return await childingCollection.doc(uid).update({
+      'duedate': dueDate,
+    });
+  }
+
+//Getting a list from the snapshot
   List<PregnancyInfo> _pregnancyInfoFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return PregnancyInfo(
         date: doc['date'] ?? '',
-        duedate: doc['duedate'] ?? '',
+        epochduedate: doc['duedate'] ?? '',
         weight: doc['weight'] ?? '',
       );
     }).toList();
