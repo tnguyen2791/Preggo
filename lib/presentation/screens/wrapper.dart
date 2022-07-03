@@ -1,14 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:preggo/login/login.dart';
+import 'package:preggo/models/user.dart';
 import 'package:preggo/services/auth.dart';
 import 'package:preggo/userhome/userhome.dart';
-import 'all_screens.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:preggo/shared/shared.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
+class Wrapper extends StatelessWidget {
+  Wrapper({Key? key}) : super(key: key);
   static const String id = 'homepage_screen';
 
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:preggo/shared/shared.dart';
-import 'package:preggo/constants.dart';
+import 'package:preggo/shared/constants.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class GrowthChart extends StatelessWidget {

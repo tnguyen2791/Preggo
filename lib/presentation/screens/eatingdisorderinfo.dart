@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:preggo/presentation/screens/home.dart';
+import 'package:preggo/presentation/screens/wrapper.dart';
 
 class WeighInOptions extends StatelessWidget {
   const WeighInOptions({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class WeighInOptions extends StatelessWidget {
           TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.white),
               onPressed: (() =>
-                  Navigator.pushReplacementNamed(context, HomeScreen.id)),
+                  Navigator.pushReplacementNamed(context, Wrapper.id)),
               child: Text("Done!"))
         ],
       ),

@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:preggo/presentation/screens/eatingdisorderinfo.dart';
-import 'package:preggo/presentation/screens/home.dart';
+import 'package:preggo/presentation/screens/wrapper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardingPage extends StatefulWidget {
@@ -41,7 +41,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 /* Area dedicated to the introduction page */
 
   void _onIntroEnd(context) {
-    Navigator.pushNamed(context, HomeScreen.id);
+    Navigator.pushNamed(context, Wrapper.id);
   }
 
   addBoolToSF() async {
@@ -173,8 +173,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       (hxconcern || hxcontrol || hxeating || hxsecret)
                           ? Navigator.pushReplacementNamed(
                               context, WeighInOptions.id)
-                          : Navigator.pushReplacementNamed(
-                              context, HomeScreen.id);
+                          : Navigator.pushReplacementNamed(context, Wrapper.id);
                     })
                   : null,
               child: const Text('Done!'),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:preggo/models/user.dart';
 import 'package:preggo/services/auth.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -33,7 +34,15 @@ class LoginScreen extends StatelessWidget {
                   buttontext: 'Anonymous Login',
                   icon: FontAwesomeIcons.userNinja,
                   color: Colors.lightGreen,
-                  loginMethod: AuthService().anonLogin,
+                  loginMethod: () async {
+                    UserModeling result = await AuthService().anonLogin();
+                    if (result == null) {
+                      print('error signing in');
+                    } else {
+                      print(result.uid);
+                      print('signed in');
+                    }
+                  },
                 ),
               ),
               Flexible(
@@ -70,7 +79,7 @@ class LoginButton extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       child: ElevatedButton.icon(
         onPressed: () {
-          print('login/logout button was pressed');
+          print('logging in');
           print(FirebaseAuth.instance.currentUser);
           loginMethod();
           //important in tacit programming the method gets called when it is pressed.

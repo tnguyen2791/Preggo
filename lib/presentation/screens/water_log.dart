@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:preggo/shared/shared.dart';
-import 'package:preggo/constants.dart';
+import 'package:preggo/shared/constants.dart';
 
 class WaterLog extends StatelessWidget {
   WaterLog({Key? key}) : super(key: key);

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:preggo/login/login.dart';
-import 'package:preggo/presentation/screens/home.dart';
+import 'package:preggo/models/user.dart';
+import 'package:preggo/presentation/screens/wrapper.dart';
 import 'package:preggo/routes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'presentation/screens/introduction.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:preggo/services/auth.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -14,26 +14,20 @@ void main() async {
 }
 
 class PreggoApp extends StatelessWidget {
-  Future<bool?> _getBoolFromSharedPref() async {
-    final prefs = await SharedPreferences.getInstance();
-    final disclaimerCheck = prefs.getBool('agreeDisclaimer');
-    if (disclaimerCheck == null) {
-      return false;
-    } else {
-      return disclaimerCheck;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-        scaffoldBackgroundColor: const Color(0xFF7209B7),
+    return StreamProvider<UserModeling>.value(
+      value: AuthService().user, //now listening to our model
+      initialData: UserModeling(),
+      child: MaterialApp(
+        theme: ThemeData(
+          primarySwatch: Colors.pink,
+          scaffoldBackgroundColor: const Color(0xFF7209B7),
+        ),
+        title: 'Pregnancy Weights',
+        initialRoute: Wrapper.id,
+        routes: appRoutes,
       ),
-      title: 'Pregnancy Weights',
-      initialRoute: HomeScreen.id,
-      routes: appRoutes,
     );
   }
 }

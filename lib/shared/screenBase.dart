@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:preggo/presentation/screens/home.dart';
+import 'package:preggo/presentation/screens/wrapper.dart';
 import 'package:flutter/services.dart';
 import 'package:preggo/services/auth.dart';
 
@@ -20,7 +20,7 @@ class ScreenBaseScaffold extends StatelessWidget {
         leading: BackButton(
           onPressed: () {
             Navigator.pop(
-                context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                context, MaterialPageRoute(builder: (context) => Wrapper()));
           },
         ),
         title: Text(titleText),

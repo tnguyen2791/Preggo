@@ -37,11 +37,11 @@ class MenuBase extends StatelessWidget {
           ),
           MenuTile(
             menuTitle: 'Blood Sugar Log',
-            navigationRoute: HomeScreen.id,
+            navigationRoute: Wrapper.id,
           ),
           MenuTile(
             menuTitle: 'Export Information',
-            navigationRoute: HomeScreen.id,
+            navigationRoute: Wrapper.id,
           ),
           MenuTile(
             menuTitle: 'Resources',
