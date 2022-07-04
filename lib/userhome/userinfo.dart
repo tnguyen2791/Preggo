@@ -2,6 +2,7 @@ import 'package:preggo/shared/constants.dart';
 import 'package:preggo/models/pregnancy.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:preggo/services/sharedfunctions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserInfo extends StatefulWidget {
@@ -18,7 +19,9 @@ class _UserInfoState extends State<UserInfo> {
 
     if (user != null) {
       String date = user.first.date;
-      int duedate = user.first.epochduedate;
+      String duedate = toPrettyDateMMMddyyyy(user.first.epochduedate);
+      // DateTime.fromMillisecondsSinceEpoch(user.first.epochduedate)
+      //     .toString();
       String weight = user.first.weight;
 
       return Column(
@@ -28,7 +31,7 @@ class _UserInfoState extends State<UserInfo> {
             style: kGoogleTitle,
           ),
           Text(
-            duedate.toString(),
+            'Due Date: $duedate',
             style: kGoogleTitle,
           ),
           Text(

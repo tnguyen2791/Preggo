@@ -4,6 +4,7 @@ import 'package:preggo/presentation/screens/wrapper.dart';
 import 'package:preggo/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:preggo/services/auth.dart';
+import 'package:preggo/services/database.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
@@ -16,9 +17,13 @@ void main() async {
 class PreggoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<UserModeling>.value(
-      value: AuthService().user, //now listening to our model
-      initialData: UserModeling(),
+    return MultiProvider(
+      providers: [
+        StreamProvider<UserUID>.value(
+          value: AuthService().user,
+          initialData: UserUID(),
+        ),
+      ],
       child: MaterialApp(
         theme: ThemeData(
           primarySwatch: Colors.pink,

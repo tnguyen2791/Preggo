@@ -13,7 +13,7 @@ class DatabaseService {
 
   //will create it automatically
 
-  Future updateUserData(String duedate, String weight, String date) async {
+  Future updateUserData(int duedate, String weight, String date) async {
     return await childingCollection.doc(uid).set({
       'duedate': duedate,
       'weight': weight,
@@ -34,7 +34,7 @@ class DatabaseService {
     return snapshot.docs.map((doc) {
       return PregnancyInfo(
         date: doc['date'] ?? '',
-        epochduedate: doc['duedate'] ?? '',
+        epochduedate: doc['duedate'] ?? 1656882023322,
         weight: doc['weight'] ?? '',
       );
     }).toList();
@@ -52,7 +52,7 @@ class DatabaseService {
     return UserData(
       uid: uid,
       date: snapshot['date'],
-      duedate: snapshot['duedate'],
+      epochduedate: snapshot['duedate'],
       weight: snapshot['weight'],
     );
   }
@@ -60,6 +60,12 @@ class DatabaseService {
   //get user doc stream
   Stream<UserData> get userData {
     return childingCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
+  }
+
+  Future<int> getdate() async {
+    final ref = childingCollection.doc(uid);
+    final doc = await ref.get();
+    return doc['duedate'];
   }
 
   Future<bool> checkIfDocExists() async {

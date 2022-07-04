@@ -21,12 +21,12 @@ class _SettingsFormState extends State<SettingsForm> {
   ];
 
   String currentdate = 'a date';
-  String currentduedate = 'the supreme court sucks';
+  int currentduedate = 1656882023322;
   double currentweight = 100;
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserModeling>(context);
+    final user = Provider.of<UserUID>(context);
 
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
@@ -61,12 +61,12 @@ class _SettingsFormState extends State<SettingsForm> {
                   height: 20,
                 ),
                 DropdownButtonFormField(
-                  value: userData.duedate,
+                  value: userData.epochduedate,
                   items: pregnantornot.map((preg) {
                     return DropdownMenuItem(value: preg, child: Text(preg));
                   }).toList(),
                   onChanged: (value) => setState(() {
-                    currentduedate = value as String;
+                    currentduedate = value as int;
                     print('currentDD $currentduedate');
                   }),
                 ),

@@ -14,14 +14,14 @@ class UserHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserModeling>(context);
+    final user = Provider.of<UserUID>(context);
 
     return StreamProvider<List<PregnancyInfo>?>.value(
       value: DatabaseService(uid: user.uid).userProfile,
       initialData: null,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Homescreen'),
+          title: const Text('Homescreen'),
           actions: [
             IconButton(
               icon: const Icon(
@@ -45,7 +45,7 @@ class UserHomeScreen extends StatelessWidget {
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
+              children: const [
                 UserInfo(),
               ],
             ),

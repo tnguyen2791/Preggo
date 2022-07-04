@@ -7,22 +7,23 @@ class AuthService {
   final userStream = FirebaseAuth.instance.authStateChanges();
   final fbuser = FirebaseAuth.instance.currentUser;
 
-  UserModeling _userFromFirebaseUser(User user) {
-    return UserModeling(uid: user.uid);
+  UserUID _userFromFirebaseUser(User user) {
+    return UserUID(uid: user.uid);
   }
 
   //auth change user stream
-  Stream<UserModeling> get user {
+  Stream<UserUID> get user {
     return userStream.map(
       (User? user) => _userFromFirebaseUser(user!),
     );
   }
+
   //now this stream will return our own model of the user
 
-  Future<UserModeling> googleLogin() async {
+  Future<UserUID> googleLogin() async {
     try {
       final googleUser = await GoogleSignIn().signIn();
-      if (googleUser == null) return UserModeling();
+      if (googleUser == null) return UserUID();
 
       final googleAuth = await googleUser.authentication;
       final authCredential = GoogleAuthProvider.credential(
@@ -36,23 +37,23 @@ class AuthService {
 
       //creating the document for this user
       await DatabaseService(uid: user.uid)
-          .updateUserData('I am pregnant', '100.00', 'This is a date');
+          .updateUserData(1656882023322, '100.00', 'This is a date');
 
       return _userFromFirebaseUser(user);
     } on FirebaseAuthException catch (e) {
       print(e.message);
-      return UserModeling();
+      return UserUID();
     }
   }
 
-  Future<UserModeling> anonLogin() async {
+  Future<UserUID> anonLogin() async {
     try {
       UserCredential result = await FirebaseAuth.instance.signInAnonymously();
       User user = result.user!;
       return _userFromFirebaseUser(user);
       //Will return a custom user object instead of Firebaseuser
     } on FirebaseAuthException catch (e) {
-      return UserModeling();
+      return UserUID();
     }
   }
 

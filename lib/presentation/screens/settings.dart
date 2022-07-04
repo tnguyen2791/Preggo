@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:preggo/tools/sharedPreferences.dart';
 import 'package:provider/provider.dart';
+import 'package:preggo/models/pregnancy.dart';
 
 class Settings extends StatelessWidget {
   static const String id = 'settings screen';
@@ -99,11 +100,13 @@ class _SettingsOptionsState extends State<SettingsOptions> {
   }
 
   Future<void> enterDueDate(BuildContext context) async {
-    final user = Provider.of<UserModeling>(context, listen: false);
+    final user = Provider.of<UserUID>(context, listen: false);
+    // final userdata = Provider.of<UserData>(context, listen: false);
 
     showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: DateTime.fromMillisecondsSinceEpoch(
+          await DatabaseService(uid: user.uid).getdate()),
       firstDate: DateTime(2000),
       lastDate: DateTime(2050),
       cancelText: "Cancel",
@@ -121,7 +124,7 @@ class _SettingsOptionsState extends State<SettingsOptions> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserModeling>(context);
+    final user = Provider.of<UserUID>(context);
 
     return StreamBuilder<UserData>(
       stream: DatabaseService(uid: user.uid).userData,
@@ -136,7 +139,7 @@ class _SettingsOptionsState extends State<SettingsOptions> {
                   SettingsTile(
                     title: Text('Due Date'),
                     leading: Icon(FontAwesomeIcons.baby),
-                    trailing: Text(userData.duedate.toString()),
+                    trailing: Text(userData.epochduedate.toString()),
                     onPressed: enterDueDate,
                   ),
                   SettingsTile(

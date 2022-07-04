@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(30),
+        padding: const EdgeInsets.all(30),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -35,7 +35,7 @@ class LoginScreen extends StatelessWidget {
                   icon: FontAwesomeIcons.userNinja,
                   color: Colors.lightGreen,
                   loginMethod: () async {
-                    UserModeling result = await AuthService().anonLogin();
+                    UserUID result = await AuthService().anonLogin();
                     if (result == null) {
                       print('error signing in');
                     } else {
