@@ -1,12 +1,14 @@
 class PregnancyInfo {
   /* The context of this is to create a model for when the information from the database comes back */
 
-  final String date;
+  final int date;
   final int epochduedate;
-  final String weight;
+  final int weight;
+  final String email;
 
   PregnancyInfo(
-      {this.date = 'Nodate',
+      {this.date = 1656882023322,
       this.epochduedate = 000000,
-      this.weight = 'noweight'});
+      this.weight = 100,
+      this.email = 'random@email.com'});
 }

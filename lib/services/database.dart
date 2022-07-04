@@ -13,47 +13,42 @@ class DatabaseService {
 
   //will create it automatically
 
-  Future updateUserData(int duedate, String weight, String date) async {
+  Future updateUserData(int duedate, int weight, String email) async {
     return await childingCollection.doc(uid).set({
       'duedate': duedate,
       'weight': weight,
-      'date': date,
+      'provideremail': email,
+      'agreement': false,
     });
     //this is to create that uid when a user does indeed sign in
     //At the same time, the dummy data will be recorded
   }
 
-  Future updateDueDate(int dueDate) async {
-    return await childingCollection.doc(uid).update({
-      'duedate': dueDate,
-    });
-  }
-
 //Getting a list from the snapshot
-  List<PregnancyInfo> _pregnancyInfoFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.docs.map((doc) {
-      return PregnancyInfo(
-        date: doc['date'] ?? '',
-        epochduedate: doc['duedate'] ?? 1656882023322,
-        weight: doc['weight'] ?? '',
-      );
-    }).toList();
-  }
+  // List<PregnancyInfo> _pregnancyInfoFromSnapshot(QuerySnapshot snapshot) {
+  //   return snapshot.docs.map((doc) {
+  //     return PregnancyInfo(
+  //       date: doc['date'] ?? '',
+  //       epochduedate: doc['duedate'] ?? 1656882023322,
+  //       weight: doc['weight'] ?? '',
+  //     );
+  //   }).toList();
+  // }
 //doc is more than enough to actually access it
 
 /* This is a stream that will return a QuerySnapshot as the object type we're expecting when we're getting the userProfile, which we named */
 
-  Stream<List<PregnancyInfo>> get userProfile {
-    return childingCollection.snapshots().map(_pregnancyInfoFromSnapshot);
-  }
+  // Stream<List<PregnancyInfo>> get userProfile {
+  //   return childingCollection.snapshots().map(_pregnancyInfoFromSnapshot);
+  // }
 
 //user data from snapshot
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
       uid: uid,
-      date: snapshot['date'],
       epochduedate: snapshot['duedate'],
       weight: snapshot['weight'],
+      email: snapshot['provideremail'],
     );
   }
 
@@ -66,6 +61,48 @@ class DatabaseService {
     final ref = childingCollection.doc(uid);
     final doc = await ref.get();
     return doc['duedate'];
+  }
+
+  Future updateDueDate(int dueDate) async {
+    return await childingCollection.doc(uid).update({
+      'duedate': dueDate,
+    });
+  }
+
+  Future<int> getweight() async {
+    final ref = childingCollection.doc(uid);
+    final doc = await ref.get();
+    return doc['weight'];
+  }
+
+  Future updateWeight(int weight) async {
+    return await childingCollection.doc(uid).update({
+      'weight': weight,
+    });
+  }
+
+  Future<String> getemail() async {
+    final ref = childingCollection.doc(uid);
+    final doc = await ref.get();
+    return doc['provideremail'];
+  }
+
+  Future updateemail(String? email) async {
+    return await childingCollection.doc(uid).update({
+      'provideremail': email,
+    });
+  }
+
+  Future updateagreement(bool? agreement) async {
+    return await childingCollection.doc(uid).update({
+      'agreement': agreement,
+    });
+  }
+
+  Future<bool> getAgreement() async {
+    final ref = childingCollection.doc(uid);
+    final doc = await ref.get();
+    return doc['agreement'];
   }
 
   Future<bool> checkIfDocExists() async {

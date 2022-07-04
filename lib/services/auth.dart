@@ -37,7 +37,7 @@ class AuthService {
 
       //creating the document for this user
       await DatabaseService(uid: user.uid)
-          .updateUserData(1656882023322, '100.00', 'This is a date');
+          .updateUserData(1656882023322, 100, 'your@provider.org');
 
       return _userFromFirebaseUser(user);
     } on FirebaseAuthException catch (e) {

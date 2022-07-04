@@ -10,13 +10,15 @@ class UserData {
   //likely we can just use the pregnancy model again
 
   final String uid;
-  final String date;
+  final bool agreement;
   final int epochduedate;
-  final String weight;
+  final int weight;
+  final String email;
 
   UserData(
       {this.uid = '00000',
-      this.date = 'noDate',
+      this.agreement = false,
       this.epochduedate = 1656882023322,
-      this.weight = 'noweight'});
+      this.weight = 100,
+      this.email = 'random@email.com'});
 }

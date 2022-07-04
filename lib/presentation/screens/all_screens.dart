@@ -5,6 +5,6 @@ export 'growth_chart.dart';
 export 'wrapper.dart';
 export 'introduction.dart';
 export 'resources.dart';
-export 'settings.dart';
+export '../settings/settings.dart';
 export 'water_log.dart';
 export '../../weight/weigh_in.dart';

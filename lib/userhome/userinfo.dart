@@ -1,9 +1,13 @@
+import 'dart:math';
+
+import 'package:preggo/models/user.dart';
 import 'package:preggo/shared/constants.dart';
 import 'package:preggo/models/pregnancy.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:preggo/services/sharedfunctions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class UserInfo extends StatefulWidget {
   const UserInfo({Key? key}) : super(key: key);
@@ -15,14 +19,20 @@ class UserInfo extends StatefulWidget {
 class _UserInfoState extends State<UserInfo> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<List<PregnancyInfo>?>(context);
+    final user = Provider.of<UserData?>(context);
 
+    try {} catch (e) {}
     if (user != null) {
-      String date = user.first.date;
-      String duedate = toPrettyDateMMMddyyyy(user.first.epochduedate);
+      final int dbuserepoch = user.epochduedate;
+      final DateTime dbuserinDT =
+          DateTime.fromMillisecondsSinceEpoch(dbuserepoch);
+      final Duration difference = dbuserinDT.difference(DateTime.now());
+
+      String date = '${difference.inDays.toString()} days left!';
+      String duedate = toPrettyDateMMMddyyyy(dbuserepoch);
       // DateTime.fromMillisecondsSinceEpoch(user.first.epochduedate)
       //     .toString();
-      String weight = user.first.weight;
+      String today = DateFormat('MMM-dd-yyyy').format(DateTime.now());
 
       return Column(
         children: [
@@ -35,7 +45,7 @@ class _UserInfoState extends State<UserInfo> {
             style: kGoogleTitle,
           ),
           Text(
-            weight,
+            'Today: $today',
             style: kGoogleTitle,
           )
         ],
