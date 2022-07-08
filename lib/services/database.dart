@@ -3,7 +3,7 @@ import 'package:preggo/models/pregnancy.dart';
 import 'package:preggo/models/user.dart';
 
 class DatabaseService {
-  final String uid;
+  final String? uid;
 
   DatabaseService({required this.uid});
 
@@ -45,7 +45,6 @@ class DatabaseService {
 //user data from snapshot
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
-      uid: uid,
       epochduedate: snapshot['duedate'],
       weight: snapshot['weight'],
       email: snapshot['provideremail'],
@@ -99,9 +98,11 @@ class DatabaseService {
     });
   }
 
-  Future<bool> getAgreement() async {
+  Future<bool?> getAgreement() async {
     final ref = childingCollection.doc(uid);
+    print(uid);
     final doc = await ref.get();
+    print(doc['agreement']);
     return doc['agreement'];
   }
 

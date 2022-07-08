@@ -50,13 +50,14 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: Form(
                     key: _formKey,
                     child: Column(
                       children: [
                         ListTile(
-                            leading: Icon(FontAwesomeIcons.calendar),
+                            leading: const Icon(FontAwesomeIcons.calendar),
                             title: const Text('Baby\'s due date'),
                             trailing: Text(
                                 toPrettyDateMMMddyyyy(userData.epochduedate)),

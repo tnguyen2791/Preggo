@@ -12,7 +12,6 @@ import 'package:provider/provider.dart';
 import 'userinfo.dart';
 
 class UserHomeScreen extends StatelessWidget {
-            
   static String id = 'homescreen';
 
   const UserHomeScreen({Key? key}) : super(key: key);

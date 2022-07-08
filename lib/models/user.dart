@@ -1,7 +1,9 @@
 class UserUID {
   final String uid;
 
-  UserUID({this.uid = '00000'});
+  UserUID({
+    this.uid = '00000',
+  });
 }
 
 class UserData {

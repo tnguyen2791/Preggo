@@ -20,8 +20,6 @@ class _UserInfoState extends State<UserInfo> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserData?>(context);
-
-    try {} catch (e) {}
     if (user != null) {
       final int dbuserepoch = user.epochduedate;
       final DateTime dbuserinDT =
