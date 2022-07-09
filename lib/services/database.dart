@@ -13,12 +13,13 @@ class DatabaseService {
 
   //will create it automatically
 
-  Future updateUserData(int duedate, int weight, String email) async {
+  Future updateUserData(
+      int duedate, int weight, String email, bool agreement) async {
     return await childingCollection.doc(uid).set({
       'duedate': duedate,
       'weight': weight,
       'provideremail': email,
-      'agreement': false,
+      'agreement': agreement,
     });
     //this is to create that uid when a user does indeed sign in
     //At the same time, the dummy data will be recorded
@@ -45,6 +46,7 @@ class DatabaseService {
 //user data from snapshot
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
+      agreement: snapshot['agreement'],
       epochduedate: snapshot['duedate'],
       weight: snapshot['weight'],
       email: snapshot['provideremail'],
@@ -99,11 +101,14 @@ class DatabaseService {
   }
 
   Future<bool?> getAgreement() async {
-    final ref = childingCollection.doc(uid);
-    print(uid);
-    final doc = await ref.get();
-    print(doc['agreement']);
-    return doc['agreement'];
+    // if (uid == '') {
+    //   print('loading');
+    // } else {
+    //   final ref = childingCollection.doc(uid);
+    //   final doc = await ref.get();
+    //   // print(doc['agreement']);
+    return true;
+    // }
   }
 
   Future<bool> checkIfDocExists() async {

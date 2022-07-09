@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:preggo/models/user.dart';
+import 'package:preggo/presentation/screens/sign_up_screen.dart';
 import 'package:preggo/services/auth.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -31,26 +32,27 @@ class LoginScreen extends StatelessWidget {
               ),
               Flexible(
                 child: LoginButton(
-                  buttontext: 'Anonymous Login',
-                  icon: FontAwesomeIcons.userNinja,
+                  buttontext: 'Register with e-mail',
+                  icon: FontAwesomeIcons.ethereum,
                   color: Colors.lightGreen,
-                  loginMethod: () async {
-                    UserUID result = await AuthService().anonLogin();
-                    if (result == null) {
-                      print('error signing in');
-                    } else {
-                      print(result.uid);
-                      print('signed in');
-                    }
+                  loginMethod: () {
+                    Navigator.pushReplacementNamed(context, SignUpScreen.id);
+                    // UserUID result = await AuthService().anonLogin();
+                    // if (result == null) {
+                    //   print('error signing in');
+                    // } else {
+                    //   print(result.uid);
+                    //   print('signed in');
+                    // }
                   },
                 ),
               ),
               Flexible(
                 child: LoginButton(
-                  buttontext: 'Log Out',
-                  icon: FontAwesomeIcons.stop,
+                  buttontext: 'Feedback',
+                  icon: FontAwesomeIcons.thumbsUp,
                   color: Colors.redAccent,
-                  loginMethod: AuthService().signOut,
+                  loginMethod: () => print('give us feedback!'),
                 ),
               ),
             ]),
@@ -79,11 +81,8 @@ class LoginButton extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       child: ElevatedButton.icon(
         onPressed: () {
-          print('logging in');
-          print(FirebaseAuth.instance.currentUser);
           loginMethod();
           //important in tacit programming the method gets called when it is pressed.
-          print(FirebaseAuth.instance.currentUser);
         },
         icon: Icon(
           icon,

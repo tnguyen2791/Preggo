@@ -17,6 +17,7 @@ class PreggoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<UserUID>.value(
+      catchError: (_, error) => UserUID(),
       value: AuthService().user,
       initialData: UserUID(),
       child: MaterialApp(

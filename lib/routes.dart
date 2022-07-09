@@ -1,6 +1,7 @@
 import 'package:preggo/login/login.dart';
 import 'package:preggo/presentation/screens/all_screens.dart';
 import 'package:preggo/presentation/screens/datacollectionform.dart';
+import 'package:preggo/presentation/screens/sign_up_screen.dart';
 import 'package:preggo/userhome/userhome.dart';
 
 var appRoutes = {
@@ -16,4 +17,5 @@ var appRoutes = {
   LoginScreen.id: (context) => LoginScreen(),
   Settings.id: (context) => Settings(),
   DataCollectionScreen.id: (context) => DataCollectionScreen(),
+  SignUpScreen.id: (context) => SignUpScreen(),
 };

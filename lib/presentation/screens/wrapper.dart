@@ -9,23 +9,29 @@ import 'package:provider/provider.dart';
 import 'package:preggo/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Wrapper extends StatelessWidget {
+class Wrapper extends StatefulWidget {
   Wrapper({Key? key}) : super(key: key);
   static const String id = 'homepage_screen';
 
+  @override
+  State<Wrapper> createState() => _WrapperState();
+}
+
+class _WrapperState extends State<Wrapper> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: AuthService().userStream,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
-            var fbuser = FirebaseAuth.instance.currentUser?.uid;
             var user = snapshot.data;
+            final user1 = Provider.of<UserUID>(context);
             if (user == null) {
               return const LoginScreen();
             }
+
             return FutureBuilder(
-              future: DatabaseService(uid: fbuser).getAgreement(),
+              future: DatabaseService(uid: user1.uid).getAgreement(),
               builder: ((context, snapshot) {
                 try {
                   if (snapshot.hasData) {
