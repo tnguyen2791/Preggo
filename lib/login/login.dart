@@ -36,7 +36,7 @@ class LoginScreen extends StatelessWidget {
                   icon: FontAwesomeIcons.ethereum,
                   color: Colors.lightGreen,
                   loginMethod: () {
-                    Navigator.pushReplacementNamed(context, SignUpScreen.id);
+                    Navigator.pushNamed(context, SignUpScreen.id);
                     // UserUID result = await AuthService().anonLogin();
                     // if (result == null) {
                     //   print('error signing in');

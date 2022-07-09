@@ -13,7 +13,6 @@ var appRoutes = {
   Resources.id: (context) => Resources(),
   Settings.id: (context) => Settings(),
   WaterLog.id: (context) => WaterLog(),
-  WeighIn.id: (context) => WeighIn(),
   LoginScreen.id: (context) => LoginScreen(),
   Settings.id: (context) => Settings(),
   DataCollectionScreen.id: (context) => DataCollectionScreen(),

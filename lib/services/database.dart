@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:preggo/models/pregnancy.dart';
 import 'package:preggo/models/user.dart';
 
 class DatabaseService {
@@ -82,6 +81,12 @@ class DatabaseService {
     });
   }
 
+  // Future logWeight1(int loggedweight) async {
+  //   return await childingCollection.doc(uid).update({
+  //     'loggedweight': loggedweight,
+  //   });
+  // }
+
   Future<String> getemail() async {
     final ref = childingCollection.doc(uid);
     final doc = await ref.get();
@@ -101,23 +106,13 @@ class DatabaseService {
   }
 
   Future<bool?> getAgreement() async {
-    // if (uid == '') {
-    //   print('loading');
-    // } else {
-    //   final ref = childingCollection.doc(uid);
-    //   final doc = await ref.get();
-    //   // print(doc['agreement']);
-    return true;
-    // }
-  }
-
-  Future<bool> checkIfDocExists() async {
-    try {
-      var doc = await childingCollection.doc(uid).get();
-      return doc.exists;
-    } catch (e) {
-      print(e);
-      return false;
+    if (uid == '00000') {
+      print('loading');
+    } else {
+      final ref = childingCollection.doc(uid);
+      final doc = await ref.get();
+      print(doc['agreement']);
+      return doc['agreement'];
     }
   }
 }

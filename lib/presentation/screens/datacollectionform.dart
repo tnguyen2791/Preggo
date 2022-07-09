@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:preggo/models/user.dart';
+import 'package:preggo/presentation/screens/wrapper.dart';
 import 'package:preggo/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:preggo/userhome/userhome.dart';
@@ -139,7 +140,7 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                               DatabaseService(uid: user.uid)
                                   .updateagreement(true);
                               Navigator.of(context)
-                                  .pushNamed(UserHomeScreen.id);
+                                  .pushReplacementNamed(Wrapper.id);
                             }
                           },
                           child: const Text('Submit'),

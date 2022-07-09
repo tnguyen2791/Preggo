@@ -21,6 +21,11 @@ class UserHomeScreen extends StatelessWidget {
     final user = Provider.of<UserUID>(context);
 
     return StreamProvider<UserData>.value(
+      catchError: (context, error) {
+        print('an error has occurred $error');
+        print(user.uid);
+        return UserData();
+      },
       value: DatabaseService(uid: user.uid).userData,
       initialData: UserData(),
       child: Scaffold(

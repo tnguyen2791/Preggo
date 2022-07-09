@@ -1,10 +1,9 @@
 export 'diet.dart';
 export 'eatingdisorderinfo.dart';
 export 'exercise_reg.dart';
-export 'growth_chart.dart';
+export '../../growth/growth_chart.dart';
 export 'wrapper.dart';
 export 'introduction.dart';
 export 'resources.dart';
 export '../settings/settings.dart';
 export 'water_log.dart';
-export '../../weight/weigh_in.dart';
