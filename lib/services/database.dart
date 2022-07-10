@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:preggo/models/user.dart';
+import 'package:preggo/growthscreen/weightlogmodel.dart';
 
 class DatabaseService {
   final String? uid;
@@ -12,13 +13,14 @@ class DatabaseService {
 
   //will create it automatically
 
-  Future updateUserData(
-      int duedate, int weight, String email, bool agreement) async {
+  Future updateUserData(int duedate, int weight, String email, bool agreement,
+      List loggedweight) async {
     return await childingCollection.doc(uid).set({
       'duedate': duedate,
       'weight': weight,
       'provideremail': email,
       'agreement': agreement,
+      'loggedweight': loggedweight,
     });
     //this is to create that uid when a user does indeed sign in
     //At the same time, the dummy data will be recorded
@@ -51,6 +53,15 @@ class DatabaseService {
       email: snapshot['provideremail'],
     );
   }
+
+  // List<WeightModel> _weightLog(DocumentSnapshot snapshot) {
+  //   List listFromDB = snapshot.get('loggedweight');
+  //   List brokenList = listFromDB.fo;
+  // }
+
+  // Stream<WeightModel> get userWeights {
+  //   return childingCollection.doc(uid).get()['loggedweight'];
+  // }
 
   //get user doc stream
   Stream<UserData> get userData {

@@ -1,15 +1,16 @@
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:preggo/models/user.dart';
 import 'package:preggo/presentation/screens/wrapper.dart';
 import 'package:preggo/services/database.dart';
 import 'package:flutter/material.dart';
-import 'package:preggo/userhome/userhome.dart';
 import 'package:provider/provider.dart';
 import 'package:preggo/services/sharedfunctions.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class DataCollectionScreen extends StatelessWidget {
   static const String id = 'datacollectionscreen';
+
+  const DataCollectionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,21 +20,20 @@ class DataCollectionScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(appTitle),
       ),
-      body: DataCollectionWidget(),
+      body: const DataCollectionWidget(),
     );
   }
 }
 
 class DataCollectionWidget extends StatefulWidget {
+  const DataCollectionWidget({Key? key}) : super(key: key);
+
   @override
   State<DataCollectionWidget> createState() => _DataCollectionWidgetState();
 }
 
 class _DataCollectionWidgetState extends State<DataCollectionWidget> {
-  final _weightController = TextEditingController();
   bool agreeDisclaimer = false;
-
-  var _weight;
 
   @override
   Widget build(BuildContext context) {
@@ -43,113 +43,133 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             UserData userData = snapshot.data!;
-            final _formKey = GlobalKey<FormState>();
+            final formKey = GlobalKey<FormState>();
             final weightController = TextEditingController();
             final provideremailController = TextEditingController();
 
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        ListTile(
-                            leading: const Icon(FontAwesomeIcons.calendar),
-                            title: const Text('Baby\'s due date'),
-                            trailing: Text(
-                                toPrettyDateMMMddyyyy(userData.epochduedate)),
-                            onTap: () {
-                              showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(2000),
-                                      lastDate: DateTime(2050))
-                                  .then((date) async {
-                                if (date == null) {
-                                  return;
-                                } else {
-                                  int adate = date.millisecondsSinceEpoch;
-                                  // print(adate);
-                                  // print(DateTime.fromMillisecondsSinceEpoch(adate));
-                                  DatabaseService(uid: user.uid)
-                                      .updateDueDate(adate);
-                                }
-                              });
-                            }),
-                        TextFormField(
-                          controller: weightController,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            icon: Icon(FontAwesomeIcons.weightScale),
-                            hintText: 'Enter Pre-Pregnancy Weight',
-                            labelText: 'Prior to Pregnancy Weight in pounds',
-                          ),
-                          validator: (String? value) {
-                            if (value == null ||
-                                value.isEmpty ||
-                                (value.contains(RegExp(r"^[0-9]*$")) ==
-                                    false)) {
-                              return 'Invalid input';
-                            }
-                            return null;
-                          },
-                        ),
-                        TextFormField(
-                          controller: provideremailController,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: const InputDecoration(
-                            icon: Icon(Icons.email),
-                            hintText: 'Enter your Provider e-mail/contact',
-                            labelText: 'Doctor\'s Email',
-                          ),
-                          validator: (value) {
-                            if (value == null ||
-                                value.isEmpty ||
-                                (value.contains(RegExp(
-                                        r"([a-z0-9!#&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)")) ==
-                                    false)) {
-                              return 'Error in input';
-                            }
-                            return null;
-                          },
-                        ),
-                        CheckboxFormField(
-                            title: const Text('I agree with the disclaimer'),
-                            onSaved: (newValue) => null,
-                            validator: (value) {
-                              if (value != true) {
-                                return 'Please agree with the disclaimer before continuing';
-                              }
-                              return null;
-                            }),
-                        ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Submitting!')));
-                              print(weightController.value.text);
-                              print(provideremailController.value.text);
-                              DatabaseService(uid: user.uid).updateemail(
-                                  provideremailController.value.text);
-                              DatabaseService(uid: user.uid).updateWeight(
-                                  int.parse(weightController.value.text));
+            return Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListTile(
+                        tileColor: Colors.white,
+                        leading: const Icon(FontAwesomeIcons.calendar),
+                        title: const Text('Baby\'s due date'),
+                        trailing:
+                            Text(toPrettyDateMMMddyyyy(userData.epochduedate)),
+                        onTap: () {
+                          showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(2000),
+                                  lastDate: DateTime(2050))
+                              .then((date) async {
+                            if (date == null) {
+                              return;
+                            } else {
+                              int adate = date.millisecondsSinceEpoch;
+                              // print(adate);
+                              // print(DateTime.fromMillisecondsSinceEpoch(adate));
                               DatabaseService(uid: user.uid)
-                                  .updateagreement(true);
-                              Navigator.of(context)
-                                  .pushReplacementNamed(Wrapper.id);
+                                  .updateDueDate(adate);
                             }
-                          },
-                          child: const Text('Submit'),
-                        )
-                      ],
+                          });
+                        }),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    decoration: const BoxDecoration(color: Colors.white),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: TextFormField(
+                        controller: weightController,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          icon: Icon(FontAwesomeIcons.weightScale),
+                          hintText: 'Enter Pre-Pregnancy Weight',
+                          labelText: 'Prior to Pregnancy Weight in pounds',
+                        ),
+                        validator: (String? value) {
+                          if (value == null ||
+                              value.isEmpty ||
+                              (value.contains(RegExp(r"^[0-9]*$")) == false)) {
+                            return 'Invalid input';
+                          }
+                          return null;
+                        },
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: provideremailController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: const InputDecoration(
+                          icon: Icon(Icons.email),
+                          hintText: 'Enter your Provider e-mail/contact',
+                          labelText: 'Doctor\'s Email',
+                        ),
+                        validator: (value) {
+                          if (value == null ||
+                              value.isEmpty ||
+                              (value.contains(RegExp(
+                                      r"([a-z0-9!#&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)")) ==
+                                  false)) {
+                            return 'Error in input';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                      onPressed: () => showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const DisclaimerAlertDialogue();
+                          }),
+                      child: const Text('View Disclaimer')),
+                  CheckboxFormField(
+                      title: const Text('I agree with the disclaimer'),
+                      onSaved: (newValue) => null,
+                      validator: (value) {
+                        if (value != true) {
+                          return 'Please agree with the disclaimer before continuing';
+                        }
+                        return null;
+                      }),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Submitting!')));
+                        // print(weightController.value.text);
+                        // print(provideremailController.value.text);
+                        DatabaseService(uid: user.uid)
+                            .updateemail(provideremailController.value.text);
+                        DatabaseService(uid: user.uid).updateWeight(
+                            int.parse(weightController.value.text));
+                        DatabaseService(uid: user.uid).updateagreement(true);
+                        Navigator.of(context).pushReplacementNamed(Wrapper.id);
+                      }
+                    },
+                    child: const Text('Submit'),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  )
+                ],
+              ),
             );
           } else {
             return const CircularProgressIndicator();
@@ -181,12 +201,14 @@ class _DisclaimerAgreementCheckboxState
 
 class CheckboxFormField extends FormField<bool> {
   CheckboxFormField(
-      {Widget title = const Text('Default Title'),
+      {Key? key,
+      Widget title = const Text('Default Title'),
       required FormFieldSetter<bool> onSaved,
       required FormFieldValidator<bool> validator,
       bool initialValue = false,
       bool autovalidate = false})
       : super(
+            key: key,
             onSaved: onSaved,
             validator: validator,
             initialValue: initialValue,
@@ -207,4 +229,41 @@ class CheckboxFormField extends FormField<bool> {
                 controlAffinity: ListTileControlAffinity.leading,
               );
             });
+}
+
+class DisclaimerAlertDialogue extends StatefulWidget {
+  const DisclaimerAlertDialogue({Key? key}) : super(key: key);
+
+  @override
+  State<DisclaimerAlertDialogue> createState() =>
+      _DisclaimerAlertDialogueState();
+}
+
+class _DisclaimerAlertDialogueState extends State<DisclaimerAlertDialogue> {
+  String _disclaimer = 'error loading';
+
+  @override
+  void initState() {
+    _loadDisclaimer();
+    super.initState();
+  }
+
+  Future<void> _loadDisclaimer() async {
+    final loadedDisclaimer =
+        await rootBundle.loadString('assets/texts/disclaimer.txt');
+    setState(() {
+      _disclaimer = loadedDisclaimer;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Disclaimer'),
+      content: SizedBox(
+          width: 200,
+          height: 400,
+          child: ListView(children: [Text(_disclaimer.toString())])),
+    );
+  }
 }

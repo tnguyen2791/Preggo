@@ -4,10 +4,7 @@ import 'package:preggo/services/database.dart';
 import 'package:preggo/services/sharedfunctions.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:preggo/tools/sharedPreferences.dart';
 import 'package:provider/provider.dart';
-import 'package:preggo/models/pregnancy.dart';
 import 'settingsdialogue.dart';
 
 class Settings extends StatelessWidget {

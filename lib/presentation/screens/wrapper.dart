@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:preggo/login/login.dart';
+import 'package:preggo/loginscreen/login.dart';
 import 'package:preggo/presentation/screens/datacollectionform.dart';
 import 'package:preggo/services/auth.dart';
 import 'package:preggo/services/database.dart';

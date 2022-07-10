@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:preggo/shared/shared.dart';
 import 'package:preggo/shared/constants.dart';
 
+
+
 class WaterLog extends StatelessWidget {
   WaterLog({Key? key}) : super(key: key);
 
@@ -9,9 +11,9 @@ class WaterLog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenBaseScaffold(
-      titleText: "Water Log",
-      scaffoldBody: Column(
+    return Scaffold(
+      appBar: AppBar(title: Text('Water Log'),),
+      body: Column(
         children: [
           Container(
             child: Text(

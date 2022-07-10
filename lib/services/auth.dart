@@ -18,7 +18,7 @@ class AuthService {
       UserCredential result = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       await DatabaseService(uid: result.user?.uid)
-          .updateUserData(1656882023322, 100, 'your@provider.org', false);
+          .updateUserData(1656882023322, 100, 'your@provider.org', false, []);
       return _userFromFirebaseUser(result.user!);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
@@ -93,7 +93,7 @@ class AuthService {
       UserCredential result = await FirebaseAuth.instance.signInAnonymously();
       User user = result.user!;
       await DatabaseService(uid: user.uid)
-          .updateUserData(1656882023322, 100, 'your@provider.org', false);
+          .updateUserData(1656882023322, 100, 'your@provider.org', false, []);
       return _userFromFirebaseUser(user);
       //Will return a custom user object instead of Firebaseuser
     } on FirebaseAuthException catch (e) {

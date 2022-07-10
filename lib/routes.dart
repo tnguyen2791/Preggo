@@ -1,4 +1,5 @@
-import 'package:preggo/login/login.dart';
+import 'package:preggo/growthscreen/growthemail.dart';
+import 'package:preggo/loginscreen/login.dart';
 import 'package:preggo/presentation/screens/all_screens.dart';
 import 'package:preggo/presentation/screens/datacollectionform.dart';
 import 'package:preggo/presentation/screens/sign_up_screen.dart';
@@ -17,4 +18,5 @@ var appRoutes = {
   Settings.id: (context) => Settings(),
   DataCollectionScreen.id: (context) => DataCollectionScreen(),
   SignUpScreen.id: (context) => SignUpScreen(),
+  EmailSender.id: (context) => EmailSender(),
 };

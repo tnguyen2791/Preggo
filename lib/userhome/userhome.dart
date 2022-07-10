@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:preggo/login/login.dart';
+import 'package:preggo/loginscreen/login.dart';
 import 'package:preggo/models/pregnancy.dart';
 import 'package:preggo/models/user.dart';
 import 'package:preggo/presentation/screens/all_screens.dart';
@@ -30,6 +30,14 @@ class UserHomeScreen extends StatelessWidget {
       initialData: UserData(),
       child: Scaffold(
         appBar: AppBar(
+          leading: const Hero(
+            tag: 'logo',
+            child: CircleAvatar(
+                radius: 150.0,
+                backgroundImage: AssetImage('assets/icon/icon.png')
+                // ,
+                ),
+          ),
           title: const Text('Homescreen'),
           actions: [
             IconButton(
