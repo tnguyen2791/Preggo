@@ -25,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -58,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBA7xrA2uRX2QXG5SIu9kNK5Jmwc9pXOlI',
-    appId: '1:101204525967:android:8f85b9b75b5dd955dd81fa',
+    appId: '1:101204525967:android:ab893d51cd00ab74dd81fa',
     messagingSenderId: '101204525967',
     projectId: 'childing-9ddea',
     storageBucket: 'childing-9ddea.appspot.com',
@@ -66,12 +63,23 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyApfAZfMR_ObHUIPJYcDmbnn0trhwHVcas',
-    appId: '1:101204525967:ios:b35c1ee8d44dde34dd81fa',
+    appId: '1:101204525967:ios:18404f3b86113fffdd81fa',
     messagingSenderId: '101204525967',
     projectId: 'childing-9ddea',
     storageBucket: 'childing-9ddea.appspot.com',
-    androidClientId: '101204525967-hqmhvjuol29fo60p3oh3bibu45eevlc2.apps.googleusercontent.com',
-    iosClientId: '101204525967-i5n18rpt58uujabmnos7enk7mb753qgk.apps.googleusercontent.com',
-    iosBundleId: 'com.example.preggo',
+    androidClientId: '101204525967-6uga3vkaqh8jss9jur3bri6qurjnet32.apps.googleusercontent.com',
+    iosClientId: '101204525967-ce4mm34mpmllp3b0k62e11u1n4cj45ad.apps.googleusercontent.com',
+    iosBundleId: 'com.tnguyen2791.Childing',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyApfAZfMR_ObHUIPJYcDmbnn0trhwHVcas',
+    appId: '1:101204525967:ios:18404f3b86113fffdd81fa',
+    messagingSenderId: '101204525967',
+    projectId: 'childing-9ddea',
+    storageBucket: 'childing-9ddea.appspot.com',
+    androidClientId: '101204525967-6uga3vkaqh8jss9jur3bri6qurjnet32.apps.googleusercontent.com',
+    iosClientId: '101204525967-ce4mm34mpmllp3b0k62e11u1n4cj45ad.apps.googleusercontent.com',
+    iosBundleId: 'com.tnguyen2791.Childing',
   );
 }
