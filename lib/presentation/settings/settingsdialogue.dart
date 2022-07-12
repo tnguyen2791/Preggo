@@ -37,6 +37,7 @@ Future<void> weightInput(BuildContext context) async {
                 } else {
                   if (_weightController.value.text
                       .contains(RegExp(r'(^[0-9]*$)'))) {
+                    _weight = _weightController.value.text;
                     DatabaseService(uid: user.uid)
                         .updateWeight(int.parse(_weight));
                     Navigator.pop(context);

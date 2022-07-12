@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:preggo/models/user.dart';
+import 'package:preggo/services/sharedfunctions.dart';
 
 class WeighInDialogueAlert extends StatefulWidget {
   const WeighInDialogueAlert({Key? key}) : super(key: key);
@@ -34,87 +35,91 @@ class _WeighInDialogueAlertState extends State<WeighInDialogueAlert> {
     return StatefulBuilder(builder: (context, setState) {
       return AlertDialog(
         title: const Text('Log Current Weight'),
-        content: Column(children: [
-          Form(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  decoration: const BoxDecoration(),
-                  child: const Text('Date'),
-                ),
-                ListTile(
-                    leading: const Icon(FontAwesomeIcons.calendar),
-                    trailing: Text(
-                        DateTime.fromMillisecondsSinceEpoch(selectedDate)
-                            .toString()),
-                    onTap: () {
-                      showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate:
-                            DateTime.now().subtract(const Duration(days: 270)),
-                        lastDate: DateTime.now().add(const Duration(days: 10)),
-                        currentDate: DateTime.now(),
-                        cancelText: "Cancel",
-                      ).then((date) {
-                        if (date == null) {
-                          return null;
-                        } else {
-                          selectedDate = date.millisecondsSinceEpoch;
-                          // print(DateTime.fromMillisecondsSinceEpoch(
-                          //     selectedDate));
-                          return selectedDate;
+        content: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.4,
+          child: Column(children: [
+            Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              key: formKey,
+              child: SizedBox(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(),
+                      child: const Text('Date'),
+                    ),
+                    ListTile(
+                        leading: const Icon(FontAwesomeIcons.calendar),
+                        trailing: Text(toPrettyDateMMMddyyyy(selectedDate)),
+                        onTap: () {
+                          showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime.now()
+                                .subtract(const Duration(days: 270)),
+                            lastDate:
+                                DateTime.now().add(const Duration(days: 10)),
+                            currentDate: DateTime.now(),
+                            cancelText: "Cancel",
+                          ).then((date) {
+                            if (date == null) {
+                              return null;
+                            } else {
+                              selectedDate = date.millisecondsSinceEpoch;
+                              // print(DateTime.fromMillisecondsSinceEpoch(
+                              //     selectedDate));
+                              return selectedDate;
+                            }
+                          }).whenComplete(() {
+                            setState(() {
+                              selectedDate;
+                            });
+                          });
+                        }),
+                    Text('Weight'),
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      controller: weightcontroller,
+                      onChanged: (value) {
+                        loggedweight = value;
+                        // print(loggedweight);
+                      },
+                      validator: (value) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            (value.contains(RegExp(r'(^[0-9]*$)')) == false)) {
+                          return 'Error in input';
                         }
-                      }).whenComplete(() {
-                        setState(() {
-                          selectedDate;
-                        });
-                      });
-                    }),
-                Text('Weight'),
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  controller: weightcontroller,
-                  onChanged: (value) {
-                    loggedweight = value;
-                    // print(loggedweight);
-                  },
-                  validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        (value.contains(RegExp(r'(^[0-9]*$)')) == false)) {
-                      return 'Error in input';
-                    }
-                    return null;
-                  },
+                        return null;
+                      },
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              // print(selectedDate);
-              Navigator.pop(context);
-            },
-            child: const Text('Go Back'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              if (formKey.currentState!.validate()) {
-                List toImport = [
-                  {'time': selectedDate, 'weight': int.parse(loggedweight)}
-                ];
-                loggedweight = weightcontroller.value.text;
-                logWeight1(toImport, user.uid);
+            ElevatedButton(
+              onPressed: () {
+                // print(selectedDate);
                 Navigator.pop(context);
-              }
-            },
-            child: const Text('Log it'),
-          ),
-        ]),
+              },
+              child: const Text('Go Back'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  List toImport = [
+                    {'time': selectedDate, 'weight': int.parse(loggedweight)}
+                  ];
+                  loggedweight = weightcontroller.value.text;
+                  logWeight1(toImport, user.uid);
+                  Navigator.pop(context);
+                }
+              },
+              child: const Text('Log it'),
+            ),
+          ]),
+        ),
       );
     });
   }

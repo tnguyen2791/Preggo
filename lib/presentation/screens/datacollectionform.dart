@@ -10,23 +10,24 @@ import 'package:flutter/services.dart' show rootBundle;
 class DataCollectionScreen extends StatelessWidget {
   static const String id = 'datacollectionscreen';
 
-  const DataCollectionScreen({Key? key}) : super(key: key);
+  DataCollectionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     const appTitle = 'Registration Form';
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text(appTitle),
       ),
-      body: const DataCollectionWidget(),
+      body: DataCollectionWidget(),
     );
   }
 }
 
 class DataCollectionWidget extends StatefulWidget {
-  const DataCollectionWidget({Key? key}) : super(key: key);
+  DataCollectionWidget({Key? key}) : super(key: key);
 
   @override
   State<DataCollectionWidget> createState() => _DataCollectionWidgetState();
@@ -34,6 +35,13 @@ class DataCollectionWidget extends StatefulWidget {
 
 class _DataCollectionWidgetState extends State<DataCollectionWidget> {
   bool agreeDisclaimer = false;
+  String weight = '150';
+  String email = 'your@provider.com';
+
+  final weightController = TextEditingController();
+  final provideremailController = TextEditingController();
+
+  static GlobalKey<FormState> formKeyforDataCollection = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,132 +51,158 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             UserData userData = snapshot.data!;
-            final formKey = GlobalKey<FormState>();
-            final weightController = TextEditingController();
-            final provideremailController = TextEditingController();
 
-            return Form(
-              key: formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListTile(
-                        tileColor: Colors.white,
-                        leading: const Icon(FontAwesomeIcons.calendar),
-                        title: const Text('Baby\'s due date'),
-                        trailing:
-                            Text(toPrettyDateMMMddyyyy(userData.epochduedate)),
-                        onTap: () {
-                          showDatePicker(
+            return GestureDetector(
+              onTap: () {
+                FocusScopeNode currentFocus = FocusScope.of(context);
+                if (!currentFocus.hasPrimaryFocus) {
+                  currentFocus.unfocus();
+                }
+              },
+              child: Form(
+                key: formKeyforDataCollection,
+                child: SingleChildScrollView(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 1.5,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                              tileColor: Colors.white,
+                              leading: const Icon(FontAwesomeIcons.calendar),
+                              title: const Text('Baby\'s due date'),
+                              trailing: Text(
+                                  toPrettyDateMMMddyyyy(userData.epochduedate)),
+                              onTap: () {
+                                showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now()
+                                            .add(const Duration(days: 90)),
+                                        firstDate: DateTime(2000),
+                                        lastDate: DateTime(2050))
+                                    .then((date) async {
+                                  if (date == null) {
+                                    return;
+                                  } else {
+                                    int adate = date.millisecondsSinceEpoch;
+                                    // print(adate);
+                                    // print(DateTime.fromMillisecondsSinceEpoch(adate));
+                                    DatabaseService(uid: user.uid)
+                                        .updateDueDate(adate);
+                                  }
+                                });
+                              }),
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          decoration: const BoxDecoration(color: Colors.white),
+                          child: Padding(
+                            padding: EdgeInsets.all(12.0),
+                            child: TextFormField(
+                              onFieldSubmitted: (value) {
+                                weight = value;
+                              },
+                              onEditingComplete: () {
+                                weight = weightController.text;
+                              },
+                              controller: weightController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(
+                                icon: Icon(FontAwesomeIcons.weightScale),
+                                hintText: 'Enter Pre-Pregnancy Weight',
+                                labelText:
+                                    'Prior to Pregnancy Weight in pounds',
+                              ),
+                              validator: (String? value) {
+                                if (value == null ||
+                                    value.isEmpty ||
+                                    (value.contains(RegExp(r"^[0-9]*$")) ==
+                                        false)) {
+                                  return 'Invalid input';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          color: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              onEditingComplete: () {
+                                email = provideremailController.text;
+                              },
+                              controller: provideremailController,
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: const InputDecoration(
+                                icon: Icon(Icons.email),
+                                hintText: 'Enter your Provider e-mail/contact',
+                                labelText: 'Doctor\'s Email',
+                              ),
+                              validator: (value) {
+                                if (value == null ||
+                                    value.isEmpty ||
+                                    (value.contains(RegExp(
+                                            r"([a-z0-9!#&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)")) ==
+                                        false)) {
+                                  return 'Error in input';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () => showDialog(
                                   context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(2000),
-                                  lastDate: DateTime(2050))
-                              .then((date) async {
-                            if (date == null) {
-                              return;
-                            } else {
-                              int adate = date.millisecondsSinceEpoch;
-                              // print(adate);
-                              // print(DateTime.fromMillisecondsSinceEpoch(adate));
-                              DatabaseService(uid: user.uid)
-                                  .updateDueDate(adate);
-                            }
-                          });
-                        }),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    decoration: const BoxDecoration(color: Colors.white),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: TextFormField(
-                        controller: weightController,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          icon: Icon(FontAwesomeIcons.weightScale),
-                          hintText: 'Enter Pre-Pregnancy Weight',
-                          labelText: 'Prior to Pregnancy Weight in pounds',
+                                  builder: (context) {
+                                    return const DisclaimerAlertDialogue();
+                                  }),
+                              child: const Text('View Disclaimer'),
+                            ),
+                            CheckboxFormField(
+                                title:
+                                    const Text('I agree with the disclaimer'),
+                                onSaved: (newValue) => null,
+                                validator: (value) {
+                                  if (value != true) {
+                                    return 'Please agree with the disclaimer before continuing';
+                                  }
+                                  return null;
+                                }),
+                            ElevatedButton(
+                              onPressed: () {
+                                if (formKeyforDataCollection.currentState!
+                                    .validate()) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text('Submitting!')));
+                                  // print(weightController.value.text);
+                                  // print(provideremailController.value.text);
+                                  DatabaseService(uid: user.uid).updateemail(
+                                      provideremailController.value.text);
+                                  DatabaseService(uid: user.uid).updateWeight(
+                                      int.parse(weightController.value.text));
+                                  DatabaseService(uid: user.uid)
+                                      .updateagreement(true);
+                                  Navigator.of(context)
+                                      .pushReplacementNamed(Wrapper.id);
+                                }
+                              },
+                              child: const Text('Submit'),
+                            ),
+                          ],
                         ),
-                        validator: (String? value) {
-                          if (value == null ||
-                              value.isEmpty ||
-                              (value.contains(RegExp(r"^[0-9]*$")) == false)) {
-                            return 'Invalid input';
-                          }
-                          return null;
-                        },
-                      ),
+                      ],
                     ),
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    color: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: provideremailController,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: const InputDecoration(
-                          icon: Icon(Icons.email),
-                          hintText: 'Enter your Provider e-mail/contact',
-                          labelText: 'Doctor\'s Email',
-                        ),
-                        validator: (value) {
-                          if (value == null ||
-                              value.isEmpty ||
-                              (value.contains(RegExp(
-                                      r"([a-z0-9!#&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)")) ==
-                                  false)) {
-                            return 'Error in input';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                      onPressed: () => showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const DisclaimerAlertDialogue();
-                          }),
-                      child: const Text('View Disclaimer')),
-                  CheckboxFormField(
-                      title: const Text('I agree with the disclaimer'),
-                      onSaved: (newValue) => null,
-                      validator: (value) {
-                        if (value != true) {
-                          return 'Please agree with the disclaimer before continuing';
-                        }
-                        return null;
-                      }),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Submitting!')));
-                        // print(weightController.value.text);
-                        // print(provideremailController.value.text);
-                        DatabaseService(uid: user.uid)
-                            .updateemail(provideremailController.value.text);
-                        DatabaseService(uid: user.uid).updateWeight(
-                            int.parse(weightController.value.text));
-                        DatabaseService(uid: user.uid).updateagreement(true);
-                        Navigator.of(context).pushReplacementNamed(Wrapper.id);
-                      }
-                    },
-                    child: const Text('Submit'),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  )
-                ],
+                ),
               ),
             );
           } else {

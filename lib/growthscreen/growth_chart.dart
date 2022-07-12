@@ -10,10 +10,6 @@ import 'weightlogmodel.dart';
 import 'weighindialogue.dart';
 
 class GrowthChart extends StatefulWidget {
-  //TODO: Creation of charts can be done with https://pub.dev/packages/syncfusion_flutter_charts
-  //TODO: Learn how to create data containers for this
-  //TODO: A stacked chart is what you're looking for.
-
   static const String id = 'growth_screen';
 
   @override
@@ -91,7 +87,6 @@ class _GrowthChartState extends State<GrowthChart> {
                 if (snapshot.hasData) {}
                 List<WeightModel> retrieveddata =
                     snapshot.data!.cast<WeightModel>();
-                // print(retrieveddata);
 
                 return Container(
                   decoration: const BoxDecoration(
@@ -157,11 +152,7 @@ class _GrowthChartState extends State<GrowthChart> {
                   builder: (context) {
                     return WeighInDialogueAlert();
                   }).then((_) => setState(() {}));
-
-              // .then((_) => setState(() {}));
-            }
-            // print('button pressed')
-            ,
+            },
             child: const Text('Add Weight'),
           ),
           ElevatedButton(
@@ -173,10 +164,3 @@ class _GrowthChartState extends State<GrowthChart> {
     );
   }
 }
-
-// class WeightModel {
-//   WeightModel(this.week, this.weight);
-
-//   final int week;
-//   final double weight;
-// }

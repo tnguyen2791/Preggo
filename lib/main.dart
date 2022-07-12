@@ -20,14 +20,22 @@ class PreggoApp extends StatelessWidget {
       catchError: (_, error) => UserUID(),
       value: AuthService().user,
       initialData: UserUID(),
-      child: MaterialApp(
-        theme: ThemeData(
-          primarySwatch: Colors.pink,
-          scaffoldBackgroundColor: const Color(0xFF7209B7),
+      child: GestureDetector(
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+          }
+        },
+        child: MaterialApp(
+          theme: ThemeData(
+            primarySwatch: Colors.pink,
+            scaffoldBackgroundColor: const Color(0xFF7209B7),
+          ),
+          title: 'Pregnancy Weights',
+          initialRoute: Wrapper.id,
+          routes: appRoutes,
         ),
-        title: 'Pregnancy Weights',
-        initialRoute: Wrapper.id,
-        routes: appRoutes,
       ),
     );
   }

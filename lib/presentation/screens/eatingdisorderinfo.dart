@@ -12,17 +12,19 @@ class WeighInOptions extends StatelessWidget {
       appBar: AppBar(
         title: Text('Weigh in Options'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text('Place holder for information about weighing options'),
-          WeighRadioChecks(),
-          TextButton(
-              style: TextButton.styleFrom(backgroundColor: Colors.white),
-              onPressed: (() =>
-                  Navigator.pushReplacementNamed(context, Wrapper.id)),
-              child: Text("Done!"))
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text('Place holder for information about weighing options'),
+            WeighRadioChecks(),
+            TextButton(
+                style: TextButton.styleFrom(backgroundColor: Colors.white),
+                onPressed: (() =>
+                    Navigator.pushReplacementNamed(context, Wrapper.id)),
+                child: Text("Done!"))
+          ],
+        ),
       ),
     );
   }

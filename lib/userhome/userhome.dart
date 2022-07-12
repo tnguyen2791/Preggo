@@ -1,6 +1,4 @@
 import "package:flutter/material.dart";
-import 'package:preggo/loginscreen/login.dart';
-import 'package:preggo/models/pregnancy.dart';
 import 'package:preggo/models/user.dart';
 import 'package:preggo/presentation/screens/all_screens.dart';
 import 'package:preggo/presentation/screens/datacollectionform.dart';
@@ -29,6 +27,7 @@ class UserHomeScreen extends StatelessWidget {
       value: DatabaseService(uid: user.uid).userData,
       initialData: UserData(),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           leading: const Hero(
             tag: 'logo',
@@ -95,7 +94,7 @@ class UserHomeScreen extends StatelessWidget {
                         cardIcon: FontAwesomeIcons.carrot,
                       ), //Diet
                       ReusableCard(
-                        navigationRoute: DataCollectionScreen.id,
+                        navigationRoute: Resources.id,
                         cardDescription: 'Resources',
                         cardIcon: FontAwesomeIcons.boxArchive,
                       ), //Resources

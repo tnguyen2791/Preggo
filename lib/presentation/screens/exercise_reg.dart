@@ -13,21 +13,18 @@ class ExerciseRegimen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Container(
-            child: Text(
-              'Exercise Regimen',
-              style: kGoogleTitle,
-            ),
+          Text(
+            'Exercise Regimen',
+            style: kGoogleTitle,
           ),
-          Container(
-            child: Text(
-              'Description',
-              style: kGoogleDescription,
-            ),
+          Text(
+            'Description',
+            style: kGoogleDescription,
           ),
-          Expanded(
-            child: Container(
-              color: Colors.red,
+          Center(
+            child: Image.network(
+              'https://www.ambitiouskitchen.com/wp-content/uploads/2019/11/pregnancyqa-pin.jpg',
+              height: MediaQuery.of(context).size.height * 0.75,
             ),
           ),
         ],
