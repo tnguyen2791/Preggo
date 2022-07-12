@@ -77,7 +77,7 @@ class _WeighInDialogueAlertState extends State<WeighInDialogueAlert> {
                             });
                           });
                         }),
-                    Text('Weight'),
+                    const Text('Weight'),
                     TextFormField(
                       keyboardType: TextInputType.number,
                       controller: weightcontroller,

@@ -7,7 +7,7 @@ class ReusableCard extends StatelessWidget {
   final IconData cardIcon;
   final String navigationRoute;
 
-  ReusableCard({
+  const ReusableCard({
     this.cardDescription = 'No Description',
     this.cardIcon = FontAwesomeIcons.faceSadCry,
     this.navigationRoute = '/',
@@ -21,6 +21,13 @@ class ReusableCard extends StatelessWidget {
           Navigator.pushNamed(context, navigationRoute);
         },
         child: Container(
+          margin: const EdgeInsets.all(5.0),
+          decoration: BoxDecoration(
+            color: Colors.lightBlue[600],
+            borderRadius: const BorderRadius.all(
+              Radius.circular(25.0),
+            ),
+          ),
           child: Row(
             children: [
               Expanded(
@@ -43,13 +50,6 @@ class ReusableCard extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-          margin: const EdgeInsets.all(5.0),
-          decoration: BoxDecoration(
-            color: Colors.lightBlue[600],
-            borderRadius: const BorderRadius.all(
-              Radius.circular(25.0),
-            ),
           ),
         ),
       ),

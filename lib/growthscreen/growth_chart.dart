@@ -3,7 +3,6 @@ import 'package:preggo/growthscreen/growthemail.dart';
 import 'package:preggo/models/user.dart';
 import 'package:preggo/shared/constants.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:preggo/growthscreen/weightdatabase.dart';
 import 'weightlogmodel.dart';
@@ -11,6 +10,8 @@ import 'weighindialogue.dart';
 
 class GrowthChart extends StatefulWidget {
   static const String id = 'growth_screen';
+
+  const GrowthChart({Key? key}) : super(key: key);
 
   @override
   State<GrowthChart> createState() => _GrowthChartState();
@@ -47,19 +48,10 @@ class _GrowthChartState extends State<GrowthChart> {
       WeightModel(currentweek: 40, weight: 188),
     ];
 
-    List<WeightModel> userseries = [
-      WeightModel(currentweek: 1, weight: 150),
-      WeightModel(currentweek: 4, weight: 152),
-      WeightModel(currentweek: 5, weight: 153),
-    ];
 
-    final CollectionReference childingCollection =
-        FirebaseFirestore.instance.collection('childing');
 
     final user = Provider.of<UserUID>(context);
 
-    final Stream<QuerySnapshot> userDataDB =
-        FirebaseFirestore.instance.collection('childing').snapshots();
 
     final userWeightList =
         WeightDatabaseServices(uid: user.uid).getWeightList();
@@ -150,14 +142,14 @@ class _GrowthChartState extends State<GrowthChart> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return WeighInDialogueAlert();
+                    return const WeighInDialogueAlert();
                   }).then((_) => setState(() {}));
             },
             child: const Text('Add Weight'),
           ),
           ElevatedButton(
             onPressed: () => Navigator.of(context).pushNamed(EmailSender.id),
-            child: Text('Email'),
+            child: const Text('Email'),
           ),
         ],
       ),

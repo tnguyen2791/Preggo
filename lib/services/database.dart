@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:preggo/models/user.dart';
-import 'package:preggo/growthscreen/weightlogmodel.dart';
 
 class DatabaseService {
   final String? uid;
@@ -118,12 +117,11 @@ class DatabaseService {
 
   Future<bool?> getAgreement() async {
     if (uid == '00000') {
-      print('loading');
     } else {
       final ref = childingCollection.doc(uid);
       final doc = await ref.get();
-      print(doc['agreement']);
       return doc['agreement'];
     }
+    return null;
   }
 }

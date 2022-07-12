@@ -1,12 +1,10 @@
-import 'dart:math';
-
 import 'package:preggo/models/user.dart';
 import 'package:preggo/shared/constants.dart';
-import 'package:preggo/models/pregnancy.dart';
+
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:preggo/services/sharedfunctions.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:intl/intl.dart';
 
 class UserInfo extends StatefulWidget {
@@ -49,7 +47,7 @@ class _UserInfoState extends State<UserInfo> {
         ],
       );
     } else {
-      return Text('Information not found');
+      return const Text('Information not found');
     }
   }
 }

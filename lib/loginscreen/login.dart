@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:preggo/models/user.dart';
 import 'package:preggo/presentation/screens/sign_up_screen.dart';
 import 'package:preggo/services/auth.dart';
 

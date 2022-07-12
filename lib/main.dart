@@ -10,10 +10,12 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(PreggoApp());
+  runApp(const PreggoApp());
 }
 
 class PreggoApp extends StatelessWidget {
+  const PreggoApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return StreamProvider<UserUID>.value(

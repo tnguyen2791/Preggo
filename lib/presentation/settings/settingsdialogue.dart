@@ -1,15 +1,14 @@
-import 'package:flutter/services.dart';
 import 'package:preggo/models/user.dart';
 import 'package:preggo/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 Future<void> weightInput(BuildContext context) async {
-  final _weightController = TextEditingController();
+  final weightController = TextEditingController();
   final user = Provider.of<UserUID>(context, listen: false);
 
-  int _userDBweight = await DatabaseService(uid: user.uid).getweight();
-  var _weight;
+  int userDBweight = await DatabaseService(uid: user.uid).getweight();
+  String weight;
 
   return showDialog(
       context: context,
@@ -17,9 +16,9 @@ Future<void> weightInput(BuildContext context) async {
         return AlertDialog(
           title: const Text('Pre-Pregnancy Weight'),
           content: TextField(
-            controller: _weightController..text = _userDBweight.toString(),
+            controller: weightController..text = userDBweight.toString(),
             onChanged: (value) {
-              _weight = value;
+              weight = value;
               // print(_weight);
             },
             keyboardType: TextInputType.number,
@@ -32,14 +31,14 @@ Future<void> weightInput(BuildContext context) async {
             TextButton(
               onPressed: () {
                 // print(_weightController.value.text.isEmpty);
-                if (_weightController.value.text.isEmpty) {
+                if (weightController.value.text.isEmpty) {
                   null;
                 } else {
-                  if (_weightController.value.text
+                  if (weightController.value.text
                       .contains(RegExp(r'(^[0-9]*$)'))) {
-                    _weight = _weightController.value.text;
+                    weight = weightController.value.text;
                     DatabaseService(uid: user.uid)
-                        .updateWeight(int.parse(_weight));
+                        .updateWeight(int.parse(weight));
                     Navigator.pop(context);
                   } else {
                     null;
@@ -83,7 +82,7 @@ Future<void> emailInput(BuildContext context) async {
   String? email;
   final user = Provider.of<UserUID>(context, listen: false);
   final emailTextController = TextEditingController();
-  String _useremail = await DatabaseService(uid: user.uid).getemail();
+  String useremail = await DatabaseService(uid: user.uid).getemail();
 
   return showDialog(
       context: context,
@@ -91,10 +90,9 @@ Future<void> emailInput(BuildContext context) async {
         return AlertDialog(
           title: const Text('Provider E-mail'),
           content: TextField(
-            controller: emailTextController..text = _useremail,
+            controller: emailTextController..text = useremail,
             onChanged: (value) {
               email = value;
-              print(email);
             },
             keyboardType: TextInputType.emailAddress,
           ),

@@ -4,7 +4,7 @@ import 'water_total.dart';
 import 'watervaluelisten.dart';
 
 class WaterCounter extends StatefulWidget {
-  WaterCounter({Key? key}) : super(key: key);
+  const WaterCounter({Key? key}) : super(key: key);
 
   @override
   State<WaterCounter> createState() => _WaterCounterState();
@@ -16,11 +16,11 @@ class _WaterCounterState extends State<WaterCounter> {
     List droplets = [];
 
     for (int i = fluidsDrank.value; i > 0; i = (i - 8)) {
-      droplets.add(WaterDropletFilled());
+      droplets.add(const WaterDropletFilled());
     }
 
     for (int i = (64 - fluidsDrank.value); i > 0; i = (i - 8)) {
-      droplets.add(WaterDropletEmpty());
+      droplets.add(const WaterDropletEmpty());
     }
 
     return Column(children: [
@@ -34,12 +34,14 @@ class _WaterCounterState extends State<WaterCounter> {
           // WaterDropletEmpty(),
         ],
       ),
-      WaterTotal(),
+      const WaterTotal(),
     ]);
   }
 }
 
 class WaterDropletEmpty extends StatefulWidget {
+  const WaterDropletEmpty({Key? key}) : super(key: key);
+
   @override
   State<WaterDropletEmpty> createState() => _WaterDropletEmptyState();
 }
@@ -51,18 +53,15 @@ class _WaterDropletEmptyState extends State<WaterDropletEmpty> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Container(
-        child: Icon(
-          FontAwesomeIcons.droplet,
-          color: beenPressed ? Colors.blue : Colors.white,
-          size: 80.0,
-        ),
+      child: Icon(
+        FontAwesomeIcons.droplet,
+        color: beenPressed ? Colors.blue : Colors.white,
+        size: 80.0,
       ),
       onTap: () {
         setState(() {
           beenPressed = !beenPressed;
           beenPressed ? fluidsDrank.value += 8 : fluidsDrank.value -= 8;
-          print(fluidsDrank.value);
         });
       },
     );
@@ -70,6 +69,8 @@ class _WaterDropletEmptyState extends State<WaterDropletEmpty> {
 }
 
 class WaterDropletFilled extends StatefulWidget {
+  const WaterDropletFilled({Key? key}) : super(key: key);
+
   @override
   State<WaterDropletFilled> createState() => _WaterDropletFilledState();
 }
@@ -81,18 +82,15 @@ class _WaterDropletFilledState extends State<WaterDropletFilled> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Container(
-        child: Icon(
-          FontAwesomeIcons.droplet,
-          color: beenPressed ? Colors.white : Colors.blue,
-          size: 80.0,
-        ),
+      child: Icon(
+        FontAwesomeIcons.droplet,
+        color: beenPressed ? Colors.white : Colors.blue,
+        size: 80.0,
       ),
       onTap: () {
         setState(() {
           beenPressed = !beenPressed;
           beenPressed ? fluidsDrank.value -= 8 : fluidsDrank.value += 8;
-          print(fluidsDrank.value);
         });
       },
     );

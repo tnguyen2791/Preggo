@@ -10,7 +10,7 @@ import 'package:flutter/services.dart' show rootBundle;
 class DataCollectionScreen extends StatelessWidget {
   static const String id = 'datacollectionscreen';
 
-  DataCollectionScreen({Key? key}) : super(key: key);
+  const DataCollectionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +21,13 @@ class DataCollectionScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(appTitle),
       ),
-      body: DataCollectionWidget(),
+      body: const DataCollectionWidget(),
     );
   }
 }
 
 class DataCollectionWidget extends StatefulWidget {
-  DataCollectionWidget({Key? key}) : super(key: key);
+  const DataCollectionWidget({Key? key}) : super(key: key);
 
   @override
   State<DataCollectionWidget> createState() => _DataCollectionWidgetState();
@@ -99,7 +99,7 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                           width: MediaQuery.of(context).size.width * 0.9,
                           decoration: const BoxDecoration(color: Colors.white),
                           child: Padding(
-                            padding: EdgeInsets.all(12.0),
+                            padding: const EdgeInsets.all(12.0),
                             child: TextFormField(
                               onFieldSubmitted: (value) {
                                 weight = value;

@@ -3,6 +3,8 @@ import 'package:preggo/shared/constants.dart';
 import 'watervaluelisten.dart';
 
 class WaterTotal extends StatefulWidget {
+  const WaterTotal({Key? key}) : super(key: key);
+
   @override
   State<WaterTotal> createState() => _WaterTotalState();
 }

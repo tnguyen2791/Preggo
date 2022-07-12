@@ -10,19 +10,19 @@ class WeighInOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Weigh in Options'),
+        title: const Text('Weigh in Options'),
       ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text('Place holder for information about weighing options'),
-            WeighRadioChecks(),
+            const Text('Place holder for information about weighing options'),
+            const WeighRadioChecks(),
             TextButton(
                 style: TextButton.styleFrom(backgroundColor: Colors.white),
                 onPressed: (() =>
                     Navigator.pushReplacementNamed(context, Wrapper.id)),
-                child: Text("Done!"))
+                child: const Text("Done!"))
           ],
         ),
       ),
@@ -47,7 +47,7 @@ class _WeighRadioChecksState extends State<WeighRadioChecks> {
     return Column(
       children: [
         RadioListTile(
-            title: Text('Regular Weigh In'),
+            title: const Text('Regular Weigh In'),
             value: WeighOptions.regular,
             groupValue: _userweigh,
             onChanged: (WeighOptions? value) {
@@ -56,7 +56,7 @@ class _WeighRadioChecksState extends State<WeighRadioChecks> {
               });
             }),
         RadioListTile(
-            title: Text('Partner Weigh In'),
+            title: const Text('Partner Weigh In'),
             value: WeighOptions.partner,
             groupValue: _userweigh,
             onChanged: (WeighOptions? value) {
@@ -65,7 +65,7 @@ class _WeighRadioChecksState extends State<WeighRadioChecks> {
               });
             }),
         RadioListTile(
-            title: Text('Do not Weigh In'),
+            title: const Text('Do not Weigh In'),
             value: WeighOptions.noweigh,
             groupValue: _userweigh,
             onChanged: (WeighOptions? value) {

@@ -4,11 +4,13 @@ import 'package:preggo/shared/constants.dart';
 class Diet extends StatelessWidget {
   static const String id = 'diet_screen';
 
+  const Diet({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Diet [Placeholder]'),
+        title: const Text('Diet [Placeholder]'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -22,10 +24,8 @@ class Diet extends StatelessWidget {
             style: kGoogleDescription,
           ),
           Expanded(
-            child: Container(
-              child: Image.network(
-                  'https://femina.wwmindia.com/content/2020/jul/pregnancy-diet-chart-infographic.jpg'),
-            ),
+            child: Image.network(
+                'https://femina.wwmindia.com/content/2020/jul/pregnancy-diet-chart-infographic.jpg'),
           ),
         ],
       ),

@@ -7,7 +7,7 @@ class MenuTile extends StatelessWidget {
   final String menuTitle;
   final String navigationRoute;
 
-  MenuTile({required this.menuTitle, required this.navigationRoute});
+  const MenuTile({required this.menuTitle, required this.navigationRoute});
 
   @override
   Widget build(BuildContext context) {

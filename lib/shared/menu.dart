@@ -4,6 +4,8 @@ import 'package:preggo/shared/menuTile.dart';
 import 'package:preggo/presentation/screens/all_screens.dart';
 
 class MenuBase extends StatelessWidget {
+  const MenuBase({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -19,35 +21,35 @@ class MenuBase extends StatelessWidget {
               ),
             ),
           ),
-          MenuTile(
+          const MenuTile(
             menuTitle: 'Weigh-In',
             navigationRoute: GrowthChart.id,
           ),
-          MenuTile(
+          const MenuTile(
             menuTitle: 'Food Diary',
             navigationRoute: Diet.id,
           ),
-          MenuTile(
+          const MenuTile(
             menuTitle: 'Water Intake',
             navigationRoute: WaterLog.id,
           ),
-          MenuTile(
+          const MenuTile(
             menuTitle: 'Exercise',
             navigationRoute: ExerciseRegimen.id,
           ),
-          MenuTile(
+          const MenuTile(
             menuTitle: 'Blood Sugar Log',
             navigationRoute: Wrapper.id,
           ),
-          MenuTile(
+          const MenuTile(
             menuTitle: 'Export Information',
             navigationRoute: Wrapper.id,
           ),
-          MenuTile(
+          const MenuTile(
             menuTitle: 'Resources',
             navigationRoute: Resources.id,
           ),
-          MenuTile(
+          const MenuTile(
             menuTitle: 'Settings',
             navigationRoute: Settings.id,
           ),
@@ -60,7 +62,8 @@ class MenuBase extends StatelessWidget {
             ),
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Settings()))
+                  .push(
+                      MaterialPageRoute(builder: (context) => const Settings()))
                   .then((value) => null);
             },
           )

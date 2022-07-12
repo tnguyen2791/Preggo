@@ -94,8 +94,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   }),
             ),
             !_agreeDisclaimer
-                ? Text("Please check the disclaimer above!")
-                : Text("Swipe left to the next screen!"),
+                ? const Text("Please check the disclaimer above!")
+                : const Text("Swipe left to the next screen!"),
           ]),
         ),
         PageViewModel(
@@ -157,7 +157,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 });
               },
             ),
-            Divider(),
+            const Divider(),
             TextButton(
               style: TextButton.styleFrom(
                   primary: Colors.purple, backgroundColor: Colors.pink[100]),
@@ -194,25 +194,4 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     );
   }
 
-  Widget _buildPopupDialog(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Popup example'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const <Widget>[
-          Text(
-              "You answered yes to either the question asking about a history of disordered eating or to the four screening questions for disordered eating. We strongly suggest bringing this up with your physician so that he or she can more fully care for you through your pregnancy and beyond."),
-        ],
-      ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Text('Close'),
-        ),
-      ],
-    );
-  }
 }

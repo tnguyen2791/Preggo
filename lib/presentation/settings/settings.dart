@@ -37,8 +37,6 @@ class _SettingsOptionsState extends State<SettingsOptions> {
   //Above is, start the session with the instantiated variable and then pull
   //if we are able to from the SharedPrefs
 
-  //TODO: Creating a setting page: https://www.youtube.com/watch?v=PVuJ-If0AuU
-
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserUID>(context);
@@ -51,24 +49,24 @@ class _SettingsOptionsState extends State<SettingsOptions> {
           return SettingsList(
             sections: [
               SettingsSection(
-                title: Text('Profile Settings'),
+                title: const Text('Profile Settings'),
                 tiles: [
                   SettingsTile(
-                    title: Text('Due Date'),
-                    leading: Icon(FontAwesomeIcons.baby),
+                    title: const Text('Due Date'),
+                    leading: const Icon(FontAwesomeIcons.baby),
                     trailing:
                         Text(toPrettyDateMMMddyyyy(userData.epochduedate)),
                     onPressed: enterDueDate,
                   ),
                   SettingsTile(
-                    title: Text('Pre-pregnancy Weight'),
-                    leading: Icon(FontAwesomeIcons.weightScale),
+                    title: const Text('Pre-pregnancy Weight'),
+                    leading: const Icon(FontAwesomeIcons.weightScale),
                     trailing: Text("${userData.weight.toString()} lbs"),
                     onPressed: weightInput,
                   ),
                   SettingsTile(
-                    title: Text('Provider E-mail'),
-                    leading: Icon(FontAwesomeIcons.userDoctor),
+                    title: const Text('Provider E-mail'),
+                    leading: const Icon(FontAwesomeIcons.userDoctor),
                     trailing: Text(userData.email.toString()),
                     onPressed: emailInput,
                   ),
@@ -77,7 +75,7 @@ class _SettingsOptionsState extends State<SettingsOptions> {
             ],
           );
         } else {
-          return Container(child: Text('something has gone wrong'));
+          return const Text('something has gone wrong');
         }
       },
     );

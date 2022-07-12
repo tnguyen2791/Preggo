@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:preggo/models/user.dart';
 import 'package:preggo/presentation/screens/all_screens.dart';
-import 'package:preggo/presentation/screens/datacollectionform.dart';
 import 'package:preggo/services/database.dart';
 import 'package:preggo/services/auth.dart';
 import 'package:preggo/shared/shared.dart';
@@ -20,8 +19,6 @@ class UserHomeScreen extends StatelessWidget {
 
     return StreamProvider<UserData>.value(
       catchError: (context, error) {
-        print('an error has occurred $error');
-        print(user.uid);
         return UserData();
       },
       value: DatabaseService(uid: user.uid).userData,
@@ -72,7 +69,7 @@ class UserHomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
+                    children: const [
                       ReusableCard(
                         navigationRoute: GrowthChart.id,
                         cardDescription: 'Weigh-in!',

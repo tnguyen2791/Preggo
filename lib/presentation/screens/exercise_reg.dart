@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:preggo/shared/shared.dart';
 import 'package:preggo/shared/constants.dart';
 
 class ExerciseRegimen extends StatelessWidget {
   static const String id = 'exercise_screen';
 
+  const ExerciseRegimen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Exercise"),
+        title: const Text("Exercise"),
       ),
       body: Column(
         children: [

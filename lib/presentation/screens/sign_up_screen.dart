@@ -1,14 +1,12 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:preggo/presentation/screens/wrapper.dart';
 import 'package:preggo/services/auth.dart';
-import 'package:preggo/shared/constants.dart';
-import 'package:preggo/userhome/userhome.dart';
 
 class SignUpScreen extends StatefulWidget {
   static String id = 'sign_up_screen';
+
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -33,7 +31,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Email Registration or Sign-in'),
+          title: const Text('Email Registration or Sign-in'),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
