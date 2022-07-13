@@ -78,24 +78,9 @@ class AuthService {
           await FirebaseAuth.instance.signInWithCredential(authCredential);
       User user = result.user!;
 
-      //creating the document for this user
-      // await DatabaseService(uidindatabase: user.uid)
-      //     .updateUserData(1656882023322, 100, 'your@provider.org');
-
-      return _userFromFirebaseUser(user);
-    } on FirebaseAuthException catch (e) {
-      return UserUID();
-    }
-  }
-
-  Future<UserUID> anonLogin() async {
-    try {
-      UserCredential result = await FirebaseAuth.instance.signInAnonymously();
-      User user = result.user!;
-      await DatabaseService(uid: user.uid)
+      await DatabaseService(uid: result.user?.uid)
           .updateUserData(1656882023322, 100, 'your@provider.org', false, []);
       return _userFromFirebaseUser(user);
-      //Will return a custom user object instead of Firebaseuser
     } on FirebaseAuthException catch (e) {
       return UserUID();
     }
@@ -103,5 +88,6 @@ class AuthService {
 
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().signOut();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:preggo/shared/constants.dart';
 
 class ExerciseRegimen extends StatelessWidget {
@@ -26,6 +27,12 @@ class ExerciseRegimen extends StatelessWidget {
             child: Image.network(
               'https://www.ambitiouskitchen.com/wp-content/uploads/2019/11/pregnancyqa-pin.jpg',
               height: MediaQuery.of(context).size.height * 0.75,
+              loadingBuilder: (BuildContext context, Widget child,
+                  ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null) return child;
+                return LoadingAnimationWidget.hexagonDots(
+                    color: Colors.white, size: 100);
+              },
             ),
           ),
         ],

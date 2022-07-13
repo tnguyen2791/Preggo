@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:preggo/growthscreen/weightdatabase.dart';
 import 'weightlogmodel.dart';
 import 'weighindialogue.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class GrowthChart extends StatefulWidget {
   static const String id = 'growth_screen';
@@ -48,10 +49,7 @@ class _GrowthChartState extends State<GrowthChart> {
       WeightModel(currentweek: 40, weight: 188),
     ];
 
-
-
     final user = Provider.of<UserUID>(context);
-
 
     final userWeightList =
         WeightDatabaseServices(uid: user.uid).getWeightList();
@@ -75,8 +73,17 @@ class _GrowthChartState extends State<GrowthChart> {
           FutureBuilder<List<WeightModel>>(
             future: userWeightList,
             builder: (context, AsyncSnapshot<List> snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {}
+              if (snapshot.hasError)
+                return AlertDialog(
+                  content: Text('There was an error'),
+                );
+
+              if (!snapshot.hasData)
+                return LoadingAnimationWidget.hexagonDots(
+                    color: Colors.white, size: 100);
+
+              if (snapshot.connectionState == ConnectionState.done &&
+                  snapshot.hasData) {
                 List<WeightModel> retrieveddata =
                     snapshot.data!.cast<WeightModel>();
 
@@ -133,7 +140,8 @@ class _GrowthChartState extends State<GrowthChart> {
                       ]),
                 );
               } else {
-                return const CircularProgressIndicator();
+                return LoadingAnimationWidget.hexagonDots(
+                    color: Colors.white, size: 100);
               }
             },
           ),

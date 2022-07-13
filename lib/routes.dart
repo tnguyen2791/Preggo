@@ -4,6 +4,7 @@ import 'package:preggo/presentation/screens/all_screens.dart';
 import 'package:preggo/presentation/screens/datacollectionform.dart';
 import 'package:preggo/presentation/screens/sign_up_screen.dart';
 import 'package:preggo/userhome/userhome.dart';
+import 'package:preggo/presentation/screens/loading_screen.dart';
 
 var appRoutes = {
   Wrapper.id: (context) => const Wrapper(),
@@ -13,10 +14,11 @@ var appRoutes = {
   GrowthChart.id: (context) => const GrowthChart(),
   Resources.id: (context) => const Resources(),
   Settings.id: (context) => const Settings(),
-  WaterLog.id: (context) => WaterLog(),
+  WaterLog.id: (context) => const WaterLog(),
   LoginScreen.id: (context) => const LoginScreen(),
   Settings.id: (context) => const Settings(),
   DataCollectionScreen.id: (context) => const DataCollectionScreen(),
   SignUpScreen.id: (context) => const SignUpScreen(),
   EmailSender.id: (context) => const EmailSender(),
+  LoadingScreen.id: (context) => const LoadingScreen(),
 };

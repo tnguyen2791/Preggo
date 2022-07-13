@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:preggo/loginscreen/login.dart';
 import 'package:preggo/presentation/screens/datacollectionform.dart';
+import 'package:preggo/presentation/screens/loading_screen.dart';
 import 'package:preggo/services/auth.dart';
 import 'package:preggo/services/database.dart';
 import 'package:preggo/userhome/userhome.dart';
 import 'package:provider/provider.dart';
 import 'package:preggo/models/user.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 class Wrapper extends StatefulWidget {
   const Wrapper({Key? key}) : super(key: key);
@@ -25,7 +27,20 @@ class _WrapperState extends State<Wrapper> {
             var user = snapshot.data;
             final user1 = Provider.of<UserUID>(context);
             if (user == null) {
-              return const LoginScreen();
+              return AnimatedSplashScreen(
+                  backgroundColor: const Color(0xFF7209B7),
+                  curve: Curves.easeInSine,
+                  animationDuration: const Duration(seconds: 2),
+                  splashIconSize: 250.0,
+                  duration: 2000,
+                  splashTransition: SplashTransition.fadeTransition,
+                  splash: const Hero(
+                    tag: 'logo',
+                    child: CircleAvatar(
+                        radius: 250.0,
+                        backgroundImage: AssetImage('assets/icon/icon.png')),
+                  ),
+                  nextScreen: const LoginScreen());
             }
 
             return FutureBuilder(
@@ -42,7 +57,7 @@ class _WrapperState extends State<Wrapper> {
                         return const DataCollectionScreen();
                     }
                   } else {
-                    return const CircularProgressIndicator();
+                    return const LoadingScreen();
                   }
                 } catch (e) {
                   print(e);
@@ -50,11 +65,18 @@ class _WrapperState extends State<Wrapper> {
                 return const Center(child: Text('error'));
               }),
             );
-          } else {
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            );
           }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const LoadingScreen();
+          }
+
+          if (snapshot.connectionState == ConnectionState.none) {
+            return const Scaffold(
+                body: Center(
+                    child: Text('You do not have an internet connection')));
+          }
+          return const LoadingScreen();
         });
   }
 }

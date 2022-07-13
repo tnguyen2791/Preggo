@@ -1,5 +1,6 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:preggo/models/user.dart';
+import 'package:preggo/presentation/screens/loading_screen.dart';
 import 'package:preggo/presentation/screens/wrapper.dart';
 import 'package:preggo/services/database.dart';
 import 'package:flutter/material.dart';
@@ -206,7 +207,7 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
               ),
             );
           } else {
-            return const CircularProgressIndicator();
+            return const LoadingScreen();
           }
         });
   }

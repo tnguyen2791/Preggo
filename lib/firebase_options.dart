@@ -48,12 +48,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyB_1JDr7eHaPB8P8dh0WWHt2fn5LXWOM00',
-    appId: '1:101204525967:web:1dd028ea5ca25b37dd81fa',
+    appId: '1:101204525967:web:b666cc7ad578312add81fa',
     messagingSenderId: '101204525967',
     projectId: 'childing-9ddea',
     authDomain: 'childing-9ddea.firebaseapp.com',
     storageBucket: 'childing-9ddea.appspot.com',
-    measurementId: 'G-KGB45L6GKB',
+    measurementId: 'G-WBCR0FRH9N',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -66,7 +66,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyApfAZfMR_ObHUIPJYcDmbnn0trhwHVcas',
-    appId: '1:101204525967:ios:18404f3b86113fffdd81fa',
+    appId: '1:101204525967:ios:fa89698fa983c99ddd81fa',
     messagingSenderId: '101204525967',
     projectId: 'childing-9ddea',
     storageBucket: 'childing-9ddea.appspot.com',
