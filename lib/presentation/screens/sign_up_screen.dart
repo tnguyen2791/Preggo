@@ -26,7 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (!currentFocus.hasPrimaryFocus) {
-        currentFocus.unfocus();
+          currentFocus.unfocus();
         }
       },
       child: Scaffold(
@@ -102,10 +102,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         if (formKey.currentState!.validate()) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Submitting!')));
-                          AuthService().createNewUser(
-                              emailController.text, passwordController.text);
-                          Navigator.of(context)
-                              .pushReplacementNamed(Wrapper.id);
+                          AuthService()
+                              .createNewUser(
+                                  emailController.text, passwordController.text)
+                              .then(
+                                (value) => Navigator.of(context)
+                                    .pushReplacementNamed(Wrapper.id),
+                              );
                         }
                       },
                       child: const Text('Sign-Up!'),

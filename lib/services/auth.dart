@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:preggo/models/user.dart';
 import 'package:preggo/services/database.dart';
@@ -17,9 +16,9 @@ class AuthService {
     try {
       UserCredential result = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      await DatabaseService(uid: result.user?.uid)
-          .updateUserData(1656882023322, 100, 'your@provider.org', false, []);
-      return _userFromFirebaseUser(result.user!);
+      return await DatabaseService(uid: result.user!.uid)
+          .createNewDBUser()
+          .then((value) => _userFromFirebaseUser(result.user!));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         print('Invalid password');
@@ -35,6 +34,7 @@ class AuthService {
         email: email,
         password: password,
       );
+
       return _userFromFirebaseUser(result.user!);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
@@ -78,8 +78,10 @@ class AuthService {
           await FirebaseAuth.instance.signInWithCredential(authCredential);
       User user = result.user!;
 
-      await DatabaseService(uid: result.user?.uid)
-          .updateUserData(1656882023322, 100, 'your@provider.org', false, []);
+      if (await DatabaseService(uid: user.uid).checksDBfordocexistance() ==
+          false) {
+        DatabaseService(uid: user.uid).createNewDBUser();
+      }
       return _userFromFirebaseUser(user);
     } on FirebaseAuthException catch (e) {
       return UserUID();
@@ -88,6 +90,5 @@ class AuthService {
 
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
-    await GoogleSignIn().signOut();
   }
 }

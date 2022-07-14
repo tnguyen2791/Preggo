@@ -14,10 +14,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
         body: Center(
-          child: LoadingAnimationWidget.hexagonDots(
-              color: Colors.white, size: 300),
-        ));
+      child: LoadingAnimationWidget.hexagonDots(color: Colors.white, size: 300),
+    ));
   }
 }

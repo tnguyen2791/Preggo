@@ -12,14 +12,13 @@ class DatabaseService {
 
   //will create it automatically
 
-  Future updateUserData(int duedate, int weight, String email, bool agreement,
-      List loggedweight) async {
-    return await childingCollection.doc(uid).set({
-      'duedate': duedate,
-      'weight': weight,
-      'provideremail': email,
-      'agreement': agreement,
-      'loggedweight': loggedweight,
+  Future<void> createNewDBUser() async {
+    await childingCollection.doc(uid).set({
+      'duedate': 1656882023322,
+      'weight': 100,
+      'provideremail': 'your@provider.org',
+      'agreement': false,
+      'loggedweight': [],
     });
     //this is to create that uid when a user does indeed sign in
     //At the same time, the dummy data will be recorded
@@ -51,6 +50,15 @@ class DatabaseService {
       weight: snapshot['weight'],
       email: snapshot['provideremail'],
     );
+  }
+
+  Future<bool> checksDBfordocexistance() async {
+    try {
+      var doc = await childingCollection.doc(uid).get();
+      return doc.exists;
+    } catch (e) {
+      throw e;
+    }
   }
 
   // List<WeightModel> _weightLog(DocumentSnapshot snapshot) {
@@ -115,13 +123,16 @@ class DatabaseService {
     });
   }
 
-  Future<bool?> getAgreement() async {
-    if (uid == '00000') {
-    } else {
-      final ref = childingCollection.doc(uid);
-      final doc = await ref.get();
-      return doc['agreement'];
-    }
-    return null;
+  Future<bool> getAgreement() async {
+    final ref = childingCollection.doc(uid);
+    final doc = await ref.get();
+    // print(uid);
+    try {
+      if (doc.exists) {
+        return doc['agreement'];
+      }
+    } catch (e) {}
+    return false;
+    // return true;
   }
 }

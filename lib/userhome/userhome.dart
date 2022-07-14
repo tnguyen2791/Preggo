@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:preggo/models/user.dart';
 import 'package:preggo/presentation/screens/all_screens.dart';
-import 'package:preggo/presentation/screens/loading_screen.dart';
 import 'package:preggo/services/database.dart';
 import 'package:preggo/services/auth.dart';
 import 'package:preggo/shared/shared.dart';
@@ -92,7 +91,7 @@ class UserHomeScreen extends StatelessWidget {
                         cardIcon: FontAwesomeIcons.carrot,
                       ), //Diet
                       ReusableCard(
-                        navigationRoute: LoadingScreen.id,
+                        navigationRoute: Resources.id,
                         cardDescription: 'Resources',
                         cardIcon: FontAwesomeIcons.boxArchive,
                       ), //Resources

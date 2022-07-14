@@ -1,4 +1,5 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:preggo/loginscreen/login.dart';
 import 'package:preggo/models/user.dart';
 import 'package:preggo/presentation/screens/loading_screen.dart';
 import 'package:preggo/presentation/screens/wrapper.dart';
@@ -42,7 +43,8 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
   final weightController = TextEditingController();
   final provideremailController = TextEditingController();
 
-  static GlobalKey<FormState> formKeyforDataCollection = GlobalKey<FormState>();
+  static final GlobalKey<FormState> formKeyforDataCollection =
+      GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,10 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Text('There is no data');
+          }
+
           if (snapshot.hasData) {
             UserData userData = snapshot.data!;
 
@@ -207,7 +213,7 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
               ),
             );
           } else {
-            return const LoadingScreen();
+            return const LoginScreen();
           }
         });
   }

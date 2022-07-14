@@ -7,7 +7,8 @@ import 'package:preggo/services/database.dart';
 import 'package:preggo/userhome/userhome.dart';
 import 'package:provider/provider.dart';
 import 'package:preggo/models/user.dart';
-import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Wrapper extends StatefulWidget {
   const Wrapper({Key? key}) : super(key: key);
@@ -18,6 +19,9 @@ class Wrapper extends StatefulWidget {
 }
 
 class _WrapperState extends State<Wrapper> {
+  final fbuser = FirebaseAuth.instance.currentUser;
+  final bool signUp = false;
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -25,46 +29,35 @@ class _WrapperState extends State<Wrapper> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
             var user = snapshot.data;
-            final user1 = Provider.of<UserUID>(context);
             if (user == null) {
-              return AnimatedSplashScreen(
-                  backgroundColor: const Color(0xFF7209B7),
-                  curve: Curves.easeInSine,
-                  animationDuration: const Duration(seconds: 2),
-                  splashIconSize: 250.0,
-                  duration: 2000,
-                  splashTransition: SplashTransition.fadeTransition,
-                  splash: const Hero(
-                    tag: 'logo',
-                    child: CircleAvatar(
-                        radius: 250.0,
-                        backgroundImage: AssetImage('assets/icon/icon.png')),
-                  ),
-                  nextScreen: const LoginScreen());
-            }
-
-            return FutureBuilder(
-              future: DatabaseService(uid: user1.uid).getAgreement(),
-              builder: ((context, snapshot) {
-                try {
-                  if (snapshot.hasData) {
-                    switch (snapshot.data) {
-                      case true:
-                        return const UserHomeScreen();
-                      case false:
-                        return const DataCollectionScreen();
-                      default:
-                        return const DataCollectionScreen();
+              return const LoginScreen();
+            } else {
+              return FutureBuilder(
+                future: DatabaseService(uid: fbuser?.uid).getAgreement(),
+                builder: ((context, snapshot) {
+                  try {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const LoadingScreen();
                     }
-                  } else {
-                    return const LoadingScreen();
+                    if (snapshot.hasData) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        switch (snapshot.data) {
+                          case true:
+                            return const UserHomeScreen();
+                          case false:
+                            return const DataCollectionScreen();
+                          default:
+                            return const DataCollectionScreen();
+                        }
+                      }
+                    }
+                  } catch (e) {
+                    print(e);
                   }
-                } catch (e) {
-                  print(e);
-                }
-                return const Center(child: Text('error'));
-              }),
-            );
+                  return const Center(child: Text('error'));
+                }),
+              );
+            }
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
