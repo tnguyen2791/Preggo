@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:preggo/presentation/screens/wrapper.dart';
 import 'package:preggo/services/auth.dart';
+import 'package:preggo/shared/restartwidget.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignUpScreen extends StatefulWidget {
   static String id = 'sign_up_screen';
@@ -16,7 +18,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final auth = FirebaseAuth.instance;
   String email = 'fakeemail';
   String password = 'fakepassword';
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _signupformKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -31,6 +33,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
+          actions: [
+            IconButton(
+                onPressed: () {
+                  AuthService().signOut();
+                  RestartWidget.restartApp(context);
+                },
+                icon: const Icon(FontAwesomeIcons.powerOff))
+          ],
           title: const Text('Email Registration or Sign-in'),
         ),
         body: Padding(
@@ -51,7 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                     ),
                     Form(
-                        key: formKey,
+                        key: _signupformKey,
                         child: Column(
                           children: [
                             TextFormField(
@@ -86,7 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         )),
                     ElevatedButton(
                       onPressed: () async {
-                        if (formKey.currentState!.validate()) {
+                        if (_signupformKey.currentState!.validate()) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Submitting!')));
                           AuthService().signInwithEmailandPassword(
@@ -99,16 +109,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Submitting!')));
-                          AuthService()
+                        if (_signupformKey.currentState!.validate()) {
+                          await AuthService()
                               .createNewUser(
                                   emailController.text, passwordController.text)
-                              .then(
-                                (value) => Navigator.of(context)
-                                    .pushReplacementNamed(Wrapper.id),
-                              );
+                              .whenComplete(() {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Submitting!')));
+
+                            Navigator.of(context)
+                                .pushReplacementNamed(Wrapper.id);
+                          });
                         }
                       },
                       child: const Text('Sign-Up!'),

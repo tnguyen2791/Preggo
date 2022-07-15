@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:preggo/growthscreen/growthemail.dart';
 import 'package:preggo/models/user.dart';
+import 'package:preggo/services/auth.dart';
 import 'package:preggo/shared/constants.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,8 @@ import 'package:preggo/growthscreen/weightdatabase.dart';
 import 'weightlogmodel.dart';
 import 'weighindialogue.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:preggo/shared/restartwidget.dart';
 
 class GrowthChart extends StatefulWidget {
   static const String id = 'growth_screen';
@@ -56,6 +59,14 @@ class _GrowthChartState extends State<GrowthChart> {
 
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                AuthService().signOut();
+                RestartWidget.restartApp(context);
+              },
+              icon: const Icon(FontAwesomeIcons.powerOff))
+        ],
         title: const Text('Weight During Pregnancy'),
       ),
       body: Column(

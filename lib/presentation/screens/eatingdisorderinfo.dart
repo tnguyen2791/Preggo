@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:preggo/presentation/screens/wrapper.dart';
+import 'package:preggo/services/auth.dart';
+import 'package:preggo/shared/restartwidget.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WeighInOptions extends StatelessWidget {
   const WeighInOptions({Key? key}) : super(key: key);
@@ -10,6 +13,14 @@ class WeighInOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                AuthService().signOut();
+                RestartWidget.restartApp(context);
+              },
+              icon: const Icon(FontAwesomeIcons.powerOff))
+        ],
         title: const Text('Weigh in Options'),
       ),
       body: SingleChildScrollView(

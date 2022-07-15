@@ -41,13 +41,6 @@ class LoginScreen extends StatelessWidget {
                   color: Colors.lightGreen,
                   loginMethod: () {
                     Navigator.pushNamed(context, SignUpScreen.id);
-                    // UserUID result = await AuthService().anonLogin();
-                    // if (result == null) {
-                    //   print('error signing in');
-                    // } else {
-                    //   print(result.uid);
-                    //   print('signed in');
-                    // }
                   },
                 ),
               ),
