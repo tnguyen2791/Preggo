@@ -24,24 +24,6 @@ class DatabaseService {
     //At the same time, the dummy data will be recorded
   }
 
-//Getting a list from the snapshot
-  // List<PregnancyInfo> _pregnancyInfoFromSnapshot(QuerySnapshot snapshot) {
-  //   return snapshot.docs.map((doc) {
-  //     return PregnancyInfo(
-  //       date: doc['date'] ?? '',
-  //       epochduedate: doc['duedate'] ?? 1656882023322,
-  //       weight: doc['weight'] ?? '',
-  //     );
-  //   }).toList();
-  // }
-//doc is more than enough to actually access it
-
-/* This is a stream that will return a QuerySnapshot as the object type we're expecting when we're getting the userProfile, which we named */
-
-  // Stream<List<PregnancyInfo>> get userProfile {
-  //   return childingCollection.snapshots().map(_pregnancyInfoFromSnapshot);
-  // }
-
 //user data from snapshot
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
@@ -60,15 +42,6 @@ class DatabaseService {
       throw e;
     }
   }
-
-  // List<WeightModel> _weightLog(DocumentSnapshot snapshot) {
-  //   List listFromDB = snapshot.get('loggedweight');
-  //   List brokenList = listFromDB.fo;
-  // }
-
-  // Stream<WeightModel> get userWeights {
-  //   return childingCollection.doc(uid).get()['loggedweight'];
-  // }
 
   //get user doc stream
   Stream<UserData> get userData {
@@ -99,12 +72,6 @@ class DatabaseService {
     });
   }
 
-  // Future logWeight1(int loggedweight) async {
-  //   return await childingCollection.doc(uid).update({
-  //     'loggedweight': loggedweight,
-  //   });
-  // }
-
   Future<String> getemail() async {
     final ref = childingCollection.doc(uid);
     final doc = await ref.get();
@@ -128,9 +95,7 @@ class DatabaseService {
     final doc = await ref.get();
     // print(uid);
     try {
-      if (doc.exists) {
-        return doc['agreement'];
-      }
+      return doc['agreement'];
     } catch (e) {}
     return false;
     // return true;

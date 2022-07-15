@@ -37,88 +37,95 @@ class _WeighInDialogueAlertState extends State<WeighInDialogueAlert> {
         title: const Text('Log Current Weight'),
         content: SizedBox(
           height: MediaQuery.of(context).size.height * 0.4,
-          child: Column(children: [
-            Form(
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              key: formKey,
-              child: SizedBox(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(),
-                      child: const Text('Date'),
-                    ),
-                    ListTile(
-                        leading: const Icon(FontAwesomeIcons.calendar),
-                        trailing: Text(toPrettyDateMMMddyyyy(selectedDate)),
-                        onTap: () {
-                          showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime.now()
-                                .subtract(const Duration(days: 270)),
-                            lastDate:
-                                DateTime.now().add(const Duration(days: 10)),
-                            currentDate: DateTime.now(),
-                            cancelText: "Cancel",
-                          ).then((date) {
-                            if (date == null) {
-                              return null;
-                            } else {
-                              selectedDate = date.millisecondsSinceEpoch;
-                              // print(DateTime.fromMillisecondsSinceEpoch(
-                              //     selectedDate));
-                              return selectedDate;
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Form(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  key: formKey,
+                  child: SizedBox(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(),
+                          child: const Text('Date'),
+                        ),
+                        ListTile(
+                            tileColor: Colors.purple[100],
+                            leading: const Icon(FontAwesomeIcons.calendar),
+                            trailing: Text(toPrettyDateMMMddyyyy(selectedDate)),
+                            onTap: () {
+                              showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime.now()
+                                    .subtract(const Duration(days: 270)),
+                                lastDate: DateTime.now()
+                                    .add(const Duration(days: 10)),
+                                currentDate: DateTime.now(),
+                                cancelText: "Cancel",
+                              ).then((date) {
+                                if (date == null) {
+                                  return null;
+                                } else {
+                                  selectedDate = date.millisecondsSinceEpoch;
+                                  // print(DateTime.fromMillisecondsSinceEpoch(
+                                  //     selectedDate));
+                                  return selectedDate;
+                                }
+                              }).whenComplete(() {
+                                setState(() {
+                                  selectedDate;
+                                });
+                              });
+                            }),
+                        const Text('Weight'),
+                        TextFormField(
+                          keyboardType: TextInputType.number,
+                          controller: weightcontroller,
+                          onChanged: (value) {
+                            loggedweight = value;
+                            // print(loggedweight);
+                          },
+                          validator: (value) {
+                            if (value == null ||
+                                value.isEmpty ||
+                                (value.contains(RegExp(r'(^[0-9]*$)')) ==
+                                    false)) {
+                              return 'Error in input';
                             }
-                          }).whenComplete(() {
-                            setState(() {
-                              selectedDate;
-                            });
-                          });
-                        }),
-                    const Text('Weight'),
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      controller: weightcontroller,
-                      onChanged: (value) {
-                        loggedweight = value;
-                        // print(loggedweight);
-                      },
-                      validator: (value) {
-                        if (value == null ||
-                            value.isEmpty ||
-                            (value.contains(RegExp(r'(^[0-9]*$)')) == false)) {
-                          return 'Error in input';
-                        }
-                        return null;
-                      },
+                            return null;
+                          },
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // print(selectedDate);
-                Navigator.pop(context);
-              },
-              child: const Text('Go Back'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  List toImport = [
-                    {'time': selectedDate, 'weight': int.parse(loggedweight)}
-                  ];
-                  loggedweight = weightcontroller.value.text;
-                  logWeight1(toImport, user.uid);
-                  Navigator.pop(context);
-                }
-              },
-              child: const Text('Log it'),
-            ),
-          ]),
+                ElevatedButton(
+                  onPressed: () {
+                    // print(selectedDate);
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Go Back'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      List toImport = [
+                        {
+                          'time': selectedDate,
+                          'weight': int.parse(loggedweight)
+                        }
+                      ];
+                      loggedweight = weightcontroller.value.text;
+                      logWeight1(toImport, user.uid);
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: const Text('Log it'),
+                ),
+              ]),
         ),
       );
     });

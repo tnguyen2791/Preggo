@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:preggo/growthscreen/editweightdialogue.dart';
 import 'package:preggo/growthscreen/growthemail.dart';
 import 'package:preggo/models/user.dart';
 import 'package:preggo/services/auth.dart';
@@ -70,28 +71,27 @@ class _GrowthChartState extends State<GrowthChart> {
         title: const Text('Weight During Pregnancy'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          SizedBox(
-            height: 50,
-            child: Center(
-              child: Text(
-                'Growth Chart',
-                style: kGoogleTitle,
-              ),
+          Center(
+            child: Text(
+              'Growth Chart',
+              style: kGoogleTitle,
             ),
           ),
           FutureBuilder<List<WeightModel>>(
             future: userWeightList,
             builder: (context, AsyncSnapshot<List> snapshot) {
-              if (snapshot.hasError)
-                return AlertDialog(
+              if (snapshot.hasError) {
+                return const AlertDialog(
                   content: Text('There was an error'),
                 );
+              }
 
-              if (!snapshot.hasData)
+              if (!snapshot.hasData) {
                 return LoadingAnimationWidget.hexagonDots(
                     color: Colors.white, size: 100);
+              }
 
               if (snapshot.connectionState == ConnectionState.done &&
                   snapshot.hasData) {
@@ -165,6 +165,16 @@ class _GrowthChartState extends State<GrowthChart> {
                   }).then((_) => setState(() {}));
             },
             child: const Text('Add Weight'),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const EditWeightDialogue();
+                  }).then((_) => setState(() {}));
+            },
+            child: const Text('Edit Weight'),
           ),
           ElevatedButton(
             onPressed: () => Navigator.of(context).pushNamed(EmailSender.id),

@@ -38,6 +38,26 @@
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
+    // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB_1JDr7eHaPB8P8dh0WWHt2fn5LXWOM00",
+    authDomain: "childing-9ddea.firebaseapp.com",
+    projectId: "childing-9ddea",
+    storageBucket: "childing-9ddea.appspot.com",
+    messagingSenderId: "101204525967",
+    appId: "1:101204525967:web:b666cc7ad578312add81fa",
+    measurementId: "G-WBCR0FRH9N"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
     function loadMainDartJs() {
