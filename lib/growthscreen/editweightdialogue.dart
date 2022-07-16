@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:preggo/growthscreen/weightlogmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:preggo/models/user.dart';
@@ -38,16 +38,21 @@ class _EditWeightDialogueState extends State<EditWeightDialogue> {
               for (WeightModel item in retrieveddata) {
                 var prettydate = toPrettyDateMMMddyyyy(item.currentweek);
                 ListTile thetile = ListTile(
-                  leading: Text(prettydate),
-                  trailing: Text(
-                    item.weight.toString(),
-                  ),
-                );
+                    leading: Text(prettydate),
+                    subtitle: Text(item.weight.toString()),
+                    trailing: ElevatedButton(
+                      onPressed: () => WeightDatabaseServices(uid: user.uid)
+                          .deleteWeight(item.currentweek)
+                          .whenComplete(() {
+                        setState(() {});
+                      }),
+                      child: const Icon(FontAwesomeIcons.deleteLeft),
+                    ));
                 todisplay.add(thetile);
               }
               return SizedBox(
                 height: 200,
-                width: 200,
+                width: 300,
                 child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: todisplay.length,

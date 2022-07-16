@@ -32,6 +32,23 @@ class WeightDatabaseServices {
     return epochstart;
   }
 
+  Future<void> deleteWeight(int epochdate) async {
+    final ref = childingCollection.doc(uid);
+    final doc = await ref.get();
+    print('This is a new list');
+    List doclist = doc['loggedweight'];
+    List tobedeleted = [];
+    for (var item in doclist) {
+      if (item['time'] == epochdate) {
+        tobedeleted.add(item);
+      }
+    }
+    for (Map item in tobedeleted) {
+      doclist.remove(item);
+    }
+    ref.update({'loggedweight': doclist});
+  }
+
   Future<List<WeightModel>> getWeightList() async {
     int resolvedateofconception = await getDateofConception();
 
@@ -41,18 +58,8 @@ class WeightDatabaseServices {
     final doc = await ref.get();
     List doclist = doc['loggedweight'];
     for (Map item in doclist) {
-      // WeightModel(
-      //   dateinepoch: item['time'],
-      //   weight: item['weight']
-      // );
       int converteddate =
           convertDifference(resolvedateofconception, item['time']);
-      // print(item['time']);
-      // print(item['weight']);
-      // print(toPrettyDateMMMddyyyy(resolvedateofconception));
-      // print(toPrettyDateMMMddyyyy(item['time']));
-      // print(converteddate);
-
       weightpulledfromDB
           .add(WeightModel(currentweek: converteddate, weight: item['weight']));
       // print(weightpulledfromDB);
