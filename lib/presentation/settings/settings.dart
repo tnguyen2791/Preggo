@@ -13,9 +13,16 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserUID>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
+        actions: [
+          IconButton(
+              onPressed: () =>
+                  DatabaseService(uid: user.uid).updateWeighPref('Regular'),
+              icon: const Icon(Icons.textsms_sharp))
+        ],
         centerTitle: true,
       ),
       body: const SettingsOptions(),
@@ -65,6 +72,11 @@ class _SettingsOptionsState extends State<SettingsOptions> {
                     onPressed: weightInput,
                   ),
                   SettingsTile(
+                      title: const Text('Weigh Options'),
+                      leading: const Icon(FontAwesomeIcons.person),
+                      trailing: const WeighSelection(),
+                      onPressed: null),
+                  SettingsTile(
                     title: const Text('Provider E-mail'),
                     leading: const Icon(FontAwesomeIcons.userDoctor),
                     trailing: Text(userData.email.toString()),
@@ -78,6 +90,45 @@ class _SettingsOptionsState extends State<SettingsOptions> {
           return const Text('something has gone wrong');
         }
       },
+    );
+  }
+}
+
+class WeighSelection extends StatefulWidget {
+  const WeighSelection({Key? key}) : super(key: key);
+
+  @override
+  State<WeighSelection> createState() => _WeighSelectionState();
+}
+
+class _WeighSelectionState extends State<WeighSelection> {
+  String dropdownValue = 'Regular';
+
+  @override
+  Widget build(BuildContext context) {
+    final user = Provider.of<UserUID>(context);
+    return DropdownButton<String>(
+      value: dropdownValue,
+      icon: const Icon(Icons.arrow_downward),
+      elevation: 16,
+      style: const TextStyle(color: Colors.deepPurple),
+      underline: Container(
+        height: 2,
+        color: Colors.deepPurpleAccent,
+      ),
+      onChanged: (String? newValue) async {
+        await DatabaseService(uid: user.uid).updateWeighPref(newValue!);
+        setState(() {
+          dropdownValue = newValue;
+        });
+      },
+      items: <String>['Regular', 'Partner', 'No Weight']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
     );
   }
 }

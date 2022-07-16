@@ -90,6 +90,33 @@ class DatabaseService {
     });
   }
 
+  Future<void> updateWeighPref(String weighpref) async {
+    final ref = childingCollection.doc(uid);
+    final doc = await ref.get();
+    final Map usermap = doc.data() as Map;
+    String keysearchedfor = 'weighpref';
+
+    if (!usermap.containsKey(keysearchedfor)) {
+      try {
+        return await childingCollection.doc(uid).update({
+          keysearchedfor: 'Regular',
+        });
+      } catch (e) {}
+    }
+    if (usermap.containsKey(keysearchedfor)) {
+      try {
+        return await childingCollection.doc(uid).update({
+          keysearchedfor: weighpref,
+        });
+      } catch (e) {}
+    }
+
+    // print(usermap.containsKey('agreements'));
+    // print(uid);
+
+    // return 'Regular';
+  }
+
   Future<bool> getAgreement() async {
     final ref = childingCollection.doc(uid);
     final doc = await ref.get();

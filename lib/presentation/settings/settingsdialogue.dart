@@ -19,27 +19,27 @@ Future<void> weightInput(BuildContext context) async {
             controller: weightController..text = userDBweight.toString(),
             onChanged: (value) {
               weight = value;
-              // print(_weight);
             },
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               labelText: 'Input weight',
-              // errorText: _errorText(_weightController)
             ),
           ),
           actions: [
             TextButton(
               onPressed: () {
-                // print(_weightController.value.text.isEmpty);
                 if (weightController.value.text.isEmpty) {
                   null;
                 } else {
-                  if (weightController.value.text
-                      .contains(RegExp(r'(^[0-9]*$)'))) {
+                  if (weightController.value.text.contains(
+                    RegExp(r'(^[0-9]*$)'),
+                  )) {
                     weight = weightController.value.text;
-                    DatabaseService(uid: user.uid)
-                        .updateWeight(int.parse(weight));
-                    Navigator.pop(context);
+                    if (int.parse(weight) < 600) {
+                      DatabaseService(uid: user.uid)
+                          .updateWeight(int.parse(weight));
+                      Navigator.pop(context);
+                    }
                   } else {
                     null;
                   }
@@ -57,22 +57,21 @@ Future<void> weightInput(BuildContext context) async {
 
 Future<void> enterDueDate(BuildContext context) async {
   final user = Provider.of<UserUID>(context, listen: false);
-  // final userdata = Provider.of<UserData>(context, listen: false);
 
   showDatePicker(
     context: context,
     initialDate: DateTime.fromMillisecondsSinceEpoch(
         await DatabaseService(uid: user.uid).getdate()),
-    firstDate: DateTime(2000),
-    lastDate: DateTime(2050),
+    firstDate: DateTime.now(),
+    lastDate: DateTime.now().add(
+      const Duration(days: 360),
+    ),
     cancelText: "Cancel",
   ).then((date) async {
     if (date == null) {
       return;
     } else {
       int adate = date.millisecondsSinceEpoch;
-      // print(adate);
-      // print(DateTime.fromMillisecondsSinceEpoch(adate));
       DatabaseService(uid: user.uid).updateDueDate(adate);
     }
   });
