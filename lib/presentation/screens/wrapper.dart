@@ -31,41 +31,25 @@ class _WrapperState extends State<Wrapper> {
             var user = snapshot.data;
             if (user == null) {
               return const LoginScreen();
-            } else {
-              return FutureBuilder(
-                future: DatabaseService(uid: userprovider.uid).getAgreement(),
-                builder: ((context, snapshot) {
-                  try {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const LoadingScreen();
-                    }
-                    if (snapshot.hasData) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        switch (snapshot.data) {
-                          case true:
-                            return StreamProvider<UserData>(
-                              create: (_) =>
-                                  DatabaseService(uid: userprovider.uid)
-                                      .userData,
-                              builder: (context, child) {
-                                return const UserHomeScreen();
-                              },
-                              initialData: UserData(),
-                            );
-                          case false:
-                            return const DataCollectionScreen();
-                          default:
-                            return const DataCollectionScreen();
-                        }
-                      }
-                    }
-                  } catch (e) {
-                    print(e);
-                  }
-                  return const Center(child: Text('error'));
-                }),
-              );
             }
+
+            return StreamProvider<UserData>(
+              create: (_) => DatabaseService(uid: userprovider.uid).userData,
+              initialData: UserData(),
+              builder: ((context, child) {
+                final userData = Provider.of<UserData>(context);
+
+                switch (userData.agreement) {
+                  case true:
+                    return const UserHomeScreen();
+
+                  case false:
+                    return const DataCollectionScreen();
+                  default:
+                    return const DataCollectionScreen();
+                }
+              }),
+            );
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {

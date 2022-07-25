@@ -7,14 +7,14 @@ import 'package:preggo/services/sharedfunctions.dart';
 
 import 'package:intl/intl.dart';
 
-class UserInfo extends StatefulWidget {
-  const UserInfo({Key? key}) : super(key: key);
+class UserDashboardInfo extends StatefulWidget {
+  const UserDashboardInfo({Key? key}) : super(key: key);
 
   @override
-  State<UserInfo> createState() => _UserInfoState();
+  State<UserDashboardInfo> createState() => _UserDashboardInfoState();
 }
 
-class _UserInfoState extends State<UserInfo> {
+class _UserDashboardInfoState extends State<UserDashboardInfo> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserData?>(context);

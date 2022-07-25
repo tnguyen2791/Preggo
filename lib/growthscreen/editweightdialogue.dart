@@ -39,7 +39,9 @@ class _EditWeightDialogueState extends State<EditWeightDialogue> {
                 var prettydate = toPrettyDateMMMddyyyy(item.currentweek);
                 ListTile thetile = ListTile(
                     leading: Text(prettydate),
-                    subtitle: Text(item.weight.toString()),
+                    subtitle: Text(
+                      item.weight.toString(),
+                    ),
                     trailing: ElevatedButton(
                       onPressed: () => WeightDatabaseServices(uid: user.uid)
                           .deleteWeight(item.currentweek)

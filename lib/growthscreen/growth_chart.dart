@@ -4,7 +4,6 @@ import 'package:preggo/growthscreen/growthemail.dart';
 import 'package:preggo/growthscreen/partnerweighindialogue.dart';
 import 'package:preggo/models/user.dart';
 import 'package:preggo/services/auth.dart';
-import 'package:preggo/services/database.dart';
 import 'package:preggo/shared/constants.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:provider/provider.dart';

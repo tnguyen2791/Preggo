@@ -1,12 +1,13 @@
 import "package:flutter/material.dart";
 import 'package:preggo/models/user.dart';
 import 'package:preggo/presentation/screens/all_screens.dart';
-import 'package:preggo/services/database.dart';
 import 'package:preggo/services/auth.dart';
 import 'package:preggo/shared/shared.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:preggo/userhome/anonymouswarningdialogue.dart';
 import 'package:provider/provider.dart';
 import 'userinfo.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UserHomeScreen extends StatelessWidget {
   static String id = 'homescreen';
@@ -16,8 +17,7 @@ class UserHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userData = Provider.of<UserData>(context);
-
-    print(userData.weighpref);
+    final fbuseranon = FirebaseAuth.instance.currentUser?.isAnonymous;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -44,7 +44,14 @@ class UserHomeScreen extends StatelessWidget {
               Icons.logout,
             ),
             onPressed: () {
-              AuthService().signOut();
+              if (fbuseranon!) {
+                showDialog(
+                    context: context,
+                    builder: ((context) =>
+                        const AnonymousLogoutWarningAlertDialogue()));
+              } else {
+                AuthService().signOut();
+              }
             },
           ),
         ],
@@ -54,7 +61,7 @@ class UserHomeScreen extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const [
-              UserInfo(),
+              UserDashboardInfo(),
             ],
           ),
           Expanded(

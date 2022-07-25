@@ -44,7 +44,8 @@ class DatabaseService {
 
   Future<void> createNewDBUser() async {
     await childingCollection.doc(uid).set({
-      'duedate': 1656882023322,
+      'duedate': (DateTime.now().millisecondsSinceEpoch +
+          const Duration(days: 120).inMilliseconds),
       'weight': 100,
       'provideremail': 'your@provider.org',
       'agreement': false,
@@ -78,6 +79,11 @@ class DatabaseService {
     } catch (e) {
       throw e;
     }
+  }
+
+  Future<void> deleteDoc() async {
+    childingCollection.doc(uid).delete();
+    print('Doc deleted');
   }
 
   Future<int> getdate() async {

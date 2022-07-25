@@ -53,6 +53,27 @@ class AuthService {
     }
   }
 
+  Future<void> signInAnonymously() async {
+    try {
+      final userCredential = await FirebaseAuth.instance.signInAnonymously();
+      print(userCredential.user?.uid);
+      await DatabaseService(uid: userCredential.user!.uid).createNewDBUser();
+      // DatabaseService(uid: userCredential.user!.uid).checkDatabaseStartup();
+      print("Signed in with temporary account.");
+      // return _userFromFirebaseUser(userCredential.user!);
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case "operation-not-allowed":
+          print("Anonymous auth hasn't been enabled for this project.");
+          break;
+        default:
+          print("Unknown error.");
+      }
+    }
+    print('returning default');
+    // return UserUID();
+  }
+
   //auth change user stream
   //this is a function that will receive from the data base and turn it into a UserID object
   Stream<UserUID> get user {

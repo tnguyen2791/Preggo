@@ -28,6 +28,14 @@ class LoginScreen extends StatelessWidget {
               ),
               Flexible(
                 child: LoginButton(
+                  buttontext: 'Anonymous Login',
+                  icon: FontAwesomeIcons.userNinja,
+                  color: Colors.pink.shade400,
+                  loginMethod: AuthService().signInAnonymously,
+                ),
+              ),
+              Flexible(
+                child: LoginButton(
                   buttontext: 'Google Login',
                   icon: FontAwesomeIcons.google,
                   color: Colors.lightBlue,
@@ -36,7 +44,7 @@ class LoginScreen extends StatelessWidget {
               ),
               Flexible(
                 child: LoginButton(
-                  buttontext: 'Register with e-mail',
+                  buttontext: 'E-mail Login/Sign Up',
                   icon: FontAwesomeIcons.ethereum,
                   color: Colors.lightGreen,
                   loginMethod: () {
