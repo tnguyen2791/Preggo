@@ -15,10 +15,12 @@ class UserData {
   final int epochduedate;
   final int weight;
   final String email;
+  final String weighpref;
 
   UserData(
       {this.agreement = false,
       this.epochduedate = 1656882023322,
       this.weight = 100,
-      this.email = 'random@email.com'});
+      this.email = 'random@email.com',
+      this.weighpref = 'Regular'});
 }

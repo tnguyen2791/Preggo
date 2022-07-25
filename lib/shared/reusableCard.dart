@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:preggo/models/user.dart';
+import 'package:preggo/presentation/screens/all_screens.dart';
+import 'package:provider/provider.dart';
+import 'package:preggo/growthscreen/growth_chart.dart';
 
-class ReusableCard extends StatelessWidget {
+class ReusableCard extends StatefulWidget {
   final String cardDescription;
   final IconData cardIcon;
   final String navigationRoute;
@@ -14,11 +18,20 @@ class ReusableCard extends StatelessWidget {
   });
 
   @override
+  State<ReusableCard> createState() => _ReusableCardState();
+}
+
+class _ReusableCardState extends State<ReusableCard> {
+  @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserData>(context);
+
     return Expanded(
       child: GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(context, navigationRoute);
+        onTap: () async {
+          await Navigator.pushNamed(context, widget.navigationRoute).then((_) {
+            setState(() {});
+          });
         },
         child: Container(
           margin: const EdgeInsets.all(5.0),
@@ -36,7 +49,7 @@ class ReusableCard extends StatelessWidget {
                   radius: 35.0,
                   backgroundColor: Colors.white,
                   child: Icon(
-                    cardIcon,
+                    widget.cardIcon,
                     size: 40.0,
                     color: Colors.purple,
                   ),
@@ -45,7 +58,7 @@ class ReusableCard extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Text(
-                  cardDescription,
+                  widget.cardDescription,
                   style: GoogleFonts.acme(fontSize: 25.0, color: Colors.white),
                 ),
               ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:preggo/growthscreen/editweightdialogue.dart';
 import 'package:preggo/growthscreen/growthemail.dart';
+import 'package:preggo/growthscreen/partnerweighindialogue.dart';
 import 'package:preggo/models/user.dart';
 import 'package:preggo/services/auth.dart';
+import 'package:preggo/services/database.dart';
 import 'package:preggo/shared/constants.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:provider/provider.dart';
@@ -54,12 +56,16 @@ class _GrowthChartState extends State<GrowthChart> {
     ];
 
     final user = Provider.of<UserUID>(context);
+    final userData = Provider.of<UserData>(context);
 
     final userWeightList =
         WeightDatabaseServices(uid: user.uid).getWeightList();
 
+    // final String weighpreference = await DatabaseService(uid: user.uid).getWeighPreference();
+
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(onPressed: () => Navigator.of(context).pop()),
         actions: [
           IconButton(
               onPressed: () {
@@ -158,11 +164,23 @@ class _GrowthChartState extends State<GrowthChart> {
           ),
           ElevatedButton(
             onPressed: () async {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const WeighInDialogueAlert();
-                  }).then((_) => setState(() {}));
+              if (userData.weighpref == 'Partner') {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const PartnerWeighingAlertDialogue();
+                    }).then((_) => showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const WeighInDialogueAlert();
+                    }).then((_) => setState(() {})));
+              } else {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const WeighInDialogueAlert();
+                    }).then((_) => setState(() {}));
+              }
             },
             child: const Text('Add Weight'),
           ),

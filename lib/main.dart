@@ -4,6 +4,7 @@ import 'package:preggo/presentation/screens/wrapper.dart';
 import 'package:preggo/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:preggo/services/auth.dart';
+import 'package:preggo/services/database.dart';
 import 'package:preggo/shared/restartwidget.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
@@ -19,21 +20,32 @@ class PreggoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<UserUID>.value(
-      catchError: (_, error) => UserUID(),
-      value: AuthService().user,
-      initialData: UserUID(),
-      child: RestartWidget(
-        child: MaterialApp(
-          theme: ThemeData(
-            primarySwatch: Colors.pink,
-            scaffoldBackgroundColor: const Color(0xFF7209B7),
-          ),
-          title: 'Pregnancy Weights',
-          initialRoute: Wrapper.id,
-          routes: appRoutes,
+    return MultiProvider(
+      providers: [
+        StreamProvider<UserUID>.value(
+          value: AuthService().user,
+          initialData: UserUID(),
+          builder: (context, child) {
+            final useruid = Provider.of<UserUID>(context);
+
+            return StreamProvider<UserData>(
+              create: (context) => DatabaseService(uid: useruid.uid).userData,
+              initialData: UserData(),
+              child: RestartWidget(
+                child: MaterialApp(
+                  theme: ThemeData(
+                    primarySwatch: Colors.pink,
+                    scaffoldBackgroundColor: const Color(0xFF7209B7),
+                  ),
+                  title: 'Pregnancy Weights',
+                  initialRoute: Wrapper.id,
+                  routes: appRoutes,
+                ),
+              ),
+            );
+          },
         ),
-      ),
+      ],
     );
   }
 }

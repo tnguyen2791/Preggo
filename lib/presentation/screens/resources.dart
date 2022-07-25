@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:preggo/models/user.dart';
+import 'package:preggo/services/database.dart';
 import 'package:preggo/shared/constants.dart';
+import 'package:provider/provider.dart';
 
 class Resources extends StatelessWidget {
   static const String id = 'resources_screen';
@@ -8,9 +12,16 @@ class Resources extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserUID>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Resources [Placeholder]"),
+        actions: [
+          IconButton(
+              onPressed: null,
+              icon: const Icon(FontAwesomeIcons.affiliatetheme)),
+        ],
       ),
       body: Column(
         children: [

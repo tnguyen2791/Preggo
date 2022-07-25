@@ -3,13 +3,14 @@ import 'package:preggo/loginscreen/login.dart';
 import 'package:preggo/models/user.dart';
 import 'package:preggo/presentation/screens/loading_screen.dart';
 import 'package:preggo/presentation/screens/wrapper.dart';
+import 'package:preggo/presentation/settings/weighselection.dart';
 import 'package:preggo/services/auth.dart';
 import 'package:preggo/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:preggo/services/sharedfunctions.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:preggo/shared/restartwidget.dart';
+import 'disclaimerdialogue.dart';
 
 class DataCollectionScreen extends StatelessWidget {
   static const String id = 'datacollectionscreen';
@@ -78,14 +79,13 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height * 1.5,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ListTile(
                                 tileColor: Colors.white,
                                 leading: const Icon(FontAwesomeIcons.calendar),
-                                title: const Text('Baby\'s due date'),
+                                title: const Text('Baby\'s due date!'),
                                 trailing: Text(toPrettyDateMMMddyyyy(
                                     userData.epochduedate)),
                                 onTap: () {
@@ -105,6 +105,15 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                                     }
                                   });
                                 }),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: ListTile(
+                              tileColor: Colors.white,
+                              leading: Icon(FontAwesomeIcons.person),
+                              title: Text('Weigh-In Option'),
+                              trailing: WeighSelection(),
+                            ),
                           ),
                           Container(
                             width: MediaQuery.of(context).size.width * 0.9,
@@ -278,41 +287,4 @@ class CheckboxFormField extends FormField<bool> {
                 controlAffinity: ListTileControlAffinity.leading,
               );
             });
-}
-
-class DisclaimerAlertDialogue extends StatefulWidget {
-  const DisclaimerAlertDialogue({Key? key}) : super(key: key);
-
-  @override
-  State<DisclaimerAlertDialogue> createState() =>
-      _DisclaimerAlertDialogueState();
-}
-
-class _DisclaimerAlertDialogueState extends State<DisclaimerAlertDialogue> {
-  String _disclaimer = 'error loading';
-
-  @override
-  void initState() {
-    _loadDisclaimer();
-    super.initState();
-  }
-
-  Future<void> _loadDisclaimer() async {
-    final loadedDisclaimer =
-        await rootBundle.loadString('assets/texts/disclaimer.txt');
-    setState(() {
-      _disclaimer = loadedDisclaimer;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Disclaimer'),
-      content: SizedBox(
-          width: 200,
-          height: 400,
-          child: ListView(children: [Text(_disclaimer.toString())])),
-    );
-  }
 }

@@ -15,93 +15,88 @@ class UserHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserUID>(context);
+    final userData = Provider.of<UserData>(context);
 
-    return StreamProvider<UserData>.value(
-      catchError: (context, error) {
-        return UserData();
-      },
-      value: DatabaseService(uid: user.uid).userData,
-      initialData: UserData(),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          leading: const Hero(
-            tag: 'logo',
-            child: CircleAvatar(
-                radius: 150.0,
-                backgroundImage: AssetImage('assets/icon/icon.png')
-                // ,
-                ),
-          ),
-          title: const Text('Homescreen'),
-          actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.settings,
+    print(userData.weighpref);
+
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        leading: const Hero(
+          tag: 'logo',
+          child: CircleAvatar(
+              radius: 150.0, backgroundImage: AssetImage('assets/icon/icon.png')
+              // ,
               ),
-              onPressed: () {
-                Navigator.pushNamed(context, Settings.id);
-              },
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.logout,
-              ),
-              onPressed: () {
-                AuthService().signOut();
-              },
-            ),
-          ],
         ),
-        body: Column(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                UserInfo(),
-              ],
+        title: const Text('Homescreen'),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.settings,
             ),
-            Expanded(
-              flex: 2,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
+            onPressed: () {
+              Navigator.pushNamed(context, Settings.id);
+            },
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.logout,
+            ),
+            onPressed: () {
+              AuthService().signOut();
+            },
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: const [
+              UserInfo(),
+            ],
+          ),
+          Expanded(
+            flex: 2,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    if (userData.weighpref != 'No Weight')
                       ReusableCard(
                         navigationRoute: GrowthChart.id,
-                        cardDescription: 'Weigh-in!',
+                        cardDescription: 'Pregnancy Growth',
                         cardIcon: FontAwesomeIcons.weightScale,
                       ), //Weighing in
-                      ReusableCard(
-                        navigationRoute: WaterLog.id,
-                        cardDescription: 'Are you hydrated?',
-                        cardIcon: FontAwesomeIcons.droplet,
-                      ), //Hydration
-                      ReusableCard(
-                        navigationRoute: ExerciseRegimen.id,
-                        cardDescription: 'Exercise Regimen',
-                        cardIcon: FontAwesomeIcons.dumbbell,
-                      ), //Exercise Regimen
-                      ReusableCard(
-                        navigationRoute: Diet.id,
-                        cardDescription: 'Diet',
-                        cardIcon: FontAwesomeIcons.carrot,
-                      ), //Diet
-                      ReusableCard(
-                        navigationRoute: Resources.id,
-                        cardDescription: 'Resources',
-                        cardIcon: FontAwesomeIcons.boxArchive,
-                      ), //Resources
-                    ],
-                  ),
+                    ReusableCard(
+                      navigationRoute: WaterLog.id,
+                      cardDescription: 'Are you hydrated?',
+                      cardIcon: FontAwesomeIcons.droplet,
+                    ), //Hydration
+                    ReusableCard(
+                      navigationRoute: ExerciseRegimen.id,
+                      cardDescription: 'Exercise Regimen',
+                      cardIcon: FontAwesomeIcons.dumbbell,
+                    ), //Exercise Regimen
+                    ReusableCard(
+                      navigationRoute: Diet.id,
+                      cardDescription: 'Diet',
+                      cardIcon: FontAwesomeIcons.carrot,
+                    ), //Diet
+                    ReusableCard(
+                      navigationRoute: Resources.id,
+                      cardDescription: 'Resources',
+                      cardIcon: FontAwesomeIcons.boxArchive,
+                    ), //Resources
+                  ],
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

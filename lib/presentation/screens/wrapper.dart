@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:preggo/loginscreen/login.dart';
-import 'package:preggo/presentation/screens/datacollectionform.dart';
+import 'package:preggo/presentation/settings/datacollectionform.dart';
 import 'package:preggo/presentation/screens/loading_screen.dart';
 import 'package:preggo/services/auth.dart';
 import 'package:preggo/services/database.dart';
@@ -23,7 +23,7 @@ class _WrapperState extends State<Wrapper> {
   @override
   Widget build(BuildContext context) {
     final userprovider = Provider.of<UserUID>(context);
-
+    DatabaseService(uid: fbuser?.uid).checkDatabaseStartup();
     return StreamBuilder(
         stream: AuthService().userStream,
         builder: (context, snapshot) {
@@ -43,7 +43,15 @@ class _WrapperState extends State<Wrapper> {
                       if (snapshot.connectionState == ConnectionState.done) {
                         switch (snapshot.data) {
                           case true:
-                            return const UserHomeScreen();
+                            return StreamProvider<UserData>(
+                              create: (_) =>
+                                  DatabaseService(uid: userprovider.uid)
+                                      .userData,
+                              builder: (context, child) {
+                                return const UserHomeScreen();
+                              },
+                              initialData: UserData(),
+                            );
                           case false:
                             return const DataCollectionScreen();
                           default:

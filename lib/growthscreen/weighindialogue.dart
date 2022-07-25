@@ -91,8 +91,10 @@ class _WeighInDialogueAlertState extends State<WeighInDialogueAlert> {
                           validator: (value) {
                             if (value == null ||
                                 value.isEmpty ||
-                                (value.contains(RegExp(r'(^[0-9]*$)')) ==
-                                    false)) {
+                                (!value.contains(
+                                  RegExp(r'(^[0-9]*$)'),
+                                )) ||
+                                int.parse(value) > 600) {
                               return 'Error in input';
                             }
                             return null;
