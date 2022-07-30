@@ -45,6 +45,7 @@ class UserHomeScreen extends StatelessWidget {
             ),
             onPressed: () {
               if (fbuseranon!) {
+                print(fbuseranon);
                 showDialog(
                     context: context,
                     builder: ((context) =>
@@ -73,27 +74,27 @@ class UserHomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     if (userData.weighpref != 'No Weight')
-                      ReusableCard(
+                      const ReusableCard(
                         navigationRoute: GrowthChart.id,
                         cardDescription: 'Pregnancy Growth',
                         cardIcon: FontAwesomeIcons.weightScale,
                       ), //Weighing in
-                    ReusableCard(
+                    const ReusableCard(
                       navigationRoute: WaterLog.id,
                       cardDescription: 'Are you hydrated?',
                       cardIcon: FontAwesomeIcons.droplet,
                     ), //Hydration
-                    ReusableCard(
+                    const ReusableCard(
                       navigationRoute: ExerciseRegimen.id,
                       cardDescription: 'Exercise Regimen',
                       cardIcon: FontAwesomeIcons.dumbbell,
                     ), //Exercise Regimen
-                    ReusableCard(
+                    const ReusableCard(
                       navigationRoute: Diet.id,
                       cardDescription: 'Diet',
                       cardIcon: FontAwesomeIcons.carrot,
                     ), //Diet
-                    ReusableCard(
+                    const ReusableCard(
                       navigationRoute: Resources.id,
                       cardDescription: 'Resources',
                       cardIcon: FontAwesomeIcons.boxArchive,

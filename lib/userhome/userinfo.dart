@@ -1,6 +1,5 @@
 import 'package:preggo/models/user.dart';
 import 'package:preggo/shared/constants.dart';
-
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:preggo/services/sharedfunctions.dart';
@@ -20,11 +19,8 @@ class _UserDashboardInfoState extends State<UserDashboardInfo> {
     final user = Provider.of<UserData?>(context);
     if (user != null) {
       final int dbuserepoch = user.epochduedate;
-      final DateTime dbuserinDT =
-          DateTime.fromMillisecondsSinceEpoch(dbuserepoch);
-      final Duration difference = dbuserinDT.difference(DateTime.now());
 
-      String date = '${difference.inDays.toString()} days left!';
+      String date = daysLefttoDueDate(dbuserepoch);
       String duedate = toPrettyDateMMMddyyyy(dbuserepoch);
       // DateTime.fromMillisecondsSinceEpoch(user.first.epochduedate)
       //     .toString();

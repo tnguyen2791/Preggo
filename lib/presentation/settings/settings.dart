@@ -65,6 +65,12 @@ class _SettingsOptionsState extends State<SettingsOptions> {
               onPressed: weightInput,
             ),
             SettingsTile(
+              title: const Text('Height'),
+              leading: const Icon(FontAwesomeIcons.ruler),
+              trailing: Text("${userData.heightininches} inches"),
+              onPressed: heightInput,
+            ),
+            SettingsTile(
                 title: const Text('Weigh Options'),
                 leading: const Icon(FontAwesomeIcons.person),
                 trailing: const WeighSelection(),

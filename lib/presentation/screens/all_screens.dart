@@ -1,7 +1,7 @@
 export 'diet.dart';
 export 'eatingdisorderinfo.dart';
 export 'exercise_reg.dart';
-export '../../growthscreen/growth_chart.dart';
+export '../../growthscreen/growthchartscreen.dart';
 export 'wrapper.dart';
 export 'introduction.dart';
 export 'resources.dart';

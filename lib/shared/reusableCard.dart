@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:preggo/models/user.dart';
-import 'package:preggo/presentation/screens/all_screens.dart';
 import 'package:provider/provider.dart';
-import 'package:preggo/growthscreen/growth_chart.dart';
 
 class ReusableCard extends StatefulWidget {
   final String cardDescription;
@@ -30,7 +28,9 @@ class _ReusableCardState extends State<ReusableCard> {
       child: GestureDetector(
         onTap: () async {
           await Navigator.pushNamed(context, widget.navigationRoute).then((_) {
-            setState(() {});
+            if (mounted) {
+              setState(() {});
+            }
           });
         },
         child: Container(

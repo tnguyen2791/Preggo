@@ -6,8 +6,9 @@ import 'package:provider/provider.dart';
 Future<void> weightInput(BuildContext context) async {
   final weightController = TextEditingController();
   final user = Provider.of<UserUID>(context, listen: false);
+  final userData = Provider.of<UserData>(context, listen: false);
 
-  int userDBweight = await DatabaseService(uid: user.uid).getweight();
+  // int userDBweight = await DatabaseService(uid: user.uid).getweight();
   String weight;
 
   return showDialog(
@@ -16,7 +17,7 @@ Future<void> weightInput(BuildContext context) async {
         return AlertDialog(
           title: const Text('Pre-Pregnancy Weight'),
           content: TextField(
-            controller: weightController..text = userDBweight.toString(),
+            controller: weightController..text = userData.weight.toString(),
             onChanged: (value) {
               weight = value;
             },
@@ -38,6 +39,59 @@ Future<void> weightInput(BuildContext context) async {
                     if (int.parse(weight) < 600) {
                       DatabaseService(uid: user.uid)
                           .updateWeight(int.parse(weight));
+                      Navigator.pop(context);
+                    }
+                  } else {
+                    null;
+                  }
+                }
+              },
+              child: const Text("Done"),
+            ),
+            TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Cancel'))
+          ],
+        );
+      });
+}
+
+Future<void> heightInput(BuildContext context) async {
+  final heightController = TextEditingController();
+  final user = Provider.of<UserUID>(context, listen: false);
+  final userData = Provider.of<UserData>(context, listen: false);
+
+  String height;
+
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Height in Inches'),
+          content: TextField(
+            controller: heightController
+              ..text = userData.heightininches.toString(),
+            onChanged: (value) {
+              height = value;
+            },
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              labelText: 'Input height',
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                if (heightController.value.text.isEmpty) {
+                  null;
+                } else {
+                  if (heightController.value.text.contains(
+                    RegExp(r'(^[0-9]*$)'),
+                  )) {
+                    height = heightController.value.text;
+                    if (int.parse(height) < 95) {
+                      DatabaseService(uid: user.uid)
+                          .updateHeight(int.parse(height));
                       Navigator.pop(context);
                     }
                   } else {

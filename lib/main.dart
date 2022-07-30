@@ -30,7 +30,7 @@ class PreggoApp extends StatelessWidget {
 
             return StreamProvider<UserData>(
               create: (context) => DatabaseService(uid: useruid.uid).userData,
-              initialData: UserData(),
+              initialData: UserData(weightlist: []),
               child: RestartWidget(
                 child: MaterialApp(
                   theme: ThemeData(

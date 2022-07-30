@@ -35,7 +35,7 @@ class _WrapperState extends State<Wrapper> {
 
             return StreamProvider<UserData>(
               create: (_) => DatabaseService(uid: userprovider.uid).userData,
-              initialData: UserData(),
+              initialData: UserData(weightlist: []),
               builder: ((context, child) {
                 final userData = Provider.of<UserData>(context);
 

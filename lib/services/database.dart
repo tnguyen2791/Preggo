@@ -16,6 +16,7 @@ class DatabaseService {
   static String keyprovideremail = 'provideremail';
   static String keyweighpref = 'weighpref';
   static String keyweight = 'weight';
+  static String keyheightininches = 'height';
 
   //will create it automatically
 
@@ -32,6 +33,7 @@ class DatabaseService {
         keyprovideremail: 'myprovider@email.com',
         keyweighpref: 'Regular',
         keyweight: 250,
+        keyheightininches: 55,
       };
 
       for (MapEntry e in dbtemplate.entries) {
@@ -44,13 +46,14 @@ class DatabaseService {
 
   Future<void> createNewDBUser() async {
     await childingCollection.doc(uid).set({
-      'duedate': (DateTime.now().millisecondsSinceEpoch +
+      keyduedate: (DateTime.now().millisecondsSinceEpoch +
           const Duration(days: 120).inMilliseconds),
-      'weight': 100,
-      'provideremail': 'your@provider.org',
-      'agreement': false,
-      'loggedweight': [],
-      'weighpref': 'Regular',
+      keyweight: 100,
+      keyprovideremail: 'your@provider.org',
+      keyagreement: false,
+      keyloggedweight: [],
+      keyweighpref: 'Regular',
+      keyheightininches: 55,
     });
     //this is to create that uid when a user does indeed sign in
     //At the same time, the dummy data will be recorded
@@ -64,11 +67,13 @@ class DatabaseService {
 //user data from snapshot
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
-      agreement: snapshot['agreement'],
-      epochduedate: snapshot['duedate'],
-      weight: snapshot['weight'],
-      email: snapshot['provideremail'],
-      weighpref: snapshot['weighpref'],
+      agreement: snapshot[keyagreement],
+      epochduedate: snapshot[keyduedate],
+      weight: snapshot[keyweight],
+      email: snapshot[keyprovideremail],
+      weighpref: snapshot[keyweighpref],
+      weightlist: snapshot[keyloggedweight],
+      heightininches: snapshot[keyheightininches],
     );
   }
 
@@ -89,7 +94,7 @@ class DatabaseService {
   Future<int> getdate() async {
     final ref = childingCollection.doc(uid);
     final doc = await ref.get();
-    return doc['duedate'];
+    return doc[keyduedate];
   }
 
   Future<String> getWeighPreference() async {
@@ -103,19 +108,25 @@ class DatabaseService {
 
   Future updateDueDate(int dueDate) async {
     return await childingCollection.doc(uid).update({
-      'duedate': dueDate,
+      keyduedate: dueDate,
     });
   }
 
   Future<int> getweight() async {
     final ref = childingCollection.doc(uid);
     final doc = await ref.get();
-    return doc['weight'];
+    return doc[keyweight];
   }
 
   Future updateWeight(int weight) async {
     return await childingCollection.doc(uid).update({
       'weight': weight,
+    });
+  }
+
+  Future updateHeight(int height) async {
+    return await childingCollection.doc(uid).update({
+      keyheightininches: height,
     });
   }
 

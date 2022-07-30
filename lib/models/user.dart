@@ -16,11 +16,15 @@ class UserData {
   final int weight;
   final String email;
   final String weighpref;
+  final List weightlist;
+  final int heightininches;
 
   UserData(
       {this.agreement = false,
       this.epochduedate = 1656882023322,
       this.weight = 100,
+      required this.weightlist,
+      this.heightininches = 55,
       this.email = 'random@email.com',
       this.weighpref = 'Regular'});
 }

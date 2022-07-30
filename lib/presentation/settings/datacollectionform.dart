@@ -49,11 +49,13 @@ class DataCollectionWidget extends StatefulWidget {
 class _DataCollectionWidgetState extends State<DataCollectionWidget> {
   bool agreeDisclaimer = false;
   String weight = '150';
+  String height = '55';
   String email = 'your@provider.com';
 
   final GlobalKey<FormState> _formKeyforDataCollection = GlobalKey<FormState>();
 
   final weightController = TextEditingController();
+  final heightController = TextEditingController();
   final provideremailController = TextEditingController();
 
   @override
@@ -139,8 +141,41 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                                 validator: (String? value) {
                                   if (value == null ||
                                       value.isEmpty ||
-                                      (value.contains(RegExp(r"^[0-9]*$")) ==
-                                          false)) {
+                                      (!value.contains(RegExp(r"^[0-9]*$"))) ||
+                                      (int.parse(value) > 400)) {
+                                    return 'Invalid input';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ), //below is weight
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            decoration:
+                                const BoxDecoration(color: Colors.white),
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: TextFormField(
+                                onFieldSubmitted: (value) {
+                                  height = value;
+                                },
+                                onEditingComplete: () {
+                                  height = heightController.text;
+                                },
+                                controller: heightController,
+                                keyboardType: TextInputType.number,
+                                decoration: const InputDecoration(
+                                  icon: Icon(FontAwesomeIcons.ruler),
+                                  hintText: 'Enter Height',
+                                  labelText: 'Height in inches',
+                                ),
+                                validator: (String? value) {
+                                  if (value == null ||
+                                      value.isEmpty ||
+                                      (!value.contains(RegExp(r"^[0-9]*$"))) ||
+                                      int.parse(value) > 90 ||
+                                      40 > int.parse(value)) {
                                     return 'Invalid input';
                                   }
                                   return null;
@@ -211,6 +246,8 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                                         int.parse(weightController.value.text));
                                     DatabaseService(uid: user.uid)
                                         .updateagreement(true);
+                                    DatabaseService(uid: user.uid).updateHeight(
+                                        int.parse(heightController.value.text));
                                     Navigator.of(context)
                                         .pushReplacementNamed(Wrapper.id);
                                   }
