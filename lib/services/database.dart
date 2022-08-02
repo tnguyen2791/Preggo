@@ -65,16 +65,20 @@ class DatabaseService {
   }
 
 //user data from snapshot
-  UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
-    return UserData(
-      agreement: snapshot[keyagreement],
-      epochduedate: snapshot[keyduedate],
-      weight: snapshot[keyweight],
-      email: snapshot[keyprovideremail],
-      weighpref: snapshot[keyweighpref],
-      weightlist: snapshot[keyloggedweight],
-      heightininches: snapshot[keyheightininches],
-    );
+  UserData _userDataFromSnapshot(DocumentSnapshot? snapshot) {
+    if (snapshot != null) {
+      return UserData(
+        agreement: snapshot[keyagreement],
+        epochduedate: snapshot[keyduedate],
+        weight: snapshot[keyweight],
+        email: snapshot[keyprovideremail],
+        weighpref: snapshot[keyweighpref],
+        weightlist: snapshot[keyloggedweight],
+        heightininches: snapshot[keyheightininches],
+      );
+    } else {
+      return UserData(weightlist: []);
+    }
   }
 
   Future<bool> checksDBfordocexistance() async {

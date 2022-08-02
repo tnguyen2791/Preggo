@@ -19,12 +19,12 @@ class Settings extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
-        actions: [
-          IconButton(
-              onPressed: () =>
-                  DatabaseService(uid: user.uid).updateWeighPref('Regular'),
-              icon: const Icon(Icons.textsms_sharp))
-        ],
+        // actions: [
+        //   IconButton(
+        //       onPressed: () =>
+        //           DatabaseService(uid: user.uid).updateWeighPref('Regular'),
+        //       icon: const Icon(Icons.textsms_sharp))
+        // ],
         centerTitle: true,
       ),
       body: const SettingsOptions(),
@@ -58,18 +58,20 @@ class _SettingsOptionsState extends State<SettingsOptions> {
               trailing: Text(toPrettyDateMMMddyyyy(userData.epochduedate)),
               onPressed: enterDueDate,
             ),
-            SettingsTile(
-              title: const Text('Pre-pregnancy Weight'),
-              leading: const Icon(FontAwesomeIcons.weightScale),
-              trailing: Text("${userData.weight.toString()} lbs"),
-              onPressed: weightInput,
-            ),
-            SettingsTile(
-              title: const Text('Height'),
-              leading: const Icon(FontAwesomeIcons.ruler),
-              trailing: Text("${userData.heightininches} inches"),
-              onPressed: heightInput,
-            ),
+            if (userData.weighpref != "No Weight")
+              SettingsTile(
+                title: const Text('Pre-pregnancy Weight'),
+                leading: const Icon(FontAwesomeIcons.weightScale),
+                trailing: Text("${userData.weight.toString()} lbs"),
+                onPressed: weightInput,
+              ),
+            if (userData.weighpref != "No Weight")
+              SettingsTile(
+                title: const Text('Height'),
+                leading: const Icon(FontAwesomeIcons.ruler),
+                trailing: Text("${userData.heightininches} inches"),
+                onPressed: heightInput,
+              ),
             SettingsTile(
                 title: const Text('Weigh Options'),
                 leading: const Icon(FontAwesomeIcons.person),

@@ -8,8 +8,12 @@ class AuthService {
   final fbuser = FirebaseAuth.instance.currentUser;
   final auth = FirebaseAuth.instance;
 
-  UserUID _userFromFirebaseUser(User user) {
-    return UserUID(uid: user.uid);
+  UserUID _userFromFirebaseUser(User? user) {
+    if (user != null) {
+      return UserUID(uid: user.uid);
+    } else {
+      return (UserUID());
+    }
   }
 
   Future<UserUID> createNewUser(String email, String password) async {
@@ -57,7 +61,7 @@ class AuthService {
     try {
       final userCredential = await FirebaseAuth.instance.signInAnonymously();
       print(userCredential.user?.uid);
-      await DatabaseService(uid: userCredential.user!.uid).createNewDBUser();
+      await DatabaseService(uid: userCredential.user?.uid).createNewDBUser();
       // DatabaseService(uid: userCredential.user!.uid).checkDatabaseStartup();
       print("Signed in with temporary account.");
       // return _userFromFirebaseUser(userCredential.user!);
@@ -78,7 +82,7 @@ class AuthService {
   //this is a function that will receive from the data base and turn it into a UserID object
   Stream<UserUID> get user {
     return userStream.map(
-      (User? user) => _userFromFirebaseUser(user!),
+      (User? user) => _userFromFirebaseUser(user),
     );
   }
 
@@ -110,6 +114,7 @@ class AuthService {
   }
 
   Future<void> signOut() async {
+    // Provider.of<UserUID>(context, listen: false);
     await FirebaseAuth.instance.signOut();
   }
 }

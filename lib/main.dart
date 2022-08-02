@@ -5,7 +5,6 @@ import 'package:preggo/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:preggo/services/auth.dart';
 import 'package:preggo/services/database.dart';
-import 'package:preggo/shared/restartwidget.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
@@ -29,10 +28,11 @@ class PreggoApp extends StatelessWidget {
             final useruid = Provider.of<UserUID>(context);
 
             return StreamProvider<UserData>(
-              create: (context) => DatabaseService(uid: useruid.uid).userData,
+              key: ObjectKey(useruid),
+              create: (_) => DatabaseService(uid: useruid.uid).userData,
               initialData: UserData(weightlist: []),
-              child: RestartWidget(
-                child: MaterialApp(
+              builder: (context, child) {
+                return MaterialApp(
                   theme: ThemeData(
                     primarySwatch: Colors.pink,
                     scaffoldBackgroundColor: const Color(0xFF7209B7),
@@ -40,8 +40,8 @@ class PreggoApp extends StatelessWidget {
                   title: 'Pregnancy Weights',
                   initialRoute: Wrapper.id,
                   routes: appRoutes,
-                ),
-              ),
+                );
+              },
             );
           },
         ),

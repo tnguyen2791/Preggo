@@ -117,72 +117,76 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                               trailing: WeighSelection(),
                             ),
                           ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.9,
-                            decoration:
-                                const BoxDecoration(color: Colors.white),
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: TextFormField(
-                                onFieldSubmitted: (value) {
-                                  weight = value;
-                                },
-                                onEditingComplete: () {
-                                  weight = weightController.text;
-                                },
-                                controller: weightController,
-                                keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
-                                  icon: Icon(FontAwesomeIcons.weightScale),
-                                  hintText: 'Enter Pre-Pregnancy Weight',
-                                  labelText:
-                                      'Prior to Pregnancy Weight in pounds',
+                          if (userData.weighpref == "Regular")
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              decoration:
+                                  const BoxDecoration(color: Colors.white),
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: TextFormField(
+                                  onFieldSubmitted: (value) {
+                                    weight = value;
+                                  },
+                                  onEditingComplete: () {
+                                    weight = weightController.text;
+                                  },
+                                  controller: weightController,
+                                  keyboardType: TextInputType.number,
+                                  decoration: const InputDecoration(
+                                    icon: Icon(FontAwesomeIcons.weightScale),
+                                    hintText: 'Enter Pre-Pregnancy Weight',
+                                    labelText:
+                                        'Prior to Pregnancy Weight in pounds',
+                                  ),
+                                  validator: (String? value) {
+                                    if (value == null ||
+                                        value.isEmpty ||
+                                        (!value
+                                            .contains(RegExp(r"^[0-9]*$"))) ||
+                                        (int.parse(value) > 400)) {
+                                      return 'Invalid input';
+                                    }
+                                    return null;
+                                  },
                                 ),
-                                validator: (String? value) {
-                                  if (value == null ||
-                                      value.isEmpty ||
-                                      (!value.contains(RegExp(r"^[0-9]*$"))) ||
-                                      (int.parse(value) > 400)) {
-                                    return 'Invalid input';
-                                  }
-                                  return null;
-                                },
+                              ),
+                            ), //below is weight
+                          if (userData.weighpref == "Regular")
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              decoration:
+                                  const BoxDecoration(color: Colors.white),
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: TextFormField(
+                                  onFieldSubmitted: (value) {
+                                    height = value;
+                                  },
+                                  onEditingComplete: () {
+                                    height = heightController.text;
+                                  },
+                                  controller: heightController,
+                                  keyboardType: TextInputType.number,
+                                  decoration: const InputDecoration(
+                                    icon: Icon(FontAwesomeIcons.ruler),
+                                    hintText: 'Enter Height',
+                                    labelText: 'Height in inches',
+                                  ),
+                                  validator: (String? value) {
+                                    if (value == null ||
+                                        value.isEmpty ||
+                                        (!value
+                                            .contains(RegExp(r"^[0-9]*$"))) ||
+                                        int.parse(value) > 90 ||
+                                        40 > int.parse(value)) {
+                                      return 'Invalid input';
+                                    }
+                                    return null;
+                                  },
+                                ),
                               ),
                             ),
-                          ), //below is weight
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.9,
-                            decoration:
-                                const BoxDecoration(color: Colors.white),
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: TextFormField(
-                                onFieldSubmitted: (value) {
-                                  height = value;
-                                },
-                                onEditingComplete: () {
-                                  height = heightController.text;
-                                },
-                                controller: heightController,
-                                keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
-                                  icon: Icon(FontAwesomeIcons.ruler),
-                                  hintText: 'Enter Height',
-                                  labelText: 'Height in inches',
-                                ),
-                                validator: (String? value) {
-                                  if (value == null ||
-                                      value.isEmpty ||
-                                      (!value.contains(RegExp(r"^[0-9]*$"))) ||
-                                      int.parse(value) > 90 ||
-                                      40 > int.parse(value)) {
-                                    return 'Invalid input';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
                           Container(
                             width: MediaQuery.of(context).size.width * 0.9,
                             color: Colors.white,
@@ -242,12 +246,17 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                                             content: Text('Submitting!')));
                                     DatabaseService(uid: user.uid).updateemail(
                                         provideremailController.value.text);
-                                    DatabaseService(uid: user.uid).updateWeight(
-                                        int.parse(weightController.value.text));
+                                    if (userData.weighpref == "Regular") {
+                                      DatabaseService(uid: user.uid)
+                                          .updateWeight(int.parse(
+                                              weightController.value.text));
+                                      DatabaseService(uid: user.uid)
+                                          .updateHeight(int.parse(
+                                              heightController.value.text));
+                                    }
                                     DatabaseService(uid: user.uid)
                                         .updateagreement(true);
-                                    DatabaseService(uid: user.uid).updateHeight(
-                                        int.parse(heightController.value.text));
+
                                     Navigator.of(context)
                                         .pushReplacementNamed(Wrapper.id);
                                   }

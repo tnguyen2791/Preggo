@@ -25,9 +25,8 @@ class UserHomeScreen extends StatelessWidget {
         leading: const Hero(
           tag: 'logo',
           child: CircleAvatar(
-              radius: 150.0, backgroundImage: AssetImage('assets/icon/icon.png')
-              // ,
-              ),
+              radius: 150.0,
+              backgroundImage: AssetImage('assets/icon/icon.png')),
         ),
         title: const Text('Homescreen'),
         actions: [
@@ -45,11 +44,11 @@ class UserHomeScreen extends StatelessWidget {
             ),
             onPressed: () {
               if (fbuseranon!) {
-                print(fbuseranon);
                 showDialog(
-                    context: context,
-                    builder: ((context) =>
-                        const AnonymousLogoutWarningAlertDialogue()));
+                  context: context,
+                  builder: ((context) =>
+                      const AnonymousLogoutWarningAlertDialogue()),
+                );
               } else {
                 AuthService().signOut();
               }

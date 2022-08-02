@@ -28,7 +28,9 @@ class _GrowthChartState extends State<GrowthChart> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserUID>(context);
-    final userData = Provider.of<UserData>(context);
+    final userData = Provider.of<UserData>(context, listen: false);
+
+    print(userData.weightlist);
 
     List<WeightModel> upperlimitlist = GrowthCalculator()
         .createUpperLimitBMIModel(userData.weight, userData.heightininches);
@@ -42,8 +44,6 @@ class _GrowthChartState extends State<GrowthChart> {
     int dateofconception =
         GrowthCalculator().getDateofConceptionEpoch(userData.epochduedate);
 
-
-
     List userWeightList = userData.weightlist;
     List<WeightModel> modeleduserWeightList = [];
 
@@ -51,7 +51,6 @@ class _GrowthChartState extends State<GrowthChart> {
         GrowthCalculator().getDateofConceptionEpoch(userData.epochduedate);
 
     for (Map item in userWeightList) {
-      print(item);
       int week = GrowthCalculator()
           .findWeeksofGestation(item['time'], conceptionInEpoch)
           .floor();

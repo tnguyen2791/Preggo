@@ -17,6 +17,7 @@ class _WeighSelectionState extends State<WeighSelection> {
     final user = Provider.of<UserUID>(context);
 
     String dropdownValue = userData.weighpref;
+
     return DropdownButton<String>(
       value: dropdownValue,
       icon: const Icon(Icons.arrow_downward),
@@ -28,9 +29,11 @@ class _WeighSelectionState extends State<WeighSelection> {
       ),
       onChanged: (String? newValue) async {
         await DatabaseService(uid: user.uid).updateWeighPref(newValue!);
-        setState(() {
+        if (mounted) {
+          setState(() {
           dropdownValue = newValue;
         });
+        }
       },
       items: <String>['Regular', 'Partner', 'No Weight']
           .map<DropdownMenuItem<String>>((String value) {

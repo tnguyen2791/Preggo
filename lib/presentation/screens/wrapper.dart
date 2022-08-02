@@ -23,33 +23,23 @@ class _WrapperState extends State<Wrapper> {
   @override
   Widget build(BuildContext context) {
     final userprovider = Provider.of<UserUID>(context);
-    DatabaseService(uid: fbuser?.uid).checkDatabaseStartup();
-    return StreamBuilder(
+    final userData = Provider.of<UserData>(context);
+    DatabaseService(uid: userprovider.uid).checkDatabaseStartup();
+
+    return StreamBuilder<User?>(
         stream: AuthService().userStream,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
             var user = snapshot.data;
             if (user == null) {
               return const LoginScreen();
+            } else {
+              if (userData.agreement == true) {
+                return UserHomeScreen();
+              } else {
+                return DataCollectionScreen();
+              }
             }
-
-            return StreamProvider<UserData>(
-              create: (_) => DatabaseService(uid: userprovider.uid).userData,
-              initialData: UserData(weightlist: []),
-              builder: ((context, child) {
-                final userData = Provider.of<UserData>(context);
-
-                switch (userData.agreement) {
-                  case true:
-                    return const UserHomeScreen();
-
-                  case false:
-                    return const DataCollectionScreen();
-                  default:
-                    return const DataCollectionScreen();
-                }
-              }),
-            );
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {

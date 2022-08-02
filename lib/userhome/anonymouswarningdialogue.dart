@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:preggo/presentation/screens/wrapper.dart';
 import 'package:preggo/services/auth.dart';
-import 'package:preggo/services/database.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class AnonymousLogoutWarningAlertDialogue extends StatefulWidget {
   const AnonymousLogoutWarningAlertDialogue({Key? key}) : super(key: key);
@@ -33,28 +32,32 @@ class _AnonymousLogoutWarningAlertDialogueState
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Partner Weigh-In'),
-      content: Column(
-        children: [
-          SizedBox(
-              width: 200,
-              height: 400,
-              child: ListView(children: [Text(_disclaimer.toString())])),
-          ElevatedButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Go Back'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              final fbuser = FirebaseAuth.instance.currentUser?.uid;
+      title: const Text('Delete Data?'),
+      content: FittedBox(
+        fit: BoxFit.fitHeight,
+        child: Column(
+          children: [
+            SizedBox(
+                width: 200,
+                height: 150,
+                child: ListView(children: [Text(_disclaimer.toString())])),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Go Back'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // final fbuser = FirebaseAuth.instance.currentUser?.uid;
 
-              AuthService().signOut();
-              DatabaseService(uid: fbuser).deleteDoc();
-              Navigator.pop(context);
-            },
-            child: Text('Log Out'),
-          ),
-        ],
+                AuthService().signOut();
+                // DatabaseService(uid: fbuser).deleteDoc();
+                Navigator.popUntil(context, ModalRoute.withName(Wrapper.id));
+                // RestartWidget.restartApp(context);
+              },
+              child: const Text('Log Out'),
+            ),
+          ],
+        ),
       ),
     );
   }
