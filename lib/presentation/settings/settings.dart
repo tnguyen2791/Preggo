@@ -1,6 +1,5 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:preggo/models/user.dart';
-import 'package:preggo/services/database.dart';
 import 'package:preggo/services/sharedfunctions.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +18,6 @@ class Settings extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
-        // actions: [
-        //   IconButton(
-        //       onPressed: () =>
-        //           DatabaseService(uid: user.uid).updateWeighPref('Regular'),
-        //       icon: const Icon(Icons.textsms_sharp))
-        // ],
         centerTitle: true,
       ),
       body: const SettingsOptions(),

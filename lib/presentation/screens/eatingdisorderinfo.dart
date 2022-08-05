@@ -13,14 +13,6 @@ class WeighInOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {
-                AuthService().signOut();
-                RestartWidget.restartApp(context);
-              },
-              icon: const Icon(FontAwesomeIcons.powerOff))
-        ],
         title: const Text('Weigh in Options'),
       ),
       body: SingleChildScrollView(

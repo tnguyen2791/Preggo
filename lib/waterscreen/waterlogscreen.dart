@@ -22,9 +22,12 @@ class WaterLog extends StatelessWidget {
               style: kGoogleTitle,
             ),
           ),
-          Text(
-            'You should be drinking at least 64 ounces of water every day! That is eight 8-oz glasses of water per day.',
-            style: kGoogleDescription,
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Text(
+              'You should be drinking at least 64 ounces of water every day! That is eight 8-oz glasses of water per day.',
+              style: kGoogleDescription,
+            ),
           ),
           const SizedBox(
             height: 25.0,

@@ -205,11 +205,11 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                                   labelText: 'Doctor\'s Email',
                                 ),
                                 validator: (value) {
-                                  if (value == null ||
-                                      value.isEmpty ||
-                                      (value.contains(RegExp(
-                                              r"([a-z0-9!#&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)")) ==
-                                          false)) {
+                                  if (value == null || value.isEmpty) {
+                                    value = 'your@provideremail.com';
+                                  } else if ((value.contains(RegExp(
+                                          r"([a-z0-9!#&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)")) ==
+                                      false)) {
                                     return 'Error in input';
                                   }
                                   return null;

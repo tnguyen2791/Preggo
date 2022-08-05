@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:preggo/services/auth.dart';
 import 'package:preggo/shared/constants.dart';
-import 'package:preggo/shared/restartwidget.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:webviewx/webviewx.dart';
 
 class Diet extends StatelessWidget {
   static const String id = 'diet_screen';
@@ -13,33 +11,55 @@ class Diet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {
-                AuthService().signOut();
-                RestartWidget.restartApp(context);
-              },
-              icon: const Icon(FontAwesomeIcons.powerOff))
-        ],
-        title: const Text('Diet [Placeholder]'),
+        title: const Text('Diet'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Diet',
-            style: kGoogleTitle,
-          ),
-          Text(
-            'Description',
-            style: kGoogleDescription,
-          ),
-          Expanded(
-            child: Image.network(
-                'https://femina.wwmindia.com/content/2020/jul/pregnancy-diet-chart-infographic.jpg'),
-          ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'How much should I eat?',
+                  style: kGoogleTitle,
+                ),
+              ),
+            ),
+            DietWebFrame(
+              height: MediaQuery.of(context).size.height * 0.7,
+            )
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class DietWebFrame extends StatefulWidget {
+  final double height;
+
+  const DietWebFrame({Key? key, this.height = 300}) : super(key: key);
+
+  @override
+  State<DietWebFrame> createState() => _DietWebFrameState();
+}
+
+class _DietWebFrameState extends State<DietWebFrame> {
+  late WebViewXController webviewController;
+
+  @override
+  Widget build(BuildContext context) {
+    double height = widget.height;
+
+    return WebViewX(
+      width: 330,
+      height: height,
+      initialContent:
+          '<iframe src="https://www.myplate.gov/widgets/myplate-plan-start" scrolling="no" style="min-height: ${height}px;"></iframe>',
+      initialSourceType: SourceType.html,
+      onWebViewCreated: (controller) => webviewController = controller,
     );
   }
 }

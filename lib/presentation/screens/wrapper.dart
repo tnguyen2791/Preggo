@@ -16,7 +16,6 @@ class Wrapper extends StatefulWidget {
   @override
   State<Wrapper> createState() => _WrapperState();
 }
-
 class _WrapperState extends State<Wrapper> {
   final fbuser = FirebaseAuth.instance.currentUser;
 
@@ -35,9 +34,9 @@ class _WrapperState extends State<Wrapper> {
               return const LoginScreen();
             } else {
               if (userData.agreement == true) {
-                return UserHomeScreen();
+                return const UserHomeScreen();
               } else {
-                return DataCollectionScreen();
+                return const DataCollectionScreen();
               }
             }
           }
@@ -51,7 +50,7 @@ class _WrapperState extends State<Wrapper> {
                 body: Center(
                     child: Text('You do not have an internet connection')));
           }
-          return const LoadingScreen();
+          return const LoginScreen();
         });
   }
 }

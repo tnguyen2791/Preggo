@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:preggo/models/user.dart';
-import 'package:provider/provider.dart';
 
 class ReusableCard extends StatefulWidget {
   final String cardDescription;
@@ -22,8 +20,6 @@ class ReusableCard extends StatefulWidget {
 class _ReusableCardState extends State<ReusableCard> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserData>(context);
-
     return Expanded(
       child: GestureDetector(
         onTap: () async {
@@ -45,13 +41,16 @@ class _ReusableCardState extends State<ReusableCard> {
             children: [
               Expanded(
                 flex: 1,
-                child: CircleAvatar(
-                  radius: 35.0,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    widget.cardIcon,
-                    size: 40.0,
-                    color: Colors.purple,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircleAvatar(
+                    radius: 35.0,
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      widget.cardIcon,
+                      size: 40.0,
+                      color: Colors.purple,
+                    ),
                   ),
                 ),
               ),

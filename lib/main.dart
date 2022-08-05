@@ -26,7 +26,6 @@ class PreggoApp extends StatelessWidget {
           initialData: UserUID(),
           builder: (context, child) {
             final useruid = Provider.of<UserUID>(context);
-
             return StreamProvider<UserData>(
               key: ObjectKey(useruid),
               create: (_) => DatabaseService(uid: useruid.uid).userData,

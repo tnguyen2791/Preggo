@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:preggo/services/auth.dart';
 import 'package:preggo/shared/constants.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:preggo/shared/restartwidget.dart';
+import 'package:webviewx/webviewx.dart';
 
 class ExerciseRegimen extends StatelessWidget {
   static const String id = 'exercise_screen';
@@ -14,40 +12,56 @@ class ExerciseRegimen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {
-                AuthService().signOut();
-                RestartWidget.restartApp(context);
-              },
-              icon: const Icon(FontAwesomeIcons.powerOff))
-        ],
         title: const Text("Exercise"),
       ),
-      body: Column(
-        children: [
-          Text(
-            'Exercise Regimen',
-            style: kGoogleTitle,
-          ),
-          Text(
-            'Description',
-            style: kGoogleDescription,
-          ),
-          Center(
-            child: Image.network(
-              'https://www.ambitiouskitchen.com/wp-content/uploads/2019/11/pregnancyqa-pin.jpg',
-              height: MediaQuery.of(context).size.height * 0.75,
-              loadingBuilder: (BuildContext context, Widget child,
-                  ImageChunkEvent? loadingProgress) {
-                if (loadingProgress == null) return child;
-                return LoadingAnimationWidget.hexagonDots(
-                    color: Colors.white, size: 100);
-              },
+      body: Center(
+        child: Column(
+          children: [
+            Text(
+              'Exercise Regimen',
+              style: kGoogleTitle,
             ),
-          ),
-        ],
+            Text(
+              'Description',
+              style: kGoogleDescription,
+            ),
+            ExerciseWebFrame(
+              height: MediaQuery.of(context).size.height * 0.7,
+              width: MediaQuery.of(context).size.width * 0.9,
+            )
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class ExerciseWebFrame extends StatefulWidget {
+  final double height;
+  final double width;
+
+  const ExerciseWebFrame({Key? key, this.height = 300, this.width = 150})
+      : super(key: key);
+
+  @override
+  State<ExerciseWebFrame> createState() => _ExerciseWebFrameState();
+}
+
+class _ExerciseWebFrameState extends State<ExerciseWebFrame> {
+  late WebViewXController webviewController;
+
+  @override
+  Widget build(BuildContext context) {
+    double height = widget.height;
+    double width = widget.width;
+
+    return WebViewX(
+      width: width,
+      height: height,
+      initialContent:
+          '<iframe frameborder="0" width="$width" height="$height" id="mywwidget" marginheight="0" marginwidth="0" name="mywwidget" scrolling="no" src="https://health.gov/MoveYourWay/widget/" title="health.gov MoveYourWay"></iframe>',
+      initialSourceType: SourceType.html,
+      onWebViewCreated: (controller) => webviewController = controller,
     );
   }
 }

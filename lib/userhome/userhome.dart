@@ -61,6 +61,18 @@ class UserHomeScreen extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const [
+              SizedBox(
+                height: 10.0,
+              ),
+              CircleAvatar(
+                radius: 70.0,
+                backgroundColor: Colors.white,
+                child: Icon(
+                  FontAwesomeIcons.baby,
+                  size: 100.0,
+                  color: Colors.deepPurple,
+                ),
+              ),
               UserDashboardInfo(),
             ],
           ),
@@ -68,7 +80,7 @@ class UserHomeScreen extends StatelessWidget {
             flex: 2,
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:preggo/models/user.dart';
 
-
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'weightlogmodel.dart';
-
 
 class CartesianGrowthChart extends StatelessWidget {
   const CartesianGrowthChart({
@@ -45,28 +43,23 @@ class CartesianGrowthChart extends StatelessWidget {
         series: <ChartSeries<WeightModel, int>>[
           LineSeries<WeightModel, int>(
             dataSource: lowerlimitlist,
-            xValueMapper: (WeightModel weight, _) =>
-                weight.currentweek,
+            xValueMapper: (WeightModel weight, _) => weight.currentweek,
             yValueMapper: (WeightModel weight, _) => weight.weight,
             name: 'Lower Limit',
             // Enable data label
-            dataLabelSettings:
-                const DataLabelSettings(isVisible: false),
+            dataLabelSettings: const DataLabelSettings(isVisible: false),
           ),
           LineSeries<WeightModel, int>(
             dataSource: upperlimitlist,
-            xValueMapper: (WeightModel weight, _) =>
-                weight.currentweek,
+            xValueMapper: (WeightModel weight, _) => weight.currentweek,
             yValueMapper: (WeightModel weight, _) => weight.weight,
             name: 'Upper Limit',
             // Enable data label
-            dataLabelSettings:
-                const DataLabelSettings(isVisible: false),
+            dataLabelSettings: const DataLabelSettings(isVisible: false),
           ),
           ScatterSeries(
               dataSource: modeleduserWeightList,
-              xValueMapper: (WeightModel weight, _) =>
-                  weight.currentweek,
+              xValueMapper: (WeightModel weight, _) => weight.currentweek,
               yValueMapper: (WeightModel weight, _) => weight.weight),
         ]);
   }

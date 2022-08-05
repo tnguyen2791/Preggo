@@ -27,10 +27,7 @@ class GrowthChart extends StatefulWidget {
 class _GrowthChartState extends State<GrowthChart> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserUID>(context);
     final userData = Provider.of<UserData>(context, listen: false);
-
-    print(userData.weightlist);
 
     List<WeightModel> upperlimitlist = GrowthCalculator()
         .createUpperLimitBMIModel(userData.weight, userData.heightininches);
@@ -69,14 +66,6 @@ class _GrowthChartState extends State<GrowthChart> {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(onPressed: () => Navigator.of(context).pop()),
-        actions: [
-          IconButton(
-              onPressed: () {
-                AuthService().signOut();
-                RestartWidget.restartApp(context);
-              },
-              icon: const Icon(FontAwesomeIcons.powerOff))
-        ],
         title: const Text('Weight During Pregnancy'),
       ),
       body: Column(
