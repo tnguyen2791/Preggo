@@ -100,9 +100,11 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                                   FontAwesomeIcons.calendar,
                                   color: Colors.white,
                                 ),
-                                title: Text(
-                                  'Baby\'s due date:',
-                                  style: kGoogleDescription,
+                                title: FittedBox(
+                                  child: Text(
+                                    'Baby\'s due date:',
+                                    style: kGoogleDescription,
+                                  ),
                                 ),
                                 trailing: Text(
                                   toPrettyDateMMMddyyyy(userData.epochduedate),
@@ -133,9 +135,11 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                                 FontAwesomeIcons.person,
                                 color: Colors.white,
                               ),
-                              title: Text(
-                                'Weigh-In Option',
-                                style: kGoogleDescription,
+                              title: FittedBox(
+                                child: Text(
+                                  'Weigh-In Option',
+                                  style: kGoogleDescription,
+                                ),
                               ),
                               trailing: const WeighSelection(),
                             ),

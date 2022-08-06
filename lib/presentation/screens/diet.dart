@@ -21,9 +21,11 @@ class Diet extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(
-                child: Text(
-                  'How much should I eat?',
-                  style: kGoogleTitle,
+                child: FittedBox(
+                  child: Text(
+                    'How much should I eat?',
+                    style: kGoogleTitle,
+                  ),
                 ),
               ),
             ),

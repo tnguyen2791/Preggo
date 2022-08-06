@@ -67,16 +67,16 @@ class UserHomeScreen extends StatelessWidget {
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              SizedBox(
+            children: [
+              const SizedBox(
                 height: 10.0,
               ),
               CircleAvatar(
-                radius: 70.0,
+                radius: MediaQuery.of(context).size.height / 12,
                 backgroundColor: Colors.white,
                 child: Icon(
                   FontAwesomeIcons.baby,
-                  size: 100.0,
+                  size: MediaQuery.of(context).size.height / 9,
                   color: Colors.deepPurple,
                 ),
               ),

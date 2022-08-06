@@ -35,10 +35,12 @@ class WaterLog extends StatelessWidget {
             height: 10.0,
           ),
           const WaterCounter(),
-          Image(
-              image: const AssetImage('assets/png/kidsgroup.png'),
-              height: MediaQuery.of(context).size.height * 0.25,
-              fit: BoxFit.fitWidth),
+          Expanded(
+            child: Image(
+                image: const AssetImage('assets/png/kidsgroup.png'),
+                height: MediaQuery.of(context).size.height * 0.25,
+                fit: BoxFit.fitWidth),
+          ),
         ],
       ),
     );

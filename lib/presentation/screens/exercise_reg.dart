@@ -17,10 +17,12 @@ class ExerciseRegimen extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            Text(
-              'How much should I exercise?',
-              textAlign: TextAlign.center,
-              style: kGoogleTitle,
+            FittedBox(
+              child: Text(
+                'How much should I exercise?',
+                textAlign: TextAlign.center,
+                style: kGoogleTitle,
+              ),
             ),
             ExerciseWebFrame(
               height: MediaQuery.of(context).size.height * 0.7,

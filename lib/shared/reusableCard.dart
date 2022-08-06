@@ -20,6 +20,8 @@ class ReusableCard extends StatefulWidget {
 class _ReusableCardState extends State<ReusableCard> {
   @override
   Widget build(BuildContext context) {
+    double heightofscreen = MediaQuery.of(context).size.height;
+
     return Expanded(
       child: GestureDetector(
         onTap: () async {
@@ -44,11 +46,11 @@ class _ReusableCardState extends State<ReusableCard> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CircleAvatar(
-                    radius: 35.0,
+                    radius: heightofscreen / 30,
                     backgroundColor: Colors.white,
                     child: Icon(
                       widget.cardIcon,
-                      size: 40.0,
+                      size: heightofscreen / 25,
                       color: Colors.purple,
                     ),
                   ),

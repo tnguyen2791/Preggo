@@ -145,10 +145,12 @@ class _GrowthChartState extends State<GrowthChart> {
               ),
             ],
           ),
-          Image(
-              image: const AssetImage('assets/png/kidsreading.png'),
-              height: MediaQuery.of(context).size.height * 0.20,
-              fit: BoxFit.fitWidth),
+          Expanded(
+            child: Image(
+                image: const AssetImage('assets/png/kidsreading.png'),
+                height: MediaQuery.of(context).size.height * 0.20,
+                fit: BoxFit.fitWidth),
+          ),
         ],
       ),
     );

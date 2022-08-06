@@ -61,10 +61,12 @@ class Resources extends StatelessWidget {
               ),
             ],
           ),
-          Image(
-              image: const AssetImage('assets/png/babycarriage.png'),
-              height: MediaQuery.of(context).size.height * 0.25,
-              fit: BoxFit.fitWidth),
+          Expanded(
+            child: Image(
+                image: const AssetImage('assets/png/babycarriage.png'),
+                height: MediaQuery.of(context).size.height * 0.25,
+                fit: BoxFit.fitWidth),
+          ),
         ],
       ),
     );
