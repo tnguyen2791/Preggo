@@ -30,17 +30,24 @@ class _PartnerWeighingAlertDialogueState
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Partner Weigh-In'),
-      content: Column(
-        children: [
-          SizedBox(
-              width: 200,
-              height: 400,
-              child: ListView(children: [Text(_disclaimer.toString())])),
-          ElevatedButton(
+      title: const Text(
+        'Partner Weigh-In',
+        textAlign: TextAlign.center,
+      ),
+      content: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.35,
+        child: Column(
+          children: [
+            SizedBox(
+                width: 200,
+                height: 250,
+                child: ListView(children: [Text(_disclaimer.toString())])),
+            ElevatedButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('I am ready!')),
-        ],
+              child: const Text('Sounds good'),
+            ),
+          ],
+        ),
       ),
     );
   }

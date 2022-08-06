@@ -47,12 +47,8 @@ class _AnonymousLogoutWarningAlertDialogueState
             ),
             ElevatedButton(
               onPressed: () {
-                // final fbuser = FirebaseAuth.instance.currentUser?.uid;
-
                 AuthService().signOut();
-                // DatabaseService(uid: fbuser).deleteDoc();
                 Navigator.popUntil(context, ModalRoute.withName(Wrapper.id));
-                // RestartWidget.restartApp(context);
               },
               child: const Text('Log Out'),
             ),

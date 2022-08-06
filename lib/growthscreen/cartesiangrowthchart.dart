@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:preggo/models/user.dart';
-
 import 'package:syncfusion_flutter_charts/charts.dart';
-
 import 'weightlogmodel.dart';
 
 class CartesianGrowthChart extends StatelessWidget {
@@ -24,7 +21,7 @@ class CartesianGrowthChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return SfCartesianChart(
         backgroundColor: Colors.white,
-        borderColor: Colors.red,
+        borderColor: Colors.black,
         borderWidth: 2.0,
         primaryXAxis: NumericAxis(
             maximum: 40,
@@ -32,13 +29,12 @@ class CartesianGrowthChart extends StatelessWidget {
             minimum: 0,
             title: AxisTitle(text: 'Week of Pregnancy')),
         primaryYAxis: NumericAxis(
-            minimum: userData.weight.toDouble() - 10,
-            title: AxisTitle(text: 'Weight in pounds')),
-        // Chart title
-        title: ChartTitle(text: 'How are you and baby growing?'),
-        // Enable legend
+          minimum: userData.weight.toDouble() - 1,
+          minorTicksPerInterval: 3,
+          title: AxisTitle(text: 'Weight (lbs)'),
+          maximum: userData.weight.toDouble() + 35,
+        ),
         legend: Legend(isVisible: false),
-        // Enable tooltip
         tooltipBehavior: TooltipBehavior(enable: true),
         series: <ChartSeries<WeightModel, int>>[
           LineSeries<WeightModel, int>(
@@ -46,7 +42,6 @@ class CartesianGrowthChart extends StatelessWidget {
             xValueMapper: (WeightModel weight, _) => weight.currentweek,
             yValueMapper: (WeightModel weight, _) => weight.weight,
             name: 'Lower Limit',
-            // Enable data label
             dataLabelSettings: const DataLabelSettings(isVisible: false),
           ),
           LineSeries<WeightModel, int>(
@@ -54,13 +49,14 @@ class CartesianGrowthChart extends StatelessWidget {
             xValueMapper: (WeightModel weight, _) => weight.currentweek,
             yValueMapper: (WeightModel weight, _) => weight.weight,
             name: 'Upper Limit',
-            // Enable data label
             dataLabelSettings: const DataLabelSettings(isVisible: false),
           ),
           ScatterSeries(
+              name: 'Weight',
               dataSource: modeleduserWeightList,
               xValueMapper: (WeightModel weight, _) => weight.currentweek,
-              yValueMapper: (WeightModel weight, _) => weight.weight),
+              yValueMapper: (WeightModel weight, _) => weight.weight,
+              dataLabelSettings: const DataLabelSettings(isVisible: true)),
         ]);
   }
 }

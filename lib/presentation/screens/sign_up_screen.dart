@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:preggo/presentation/screens/wrapper.dart';
 import 'package:preggo/services/auth.dart';
+import 'package:preggo/shared/constants.dart';
 import 'package:preggo/shared/restartwidget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -99,19 +100,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: 25.0,
                       ),
                       ElevatedButton(
+                        style: kElevatedButtonStyle,
                         onPressed: () async {
                           if (_signupformKey.currentState!.validate()) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Submitting!')));
+                                const SnackBar(content: Text('Welcome')));
                             AuthService().signInwithEmailandPassword(
                                 emailController.text, passwordController.text);
                             Navigator.of(context)
                                 .pushReplacementNamed(Wrapper.id);
                           }
                         },
-                        child: const Text('Sign-In!'),
+                        child: const Text('Sign-In'),
                       ),
                       ElevatedButton(
+                        style: kElevatedButtonStyle,
                         onPressed: () async {
                           if (_signupformKey.currentState!.validate()) {
                             await AuthService()
@@ -119,7 +122,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     passwordController.text)
                                 .whenComplete(() {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Submitting!')));
+                                  const SnackBar(content: Text('Welcome')));
 
                               Navigator.of(context)
                                   .pushReplacementNamed(Wrapper.id);

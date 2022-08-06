@@ -22,7 +22,7 @@ class _WeighSelectionState extends State<WeighSelection> {
       value: dropdownValue,
       icon: const Icon(Icons.arrow_downward),
       elevation: 16,
-      style: const TextStyle(color: Colors.deepPurple),
+      style: const TextStyle(color: Colors.red),
       underline: Container(
         height: 2,
         color: Colors.deepPurpleAccent,
@@ -31,8 +31,8 @@ class _WeighSelectionState extends State<WeighSelection> {
         await DatabaseService(uid: user.uid).updateWeighPref(newValue!);
         if (mounted) {
           setState(() {
-          dropdownValue = newValue;
-        });
+            dropdownValue = newValue;
+          });
         }
       },
       items: <String>['Regular', 'Partner', 'No Weight']

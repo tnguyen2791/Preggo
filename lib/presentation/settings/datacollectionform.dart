@@ -7,6 +7,7 @@ import 'package:preggo/presentation/settings/weighselection.dart';
 import 'package:preggo/services/auth.dart';
 import 'package:preggo/services/database.dart';
 import 'package:flutter/material.dart';
+import 'package:preggo/shared/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:preggo/services/sharedfunctions.dart';
 import 'package:preggo/shared/restartwidget.dart';
@@ -82,14 +83,31 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                       height: MediaQuery.of(context).size.height * 1.5,
                       child: Column(
                         children: [
+                          const Padding(
+                            padding: EdgeInsets.all(18.0),
+                            child: Hero(
+                              tag: 'logo',
+                              child: CircleAvatar(
+                                  radius: 90.0,
+                                  backgroundImage:
+                                      AssetImage('assets/icon/icon.png')),
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ListTile(
-                                tileColor: Colors.white,
-                                leading: const Icon(FontAwesomeIcons.calendar),
-                                title: const Text('Baby\'s due date!'),
-                                trailing: Text(toPrettyDateMMMddyyyy(
-                                    userData.epochduedate)),
+                                leading: const Icon(
+                                  FontAwesomeIcons.calendar,
+                                  color: Colors.white,
+                                ),
+                                title: Text(
+                                  'Baby\'s due date:',
+                                  style: kGoogleDescription,
+                                ),
+                                trailing: Text(
+                                  toPrettyDateMMMddyyyy(userData.epochduedate),
+                                  style: kGoogleDescription,
+                                ),
                                 onTap: () {
                                   showDatePicker(
                                           context: context,
@@ -108,36 +126,43 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                                   });
                                 }),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: ListTile(
-                              tileColor: Colors.white,
-                              leading: Icon(FontAwesomeIcons.person),
-                              title: Text('Weigh-In Option'),
-                              trailing: WeighSelection(),
+                              leading: const Icon(
+                                FontAwesomeIcons.person,
+                                color: Colors.white,
+                              ),
+                              title: Text(
+                                'Weigh-In Option',
+                                style: kGoogleDescription,
+                              ),
+                              trailing: const WeighSelection(),
                             ),
                           ),
                           if (userData.weighpref == "Regular")
-                            Container(
+                            SizedBox(
                               width: MediaQuery.of(context).size.width * 0.9,
-                              decoration:
-                                  const BoxDecoration(color: Colors.white),
                               child: Padding(
-                                padding: const EdgeInsets.all(12.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: TextFormField(
                                   onFieldSubmitted: (value) {
                                     weight = value;
                                   },
+                                  style: kGoogleDescription,
                                   onEditingComplete: () {
                                     weight = weightController.text;
                                   },
                                   controller: weightController,
                                   keyboardType: TextInputType.number,
-                                  decoration: const InputDecoration(
-                                    icon: Icon(FontAwesomeIcons.weightScale),
+                                  decoration: InputDecoration(
+                                    icon: const Icon(
+                                      FontAwesomeIcons.weightScale,
+                                      color: Colors.white,
+                                    ),
                                     hintText: 'Enter Pre-Pregnancy Weight',
-                                    labelText:
-                                        'Prior to Pregnancy Weight in pounds',
+                                    labelText: 'Pre-Pregnancy Weight (lbs)',
+                                    labelStyle: kGoogleDescription,
                                   ),
                                   validator: (String? value) {
                                     if (value == null ||
@@ -153,12 +178,10 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                               ),
                             ), //below is weight
                           if (userData.weighpref == "Regular")
-                            Container(
+                            SizedBox(
                               width: MediaQuery.of(context).size.width * 0.9,
-                              decoration:
-                                  const BoxDecoration(color: Colors.white),
                               child: Padding(
-                                padding: const EdgeInsets.all(12.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: TextFormField(
                                   onFieldSubmitted: (value) {
                                     height = value;
@@ -166,12 +189,17 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                                   onEditingComplete: () {
                                     height = heightController.text;
                                   },
+                                  style: kGoogleDescription,
                                   controller: heightController,
                                   keyboardType: TextInputType.number,
-                                  decoration: const InputDecoration(
-                                    icon: Icon(FontAwesomeIcons.ruler),
+                                  decoration: InputDecoration(
+                                    icon: const Icon(
+                                      FontAwesomeIcons.ruler,
+                                      color: Colors.white,
+                                    ),
                                     hintText: 'Enter Height',
                                     labelText: 'Height in inches',
+                                    labelStyle: kGoogleDescription,
                                   ),
                                   validator: (String? value) {
                                     if (value == null ||
@@ -187,9 +215,8 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                                 ),
                               ),
                             ),
-                          Container(
+                          SizedBox(
                             width: MediaQuery.of(context).size.width * 0.9,
-                            color: Colors.white,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
@@ -197,12 +224,16 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                                   email = provideremailController.text;
                                 },
                                 controller: provideremailController,
+                                style: kGoogleDescription,
                                 keyboardType: TextInputType.emailAddress,
-                                decoration: const InputDecoration(
-                                  icon: Icon(Icons.email),
-                                  hintText:
-                                      'Enter your Provider e-mail/contact',
+                                decoration: InputDecoration(
+                                  icon: const Icon(
+                                    Icons.email,
+                                    color: Colors.white,
+                                  ),
+                                  hintText: 'Enter your provider e-mail',
                                   labelText: 'Doctor\'s Email',
+                                  labelStyle: kGoogleDescription,
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -219,17 +250,9 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                           ),
                           Column(
                             children: [
-                              ElevatedButton(
-                                onPressed: () => showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return const DisclaimerAlertDialogue();
-                                    }),
-                                child: const Text('View Disclaimer'),
-                              ),
                               CheckboxFormField(
-                                  title:
-                                      const Text('I agree with the disclaimer'),
+                                  title: Text('I agree with the disclaimer',
+                                      style: kGoogleDescription),
                                   onSaved: (newValue) => null,
                                   validator: (value) {
                                     if (value != true) {
@@ -237,31 +260,51 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                                     }
                                     return null;
                                   }),
-                              ElevatedButton(
-                                onPressed: () {
-                                  if (_formKeyforDataCollection.currentState!
-                                      .validate()) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                            content: Text('Submitting!')));
-                                    DatabaseService(uid: user.uid).updateemail(
-                                        provideremailController.value.text);
-                                    if (userData.weighpref == "Regular") {
-                                      DatabaseService(uid: user.uid)
-                                          .updateWeight(int.parse(
-                                              weightController.value.text));
-                                      DatabaseService(uid: user.uid)
-                                          .updateHeight(int.parse(
-                                              heightController.value.text));
-                                    }
-                                    DatabaseService(uid: user.uid)
-                                        .updateagreement(true);
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () => showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return const DisclaimerAlertDialogue();
+                                        }),
+                                    child: const Text('View Disclaimer'),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      if (_formKeyforDataCollection
+                                          .currentState!
+                                          .validate()) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                                content: Text(
+                                          'Welcome!',
+                                          style: kGoogleDescription,
+                                          textAlign: TextAlign.center,
+                                        )));
+                                        DatabaseService(uid: user.uid)
+                                            .updateemail(provideremailController
+                                                .value.text);
+                                        if (userData.weighpref == "Regular") {
+                                          DatabaseService(uid: user.uid)
+                                              .updateWeight(int.parse(
+                                                  weightController.value.text));
+                                          DatabaseService(uid: user.uid)
+                                              .updateHeight(int.parse(
+                                                  heightController.value.text));
+                                        }
+                                        DatabaseService(uid: user.uid)
+                                            .updateagreement(true);
 
-                                    Navigator.of(context)
-                                        .pushReplacementNamed(Wrapper.id);
-                                  }
-                                },
-                                child: const Text('Submit'),
+                                        Navigator.of(context)
+                                            .pushReplacementNamed(Wrapper.id);
+                                      }
+                                    },
+                                    child: const Text('SUBMIT'),
+                                  ),
+                                ],
                               ),
                             ],
                           ),

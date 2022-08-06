@@ -60,9 +60,7 @@ class AuthService {
   Future<void> signInAnonymously() async {
     try {
       final userCredential = await FirebaseAuth.instance.signInAnonymously();
-      print(userCredential.user?.uid);
       await DatabaseService(uid: userCredential.user?.uid).createNewDBUser();
-      // DatabaseService(uid: userCredential.user!.uid).checkDatabaseStartup();
       print("Signed in with temporary account.");
       // return _userFromFirebaseUser(userCredential.user!);
     } on FirebaseAuthException catch (e) {
@@ -75,18 +73,13 @@ class AuthService {
       }
     }
     print('returning default');
-    // return UserUID();
   }
 
-  //auth change user stream
-  //this is a function that will receive from the data base and turn it into a UserID object
   Stream<UserUID> get user {
     return userStream.map(
       (User? user) => _userFromFirebaseUser(user),
     );
   }
-
-  //now this stream will return our own model of the user
 
   Future<UserUID> googleLogin() async {
     try {

@@ -29,9 +29,6 @@ class _WaterCounterState extends State<WaterCounter> {
         shrinkWrap: true,
         children: [
           ...droplets,
-          // WaterDropletEmpty(),
-          // WaterDropletEmpty(),
-          // WaterDropletEmpty(),
         ],
       ),
       const WaterTotal(),
@@ -56,7 +53,7 @@ class _WaterDropletEmptyState extends State<WaterDropletEmpty> {
       child: Icon(
         FontAwesomeIcons.droplet,
         color: beenPressed ? Colors.blue : Colors.white,
-        size: 80.0,
+        size: 70.0,
       ),
       onTap: () {
         setState(() {

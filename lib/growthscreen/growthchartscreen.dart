@@ -4,13 +4,10 @@ import 'package:preggo/emailscreen/growthemail.dart';
 import 'package:preggo/growthscreen/growthstatus.dart';
 import 'package:preggo/growthscreen/partnerweighindialogue.dart';
 import 'package:preggo/models/user.dart';
-import 'package:preggo/services/auth.dart';
 import 'package:preggo/shared/constants.dart';
 import 'package:provider/provider.dart';
 import 'weightlogmodel.dart';
 import 'weighindialogue.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:preggo/shared/restartwidget.dart';
 import 'growthcalculator.dart';
 import 'cartesiangrowthchart.dart';
 import 'package:preggo/emailscreen/pdfservices.dart';
@@ -66,74 +63,78 @@ class _GrowthChartState extends State<GrowthChart> {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(onPressed: () => Navigator.of(context).pop()),
-        title: const Text('Weight During Pregnancy'),
+        title: const Text('Growth Chart'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Center(
-            child: Text(
-              'Growth Chart',
-              style: kGoogleTitle,
-            ),
+          Text(
+            'Growth Status',
+            style: kGoogleTitle,
           ),
-          if (userData.weighpref != 'Partner')
-            Container(
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(100.0))),
-              child: CartesianGrowthChart(
-                  userData: userData,
-                  lowerlimitlist: lowerlimitlist,
-                  upperlimitlist: upperlimitlist,
-                  modeleduserWeightList: modeleduserWeightList),
-            ),
           progressNumber == 0
               ? const UnderweightGrowth()
               : progressNumber == 1
                   ? const OnTrackGrowth()
                   : const OverweightGrowth(),
-          ElevatedButton(
-            onPressed: () async {
-              if (userData.weighpref == 'Partner') {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return const PartnerWeighingAlertDialogue();
-                    }).then((_) => showDialog(
-                    context: context,
-                    builder: (context) {
-                      return const WeighInDialogueAlert();
-                    }).then((_) => setState(() {})));
-              } else {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return const WeighInDialogueAlert();
-                    }).then((_) => setState(() {}));
-              }
-            },
-            child: const Text('Add Weight'),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const EditWeightDialogue();
-                  }).then((_) => setState(() {}));
-            },
-            child: const Text('Edit Weight'),
+          if (userData.weighpref != 'Partner')
+            CartesianGrowthChart(
+                userData: userData,
+                lowerlimitlist: lowerlimitlist,
+                upperlimitlist: upperlimitlist,
+                modeleduserWeightList: modeleduserWeightList),
+          const SizedBox(
+            height: 10,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
+                style: kElevatedButtonStyle,
+                onPressed: () async {
+                  if (userData.weighpref == 'Partner') {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const PartnerWeighingAlertDialogue();
+                        }).then((_) => showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const WeighInDialogueAlert();
+                        }).then((_) => setState(() {})));
+                  } else {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const WeighInDialogueAlert();
+                        }).then((_) => setState(() {}));
+                  }
+                },
+                child: const Text('Add Weight'),
+              ),
+              ElevatedButton(
+                style: kElevatedButtonStyle,
+                onPressed: () async {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const EditWeightDialogue();
+                      }).then((_) => setState(() {}));
+                },
+                child: const Text('Edit Weight'),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                style: kElevatedButtonStyle,
                 onPressed: () =>
                     Navigator.of(context).pushNamed(EmailSender.id),
                 child: const Text('Email'),
               ),
               ElevatedButton(
+                style: kElevatedButtonStyle,
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -144,6 +145,10 @@ class _GrowthChartState extends State<GrowthChart> {
               ),
             ],
           ),
+          Image(
+              image: const AssetImage('assets/png/kidsreading.png'),
+              height: MediaQuery.of(context).size.height * 0.20,
+              fit: BoxFit.fitWidth),
         ],
       ),
     );

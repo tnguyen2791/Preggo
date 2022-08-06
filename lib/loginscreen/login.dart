@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:preggo/emailscreen/feedbackemail.dart';
 import 'package:preggo/presentation/screens/sign_up_screen.dart';
 import 'package:preggo/services/auth.dart';
 
@@ -57,7 +59,9 @@ class LoginScreen extends StatelessWidget {
                   buttontext: 'Feedback',
                   icon: FontAwesomeIcons.thumbsUp,
                   color: Colors.redAccent,
-                  loginMethod: () => print('give us feedback!'),
+                  loginMethod: () async {
+                    await sendFeedback();
+                  },
                 ),
               ),
             ]),
@@ -87,7 +91,6 @@ class LoginButton extends StatelessWidget {
       child: ElevatedButton.icon(
         onPressed: () {
           loginMethod();
-          //important in tacit programming the method gets called when it is pressed.
         },
         icon: Icon(
           icon,

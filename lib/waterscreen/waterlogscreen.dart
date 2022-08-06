@@ -16,23 +16,29 @@ class WaterLog extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            margin: const EdgeInsets.all(15.0),
+            margin: const EdgeInsets.all(8.0),
             child: Text(
-              'Water Tracker',
+              'How much water should I be drinking?',
+              textAlign: TextAlign.center,
               style: kGoogleTitle,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(8.0),
             child: Text(
               'You should be drinking at least 64 ounces of water every day! That is eight 8-oz glasses of water per day.',
+              textAlign: TextAlign.center,
               style: kGoogleDescription,
             ),
           ),
           const SizedBox(
-            height: 25.0,
+            height: 10.0,
           ),
           const WaterCounter(),
+          Image(
+              image: const AssetImage('assets/png/kidsgroup.png'),
+              height: MediaQuery.of(context).size.height * 0.25,
+              fit: BoxFit.fitWidth),
         ],
       ),
     );

@@ -22,3 +22,8 @@ const textInputDecoration = InputDecoration(
     borderSide: BorderSide(color: Colors.pink, width: 2.0),
   ),
 );
+
+ButtonStyle kElevatedButtonStyle = ElevatedButton.styleFrom(
+    textStyle: kGoogleDescription,
+    elevation: 10,
+    fixedSize: const Size.fromWidth(175.0));

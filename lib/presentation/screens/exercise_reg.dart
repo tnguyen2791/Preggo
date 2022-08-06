@@ -18,12 +18,9 @@ class ExerciseRegimen extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Exercise Regimen',
+              'How much should I exercise?',
+              textAlign: TextAlign.center,
               style: kGoogleTitle,
-            ),
-            Text(
-              'Description',
-              style: kGoogleDescription,
             ),
             ExerciseWebFrame(
               height: MediaQuery.of(context).size.height * 0.7,

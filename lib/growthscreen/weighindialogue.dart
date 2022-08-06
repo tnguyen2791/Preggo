@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:preggo/shared/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:preggo/models/user.dart';
 import 'package:preggo/services/sharedfunctions.dart';
@@ -34,7 +35,11 @@ class _WeighInDialogueAlertState extends State<WeighInDialogueAlert> {
 
     return StatefulBuilder(builder: (context, setState) {
       return AlertDialog(
-        title: const Text('Log Current Weight'),
+        title: Text(
+          'Log Current Weight',
+          textAlign: TextAlign.center,
+          style: kGoogleTitle.copyWith(color: Colors.black),
+        ),
         content: SizedBox(
           height: MediaQuery.of(context).size.height * 0.4,
           child: Column(
@@ -49,10 +54,11 @@ class _WeighInDialogueAlertState extends State<WeighInDialogueAlert> {
                       children: [
                         Container(
                           decoration: const BoxDecoration(),
-                          child: const Text('Date'),
+                          child: Text('Current Date',
+                              style: kGoogleDescription.copyWith(
+                                  color: Colors.black)),
                         ),
                         ListTile(
-                            tileColor: Colors.purple[100],
                             leading: const Icon(FontAwesomeIcons.calendar),
                             trailing: Text(toPrettyDateMMMddyyyy(selectedDate)),
                             onTap: () {
@@ -80,7 +86,9 @@ class _WeighInDialogueAlertState extends State<WeighInDialogueAlert> {
                                 });
                               });
                             }),
-                        const Text('Weight'),
+                        Text('Weight',
+                            style: kGoogleDescription.copyWith(
+                                color: Colors.black)),
                         TextFormField(
                           keyboardType: TextInputType.number,
                           controller: weightcontroller,
@@ -104,28 +112,39 @@ class _WeighInDialogueAlertState extends State<WeighInDialogueAlert> {
                     ),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    // print(selectedDate);
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Go Back'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      List toImport = [
-                        {
-                          'time': selectedDate,
-                          'weight': int.parse(loggedweight)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // print(selectedDate);
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        'Go Back',
+                        style: kGoogleDescription,
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          List toImport = [
+                            {
+                              'time': selectedDate,
+                              'weight': int.parse(loggedweight)
+                            }
+                          ];
+                          loggedweight = weightcontroller.value.text;
+                          logWeight1(toImport, user.uid);
+                          Navigator.pop(context);
                         }
-                      ];
-                      loggedweight = weightcontroller.value.text;
-                      logWeight1(toImport, user.uid);
-                      Navigator.pop(context);
-                    }
-                  },
-                  child: const Text('Log it'),
+                      },
+                      child: Text(
+                        'LOG IT',
+                        style: kGoogleDescription,
+                      ),
+                    ),
+                  ],
                 ),
               ]),
         ),

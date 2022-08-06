@@ -16,7 +16,7 @@ class _WaterTotalState extends State<WaterTotal> {
       valueListenable: fluidsDrank,
       builder: ((context, int fluid, child) {
         return Text('$fluid oz today',
-            style: kGoogleDescription.copyWith(fontSize: 80.0));
+            style: kGoogleDescription.copyWith(fontSize: 60.0));
       }),
     );
   }

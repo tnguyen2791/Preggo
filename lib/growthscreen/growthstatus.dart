@@ -7,26 +7,27 @@ class OnTrackGrowth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const CircleAvatar(
-          backgroundColor: Colors.green,
-          radius: 50,
-          child: Icon(
-            FontAwesomeIcons.faceSmile,
-            color: Colors.yellow,
-            size: 100.0,
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          const CircleAvatar(
+            backgroundColor: Colors.green,
+            radius: 50,
+            child: Icon(
+              FontAwesomeIcons.faceSmile,
+              color: Colors.white,
+              size: 100.0,
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 50,
-        ),
-        Text(
-          'Baby is doing good!\nYou are on track for weight gain.',
-          style: kGoogleDescription,
-          textAlign: TextAlign.center,
-        ),
-      ],
+          Text(
+            'You are on track!',
+            style: kGoogleDescription,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -36,26 +37,27 @@ class UnderweightGrowth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const CircleAvatar(
-          backgroundColor: Colors.orange,
-          radius: 50,
-          child: Icon(
-            FontAwesomeIcons.faceMeh,
-            color: Colors.white,
-            size: 100.0,
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          const CircleAvatar(
+            backgroundColor: Colors.green,
+            radius: 50,
+            child: Icon(
+              FontAwesomeIcons.arrowDown,
+              color: Colors.white,
+              size: 100.0,
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 50,
-        ),
-        Text(
-          'Growth is below normal at this gestational period',
-          style: kGoogleDescription,
-          textAlign: TextAlign.center,
-        ),
-      ],
+          Text(
+            'Growth is currently below normal\nat this gestational period',
+            style: kGoogleDescription,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -65,26 +67,27 @@ class OverweightGrowth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const CircleAvatar(
-          backgroundColor: Colors.orange,
-          radius: 50,
-          child: Icon(
-            FontAwesomeIcons.faceMeh,
-            color: Colors.white,
-            size: 100.0,
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          const CircleAvatar(
+            backgroundColor: Colors.green,
+            radius: 50,
+            child: Icon(
+              FontAwesomeIcons.arrowUp,
+              color: Colors.white,
+              size: 100.0,
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 50,
-        ),
-        Text(
-          'Growth is above normal at this gestational period',
-          style: kGoogleDescription,
-          textAlign: TextAlign.center,
-        ),
-      ],
+          Text(
+            'Growth is higher than\nusual at this point',
+            style: kGoogleDescription,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:preggo/models/user.dart';
 import 'package:preggo/presentation/screens/all_screens.dart';
 import 'package:preggo/services/auth.dart';
+import 'package:preggo/shared/constants.dart';
 import 'package:preggo/shared/shared.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:preggo/userhome/anonymouswarningdialogue.dart';
@@ -50,7 +51,13 @@ class UserHomeScreen extends StatelessWidget {
                       const AnonymousLogoutWarningAlertDialogue()),
                 );
               } else {
-                AuthService().signOut();
+                AuthService().signOut().whenComplete(
+                    () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                          'Logged Out',
+                          style: kGoogleDescription,
+                          textAlign: TextAlign.center,
+                        ))));
               }
             },
           ),
