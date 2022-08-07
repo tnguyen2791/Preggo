@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:preggo/emailscreen/feedbackemail.dart';
 import 'package:preggo/presentation/screens/sign_up_screen.dart';
@@ -25,7 +24,6 @@ class LoginScreen extends StatelessWidget {
                 child: CircleAvatar(
                     radius: 150.0,
                     backgroundImage: AssetImage('assets/icon/icon.png')
-                    // ,
                     ),
               ),
               Flexible(

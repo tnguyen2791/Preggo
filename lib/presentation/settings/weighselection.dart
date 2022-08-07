@@ -11,11 +11,12 @@ class WeighSelection extends StatefulWidget {
 }
 
 class _WeighSelectionState extends State<WeighSelection> {
+  String dropdownValue = "Regular";
+
   @override
   Widget build(BuildContext context) {
     final userData = Provider.of<UserData>(context);
     final user = Provider.of<UserUID>(context);
-
     String dropdownValue = userData.weighpref;
 
     return DropdownButton<String>(
@@ -28,12 +29,10 @@ class _WeighSelectionState extends State<WeighSelection> {
         color: Colors.deepPurpleAccent,
       ),
       onChanged: (String? newValue) async {
-        await DatabaseService(uid: user.uid).updateWeighPref(newValue!);
-        if (mounted) {
-          setState(() {
-            dropdownValue = newValue;
-          });
-        }
+        setState(() {
+          dropdownValue = newValue!;
+        });
+        await DatabaseService(uid: user.uid).updateWeighPref(dropdownValue);
       },
       items: <String>['Regular', 'Partner', 'No Weight']
           .map<DropdownMenuItem<String>>((String value) {

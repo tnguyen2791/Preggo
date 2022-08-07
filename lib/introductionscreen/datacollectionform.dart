@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:preggo/shared/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:preggo/services/sharedfunctions.dart';
-import 'package:preggo/shared/restartwidget.dart';
 import 'disclaimerdialogue.dart';
 
 class DataCollectionScreen extends StatelessWidget {
@@ -29,7 +28,6 @@ class DataCollectionScreen extends StatelessWidget {
           IconButton(
               onPressed: () {
                 AuthService().signOut();
-                RestartWidget.restartApp(context);
               },
               icon: const Icon(FontAwesomeIcons.powerOff))
         ],
@@ -127,22 +125,6 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                                     }
                                   });
                                 }),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ListTile(
-                              leading: const Icon(
-                                FontAwesomeIcons.person,
-                                color: Colors.white,
-                              ),
-                              title: FittedBox(
-                                child: Text(
-                                  'Weigh-In Option',
-                                  style: kGoogleDescription,
-                                ),
-                              ),
-                              trailing: const WeighSelection(),
-                            ),
                           ),
                           if (userData.weighpref == "Regular")
                             SizedBox(
@@ -254,28 +236,10 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
                           ),
                           Column(
                             children: [
-                              CheckboxFormField(
-                                  title: Text('I agree with the disclaimer',
-                                      style: kGoogleDescription),
-                                  onSaved: (newValue) => null,
-                                  validator: (value) {
-                                    if (value != true) {
-                                      return 'Please agree with the disclaimer before continuing';
-                                    }
-                                    return null;
-                                  }),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  ElevatedButton(
-                                    onPressed: () => showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return const DisclaimerAlertDialogue();
-                                        }),
-                                    child: const Text('View Disclaimer'),
-                                  ),
                                   ElevatedButton(
                                     onPressed: () {
                                       if (_formKeyforDataCollection
@@ -327,57 +291,4 @@ class _DataCollectionWidgetState extends State<DataCollectionWidget> {
           }
         });
   }
-}
-
-class DisclaimerAgreementCheckbox extends StatefulWidget {
-  const DisclaimerAgreementCheckbox({Key? key}) : super(key: key);
-
-  @override
-  State<DisclaimerAgreementCheckbox> createState() =>
-      _DisclaimerAgreementCheckboxState();
-}
-
-class _DisclaimerAgreementCheckboxState
-    extends State<DisclaimerAgreementCheckbox> {
-  bool agreeDisclaimer = false;
-  @override
-  Widget build(BuildContext context) {
-    return Checkbox(
-        value: agreeDisclaimer,
-        onChanged: (bool? value) => setState(() {
-              agreeDisclaimer = value!;
-            }));
-  }
-}
-
-class CheckboxFormField extends FormField<bool> {
-  CheckboxFormField(
-      {Key? key,
-      Widget title = const Text('Default Title'),
-      required FormFieldSetter<bool> onSaved,
-      required FormFieldValidator<bool> validator,
-      bool initialValue = false,
-      bool autovalidate = false})
-      : super(
-            key: key,
-            onSaved: onSaved,
-            validator: validator,
-            initialValue: initialValue,
-            builder: (FormFieldState<bool> state) {
-              return CheckboxListTile(
-                dense: state.hasError,
-                title: title,
-                value: state.value,
-                onChanged: state.didChange,
-                subtitle: state.hasError
-                    ? Builder(
-                        builder: (BuildContext context) => Text(
-                          state.errorText!,
-                          style: TextStyle(color: Theme.of(context).errorColor),
-                        ),
-                      )
-                    : null,
-                controlAffinity: ListTileControlAffinity.leading,
-              );
-            });
 }

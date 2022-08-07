@@ -1,11 +1,10 @@
-//Todo: Creation of introduction screen https://pub.dev/packages/introduction_screen
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:preggo/presentation/screens/eatingdisorderinfo.dart';
 import 'package:preggo/presentation/screens/wrapper.dart';
+import 'package:preggo/introductionscreen/datacollectionform.dart';
+import 'package:preggo/introductionscreen/disclaimerdialogue.dart';
 
 class OnBoardingPage extends StatefulWidget {
   static String id = 'intro_screen';
@@ -36,6 +35,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   }
 
   final introKey = GlobalKey<IntroductionScreenState>();
+  final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
 
 /* Area dedicated to the introduction page */
 
@@ -56,19 +56,17 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       setState(() {
         hxeating = true;
       });
-      print('Switch Button is ON');
     } else {
       setState(() {
         hxeating = false;
       });
-      print('Switch Button is OFF');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return IntroductionScreen(
-      key: introKey,
+      key: scaffoldkey,
       globalBackgroundColor: Colors.white,
       globalHeader: const Align(
         alignment: Alignment.topCenter,
@@ -76,8 +74,17 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       ),
       pages: [
         PageViewModel(
-          title: "Disclaimer",
+          title: "Welcome to Childing",
           bodyWidget: Column(children: [
+            const Hero(
+              tag: 'logo',
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 20),
+                child: CircleAvatar(
+                    radius: 100.0,
+                    backgroundImage: AssetImage('assets/icon/icon.png')),
+              ),
+            ),
             Text(_disclaimer ?? "Nothing"),
             const Divider(
               thickness: 5,
@@ -164,9 +171,13 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               onPressed: (_agreeDisclaimer)
                   ? (() {
                       (hxconcern || hxcontrol || hxeating || hxsecret)
-                          ? Navigator.pushReplacementNamed(
-                              context, WeighInOptions.id)
-                          : Navigator.pushReplacementNamed(context, Wrapper.id);
+                          ? showDialog(
+                              context: context,
+                              builder: (context) {
+                                return const WeighingDisclaimer();
+                              })
+                          : Navigator.pushReplacementNamed(
+                              context, DataCollectionScreen.id);
                     })
                   : null,
               child: const Text('Done!'),
@@ -177,15 +188,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           ]),
         ),
       ],
-
       onDone: () => _onIntroEnd(context),
-      // onSkip: () => _onIntroEnd(context), // You can override onSkip callback
       showSkipButton: false,
       skipOrBackFlex: 0,
       nextFlex: 0,
       showBackButton: false,
       showNextButton: false,
-      //rtl: true, // Display as right-to-left
       isTopSafeArea: true,
       skip: const Text('Skip', style: TextStyle(fontWeight: FontWeight.w600)),
       showDoneButton: false,
@@ -193,5 +201,4 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       controlsMargin: const EdgeInsets.all(16),
     );
   }
-
 }

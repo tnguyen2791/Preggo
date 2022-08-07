@@ -1,0 +1,13 @@
+Based on your medical history, consider customizing your option below of how to weigh in:
+
+Regular Weigh-in:
+
+Weight chart is available for viewing.
+
+Partner Weigh-in:
+
+Weight chart is not available and weigh-ins will be prompted with a partner to help you.
+
+No Weigh-in:
+
+Weight will not be included.

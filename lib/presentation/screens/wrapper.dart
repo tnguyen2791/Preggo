@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:preggo/loginscreen/login.dart';
-import 'package:preggo/presentation/settings/datacollectionform.dart';
+import 'package:preggo/introductionscreen/introduction.dart';
 import 'package:preggo/presentation/screens/loading_screen.dart';
 import 'package:preggo/services/auth.dart';
 import 'package:preggo/services/database.dart';
@@ -16,6 +16,7 @@ class Wrapper extends StatefulWidget {
   @override
   State<Wrapper> createState() => _WrapperState();
 }
+
 class _WrapperState extends State<Wrapper> {
   final fbuser = FirebaseAuth.instance.currentUser;
 
@@ -36,7 +37,7 @@ class _WrapperState extends State<Wrapper> {
               if (userData.agreement == true) {
                 return const UserHomeScreen();
               } else {
-                return const DataCollectionScreen();
+                return const OnBoardingPage();
               }
             }
           }

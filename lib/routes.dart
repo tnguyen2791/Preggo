@@ -3,7 +3,7 @@ import 'package:preggo/emailscreen/pdfservices.dart';
 import 'package:preggo/loginscreen/login.dart';
 
 import 'package:preggo/presentation/screens/all_screens.dart';
-import 'package:preggo/presentation/settings/datacollectionform.dart';
+import 'package:preggo/introductionscreen/datacollectionform.dart';
 import 'package:preggo/presentation/screens/sign_up_screen.dart';
 import 'package:preggo/userhome/userhome.dart';
 import 'package:preggo/presentation/screens/loading_screen.dart';

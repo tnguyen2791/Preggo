@@ -3,7 +3,6 @@ import 'package:preggo/shared/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:preggo/services/sharedfunctions.dart';
-
 import 'package:intl/intl.dart';
 
 class UserDashboardInfo extends StatefulWidget {
@@ -22,8 +21,6 @@ class _UserDashboardInfoState extends State<UserDashboardInfo> {
 
       String date = daysLefttoDueDate(dbuserepoch);
       String duedate = toPrettyDateMMMddyyyy(dbuserepoch);
-      // DateTime.fromMillisecondsSinceEpoch(user.first.epochduedate)
-      //     .toString();
       String today = DateFormat('MMM-dd-yyyy').format(DateTime.now());
 
       return Column(

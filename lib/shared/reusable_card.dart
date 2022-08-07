@@ -3,14 +3,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ReusableCard extends StatefulWidget {
-  final String cardDescription;
-  final IconData cardIcon;
-  final String navigationRoute;
+  final String childingCardDescription;
+  final IconData childingCardIcon;
+  final String childingNavigationRoute;
 
   const ReusableCard({
-    this.cardDescription = 'No Description',
-    this.cardIcon = FontAwesomeIcons.faceSadCry,
-    this.navigationRoute = '/',
+    this.childingCardDescription = 'No Description',
+    this.childingCardIcon = FontAwesomeIcons.faceSadCry,
+    this.childingNavigationRoute = '/',
   });
 
   @override
@@ -25,7 +25,8 @@ class _ReusableCardState extends State<ReusableCard> {
     return Expanded(
       child: GestureDetector(
         onTap: () async {
-          await Navigator.pushNamed(context, widget.navigationRoute).then((_) {
+          await Navigator.pushNamed(context, widget.childingNavigationRoute)
+              .then((_) {
             if (mounted) {
               setState(() {});
             }
@@ -49,7 +50,7 @@ class _ReusableCardState extends State<ReusableCard> {
                     radius: heightofscreen / 30,
                     backgroundColor: Colors.white,
                     child: Icon(
-                      widget.cardIcon,
+                      widget.childingCardIcon,
                       size: heightofscreen / 25,
                       color: Colors.purple,
                     ),
@@ -59,7 +60,7 @@ class _ReusableCardState extends State<ReusableCard> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  widget.cardDescription,
+                  widget.childingCardDescription,
                   style: GoogleFonts.acme(fontSize: 25.0, color: Colors.white),
                 ),
               ),

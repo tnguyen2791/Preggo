@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:preggo/presentation/screens/wrapper.dart';
-import 'package:preggo/services/auth.dart';
-import 'package:preggo/shared/restartwidget.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WeighInOptions extends StatelessWidget {
   const WeighInOptions({Key? key}) : super(key: key);

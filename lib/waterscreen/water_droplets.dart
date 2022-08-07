@@ -93,13 +93,3 @@ class _WaterDropletFilledState extends State<WaterDropletFilled> {
     );
   }
 }
-
-/*
-
-The above is using fluidDrank as a notifier
-The listener lives in a Listenable Builder
-This took forever. Consideration of refactoring
-Consideration of deletion of print statement.
-
-
- */

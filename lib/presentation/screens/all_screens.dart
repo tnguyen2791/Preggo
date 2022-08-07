@@ -3,7 +3,7 @@ export 'eatingdisorderinfo.dart';
 export 'exercise_reg.dart';
 export '../../growthscreen/growthchartscreen.dart';
 export 'wrapper.dart';
-export 'introduction.dart';
+export '../../introductionscreen/introduction.dart';
 export 'resources.dart';
 export '../settings/settings.dart';
 export '../../waterscreen/waterlogscreen.dart';

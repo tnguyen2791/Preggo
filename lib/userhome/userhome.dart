@@ -80,7 +80,7 @@ class UserHomeScreen extends StatelessWidget {
                   color: Colors.deepPurple,
                 ),
               ),
-              UserDashboardInfo(),
+              const UserDashboardInfo(),
             ],
           ),
           Expanded(
@@ -93,29 +93,29 @@ class UserHomeScreen extends StatelessWidget {
                   children: [
                     if (userData.weighpref != 'No Weight')
                       const ReusableCard(
-                        navigationRoute: GrowthChart.id,
-                        cardDescription: 'Pregnancy Growth',
-                        cardIcon: FontAwesomeIcons.weightScale,
+                        childingNavigationRoute: GrowthChart.id,
+                        childingCardDescription: 'Pregnancy Growth',
+                        childingCardIcon: FontAwesomeIcons.weightScale,
                       ), //Weighing in
                     const ReusableCard(
-                      navigationRoute: WaterLog.id,
-                      cardDescription: 'Are you hydrated?',
-                      cardIcon: FontAwesomeIcons.droplet,
+                      childingNavigationRoute: WaterLog.id,
+                      childingCardDescription: 'Are you hydrated?',
+                      childingCardIcon: FontAwesomeIcons.droplet,
                     ), //Hydration
                     const ReusableCard(
-                      navigationRoute: ExerciseRegimen.id,
-                      cardDescription: 'Exercise Regimen',
-                      cardIcon: FontAwesomeIcons.dumbbell,
+                      childingNavigationRoute: ExerciseRegimen.id,
+                      childingCardDescription: 'Exercise Regimen',
+                      childingCardIcon: FontAwesomeIcons.dumbbell,
                     ), //Exercise Regimen
                     const ReusableCard(
-                      navigationRoute: Diet.id,
-                      cardDescription: 'Diet',
-                      cardIcon: FontAwesomeIcons.carrot,
+                      childingNavigationRoute: Diet.id,
+                      childingCardDescription: 'Diet',
+                      childingCardIcon: FontAwesomeIcons.carrot,
                     ), //Diet
                     const ReusableCard(
-                      navigationRoute: Resources.id,
-                      cardDescription: 'Resources',
-                      cardIcon: FontAwesomeIcons.boxArchive,
+                      childingNavigationRoute: Resources.id,
+                      childingCardDescription: 'Resources',
+                      childingCardIcon: FontAwesomeIcons.boxArchive,
                     ), //Resources
                   ],
                 ),
